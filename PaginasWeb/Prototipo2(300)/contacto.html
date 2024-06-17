@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redes_Sociales_La~Snackeria~</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="imagenempresa.png" type="image/png">
+</head>
+<body>
+    <header>
+        <img src="imagenempresa.png"></img>
+        <h1 class="animated-title">La~Snackeria~</h1>
+        <p class="animated-slogan">"Rompiendo dietas, no antojos."</p>
+        <nav>
+            <a href="index.html"><button class="nav-btn"> Inicio </button></a>
+            <a href="menu.html"><button class="nav-btn"> Productos y menu </button> </a>
+        </nav>
+        <h2>Redes Sociales</h2>
+    <div>
+        <img src="whatsapp.png" alt="WhatsApp" class="social-icon">
+        <p>########CEO: +52 3333333333</p><br>
+        <p>######Repartidor: +52 3333333333</p><br>
+        <p>######Empleados: +52 3333333333</p><br>
+        <p>Telefono Empresa: +52 3333333333</p><br>
+
+        
+    </header>
+
+    <footer>
+        <p>Todos los derechos reservados &copy; 2024 La~Snackeria~</p>
+    </footer>
+
+    <div class="overlay" onclick="closeContent()"></div>
+    <div class="popup">
+        <button class="close-btn" onclick="closeContent()">&times;</button>
+        <h2 id="popup-title"></h2>
+        <p id="popup-content"></p>
+    </div>
+    <script src="view.js"></script>
+</body>
+</html>

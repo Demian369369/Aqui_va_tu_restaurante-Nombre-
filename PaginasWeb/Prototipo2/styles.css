@@ -1,11 +1,4 @@
-/* Reset de CSS básico */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* Estilos generales */
 body {
   font-family: 'Helvetica', sans-serif;
   line-height: 1.6;
@@ -18,17 +11,6 @@ body {
   padding: 0;
 }
 
-/* Contenedor principal */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: rgba(108, 176, 89, 0.8); 
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); 
-  border-radius: 20px; 
-}
-
-/* Estilos del encabezado */
 header {
   text-align: center;
   background-color: rgba(108, 176, 89, 0.8); 
@@ -59,12 +41,6 @@ nav a {
   margin: 0 20px;
 }
 
-/* Sección de contacto */
-.contact {
-  background-color: #60f404;
-  padding: 50px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
 
 /* Estilos del pie de página */
 footer {
@@ -74,40 +50,7 @@ footer {
   padding: 10px;
 }
 
-/* Overlay y popup */
-.overlay,
-.popup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
-}
 
-.popup {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -60%);
-  background-color: #60f404;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  z-index: 2;
-}
-
-.popup.active,
-.overlay.active {
-  display: block;
-  opacity: 1;
-  transform: translate(-50%, -50%);
-}
-
-/* Animaciones */
 .animated-title {
   animation: fadeInUp 1.5s ease-in-out;
 }
@@ -127,27 +70,6 @@ footer {
   }
 }
 
-/* Áreas de comentario */
-#comment-area {
-  width: 100%;
-  resize: none;
-  padding: 10px;
-  border: 1px solid #17d01d;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
-
-#comment-area::placeholder {
-  color: #999;
-}
-
-.comment {
-  background-color: #12a22a;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  margin-bottom: 10px;
-}
 
 /* Sección de productos */
 .products-section {
@@ -172,43 +94,6 @@ footer {
   margin-bottom: 10px;
 }
 
-/* Sección de comentarios */
-.comments-section {
-  background-color: #1c8f33;
-  margin-top: 30px;
-  padding: 20px;
-  border: 1px solid #20ad2e;
-  border-radius: 10px;
-}
-
-.comments-section h2 {
-  margin-bottom: 10px;
-}
-
-/* Calificación */
-.rating {
-  display: flex;
-  flex-direction: row-reverse; 
-  margin-bottom: 10px;
-}
-
-.rating input {
-  display: none;
-}
-
-.rating label {
-  font-size: 24px;
-  color: #ddd;
-  cursor: pointer;
-}
-
-.rating label:before {
-  content: '\2605';
-}
-
-.rating input:checked ~ label {
-  color: #FFD700;
-}
 
 /* Lista de precios */
 .price-list {
@@ -223,38 +108,6 @@ footer {
 
 .price-list li:last-child {
   border-bottom: none;
-}
-
-/* Banner de cookies */
-#cookie-banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: #333;
-  color: #fff;
-  padding: 10px;
-  text-align: center;
-}
-
-#cookie-banner a {
-  color: #ff9900;
-  text-decoration: underline;
-}
-
-#accept-cookies {
-  background-color: #ff9900;
-  color: #333;
-  border: none;
-  padding: 5px 15px;
-  cursor: pointer;
-}
-
-/* Iconos sociales */
-.social-icon {
-  width: 40px;
-  height: 40px;
-  margin: 10px;
 }
 
 /* Botones */
@@ -314,7 +167,7 @@ p {
 
 /* Sección de productos y precios */
 #products-prices {
-  text-align: center;
+  text-align: left;
 }
 
 .products-prices-title {
@@ -333,6 +186,7 @@ p {
   font-size: 18px;
   margin: 10px 0;
   transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
 .snack-item:hover {
@@ -343,22 +197,86 @@ p {
 .product-info {
   display: none;
   position: absolute;
-  top: 0;
-  left: 100%;
+  top: 100%; /* Posicionado debajo del .snack-item */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+/* Sección de productos */
+.products-section {
+  margin-top: 30px;
+  background-color: #a99d1a;
+  padding: 20px;
+  border: 1px solid #7fc553;
+  border-radius: 10px;
+}
+
+.products-section h2 {
+  margin-bottom: 10px;
+}
+
+.ver-precios {
+  background-color: #2b8f09; 
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+/* Lista de precios */
+.snack-menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.snack-item {
+  font-size: 18px;
+  margin: 10px 0;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+.snack-item:hover {
+  color: #FF5733;
+  transform: translateX(5px);
+}
+
+.product-info {
+  display: none;
+  position: absolute;
+  top: 100%; /* Posicionado debajo del .snack-item */
+  left: 50%;
+  transform: translateX(-50%);
   background-color: #fff;
   border: 1px solid #ccc;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 90vw;
+  z-index: 1;
+  text-align: left; /* Centrar el contenido */
 }
 
 .snack-item:hover .product-info {
   display: block;
 }
 
+.product-info img {
+  max-width: 80%; /* Reducir el tamaño de la imagen */
+  height: auto;
+  margin-top: 10px; /* Espacio entre la imagen y el texto */
+}
+
 .add-to-cart {
-  margin-top: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
 .add-to-cart img {
@@ -367,36 +285,34 @@ p {
   margin-right: 5px;
 }
 
-/* Diseño responsivo */
+/* Imágenes en productos */
+.products-section img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* Estilos del pie de página */
+footer {
+  text-align: center;
+  background-color: #21b137;
+  color: #fff;
+  padding: 10px;
+}
+
+/* Estilos de navegación en dispositivos móviles */
 @media (max-width: 768px) {
-  body {
-      font-size: 16px;
-  }
-
-  header {
-      text-align: center;
-  }
-
-  .animated-title,
-  .animated-slogan {
-      text-align: center;
-  }
-
   nav {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    flex-direction: column;
+    align-items: center;
   }
-
+  
   nav a {
-      margin: 10px 0;
+    margin: 10px 0;
   }
-
-  #comment-area {
-      width: 100%;
-  }
-
-  footer {
-      text-align: center;
+  
+  .product-info img {
+    max-width: 100%;
   }
 }

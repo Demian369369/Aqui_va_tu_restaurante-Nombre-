@@ -1,0 +1,476 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    overflow-y: auto; /* Permitir desplazamiento vertical cuando el contenido excede la altura de la ventana */
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+    min-height: 100vh; 
+    overflow-y: auto; 
+}
+#calendar {
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.day.selected-day {
+    background-color: blue;
+    color: white;
+}
+
+.day.green {
+    background-color: green;
+    color: white;
+}
+
+.day.red {
+    background-color: red;
+    color: white;
+}
+
+.day.white {
+    background-color: white;
+    color: black;
+}
+
+.day.empty {
+    visibility: hidden;
+}
+
+#tasks {
+    margin-top: 20px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.task input[type="text"],
+.task input[type="time"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.task .status {
+    display: flex;
+    align-items: center;
+}
+
+.task .status button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.task .status .not-done {
+    background: #dc3545;
+}
+
+.task .status .points {
+    margin-left: 10px;
+}
+
+.task .delete-task {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.performance {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.performance.green {
+    color: green;
+}
+
+.performance.red {
+    color: red;
+}
+
+#clock {
+    position: fixed; /* Cambiado a fixed para que se mantenga visible al desplazar */
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Estilos para el modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Estilos para el modal de autenticación */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+    background-color: #f9f9f9;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#auth-content {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#auth-content h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+#auth-content button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+#auth-content button:hover {
+    background-color: #3b79db;
+}
+
+/* Estilos para los formularios */
+#login-form, #signup-form {
+    display: none;
+}
+
+#login-form, #signup-form h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+#login-form input, #signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+#login-form button, #signup-form button {
+    width: 100%;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+#login-form button:hover, #signup-form button:hover {
+    background-color: #45a049;
+}
+
+/* Estilos para el footer */
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: white;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.important-things {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    min-height: 100%;
+}
+
+.important-things h2 {
+    margin-bottom: 10px;
+}
+
+#important-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.add-important {
+    margin-top: 10px;
+}
+
+.add-important input[type="text"] {
+    padding: 5px;
+    width: calc(100% - 80px);
+    border: 1px solid #ccc;
+    border-radius: 5px 0 0 5px;
+}
+
+.add-important button {
+    padding: 6px 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.add-important button:hover {
+    background-color: #0056b3;
+}
+
+
+
+#gym-routines-container {
+    position: fixed;
+    right: 20px;
+    top: 50px;
+    z-index: 1000;
+    text-align: center;
+}
+
+#gym-routines-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#gym-routines-button:hover {
+    background-color: #45a049;
+}
+
+.hidden {
+    display: none;
+}
+
+.important-things {
+    background-color: #f0f7ff; /* Color azul claro */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.important-things .title {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.important-things .list {
+    margin-bottom: 10px;
+}
+
+.important-things .add-form {
+    display: flex;
+    align-items: center;
+}
+
+.important-things .add-form input {
+    flex: 1;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.important-things .add-form button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50; /* Color verde para el botón */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.important-things .add-form button:hover {
+    background-color: #45a049; /* Color verde oscuro al pasar el mouse */
+}
+
+.important-things .list-item {
+    margin-bottom: 5px;
+    padding: 5px 10px;
+    background-color: #e7f6e7; /* Color de fondo para cada elemento */
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.important-things .list-item .delete-btn {
+    color: #ff3333; /* Color rojo para el botón de eliminar */
+    cursor: pointer;
+}
+
+.contenedor-flex {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+  }
+
+#gymvideo-routines-button {
+    background-color: #000000;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    font-size: 16px;
+    
+}
+

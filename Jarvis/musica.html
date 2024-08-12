@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Composición Musical</title>
+    <link rel="stylesheet" href="css/musica.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Composición Musical</h1>
+        <div class="buttons">
+            <button class="main-btn" onclick="toggleSection('lyrics-section')">Escribir Letras</button>
+            <div id="lyrics-section" class="content">
+                <textarea id="lyrics-input" placeholder="Escribe las letras aquí..."></textarea>
+                <button onclick="saveItem('lyrics')">Guardar Letra</button>
+                <div id="lyrics-list" class="list"></div>
+            </div>
+            <button class="main-btn" onclick="toggleSection('audio-section')">Guardar Audios</button>
+            <div id="audio-section" class="content">
+                <input type="file" id="audio-input" accept="audio/*">
+                <button onclick="saveItem('audio')">Guardar Audio</button>
+                <div id="audio-list" class="list"></div>
+            </div>
+            <button class="main-btn" onclick="toggleSection('chords-section')">Escribir Acordes</button>
+            <div id="chords-section" class="content">
+                <textarea id="chords-input" placeholder="Escribe los acordes aquí..."></textarea>
+                <button onclick="saveItem('chords')">Guardar Acorde</button>
+                <div id="chords-list" class="list"></div>
+            </div>
+            <button class="main-btn" onclick="toggleSection('all')">Ver Todo</button>
+        </div>
+    </div>
+
+    <script src="js/musica.js"></script>
+</body>
+</html>

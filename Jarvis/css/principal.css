@@ -1,0 +1,200 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+    overflow-y: auto;
+}
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+    min-height: 100vh; 
+    overflow-y: auto; 
+}
+#calendar {
+    margin-bottom: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.days-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.day.selected-day {
+    background-color: blue;
+    color: white;
+}
+
+.day.green {
+    background-color: green;
+    color: white;
+}
+
+.day.red {
+    background-color: red;
+    color: white;
+}
+
+.day.white {
+    background-color: white;
+    color: black;
+}
+
+.day.empty {
+    visibility: hidden;
+}
+
+#tasks {
+    margin-top: 20px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.task input[type="text"],
+.task input[type="time"] {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.task .status {
+    display: flex;
+    align-items: center;
+}
+
+.task .status button {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.task .status .not-done {
+    background: #dc3545;
+}
+
+.task .status .points {
+    margin-left: 10px;
+}
+
+.task .delete-task {
+    background: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.performance {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.performance.green {
+    color: green;
+}
+
+.performance.red {
+    color: red;
+}
+
+#clock {
+    position: fixed; 
+    top: 10px;
+    right: 10px;
+    font-size: 14px;
+    background: #007bff;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.important-things {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    min-height: 100%;
+}
+
+#excel-button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.important-things .add-form button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+#gymvideo-routines-button {
+    margin-left: 10px;
+    padding: 8px 15px;
+    background-color: #4CAF50; 
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    
+}
+
+

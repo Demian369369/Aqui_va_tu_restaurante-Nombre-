@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de Ideas de Videos</title>
+    <link rel="stylesheet" href="css/yt.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Blog de Ideas de Videos</h1>
+        <div class="buttons">
+            <button class="main-btn" onclick="toggleContent('idea-videos')">Ideas de Videos</button>
+            <div id="idea-videos" class="content">
+                <button class="sub-btn" onclick="toggleContent('cursos')">Cursos</button>
+                <div id="cursos" class="content">
+                    <button class="sub-sub-btn" onclick="toggleContent('curso1')">Curso 1: HTML Básico</button>
+                    <div id="curso1" class="content">
+                        <p>Este curso cubre los fundamentos de HTML, incluyendo etiquetas básicas, estructura de documentos, y mejores prácticas.</p>
+                        <a href="https://www.ejemplo.com/html-basico" target="_blank">Ver más</a>
+                    </div>
+                    <button class="sub-sub-btn" onclick="toggleContent('curso2')">Curso 2: CSS Básico</button>
+                    <div id="curso2" class="content">
+                        <p>En este curso aprenderás sobre CSS, cómo estilizar tu página web, y cómo crear un diseño atractivo.</p>
+                        <a href="https://www.ejemplo.com/css-basico" target="_blank">Ver más</a>
+                    </div>
+                </div>
+                <button class="sub-btn" onclick="toggleContent('tutoriales')">Tutoriales</button>
+                <div id="tutoriales" class="content">
+                    <button class="sub-sub-btn" onclick="toggleContent('tutorial1')">Tutorial 1: Cómo crear un botón en HTML</button>
+                    <div id="tutorial1" class="content">
+                        <p>Aprende a crear botones interactivos en HTML y CSS para mejorar la experiencia del usuario en tu página web.</p>
+                        <a href="https://www.ejemplo.com/crear-boton-html" target="_blank">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <button class="main-btn" onclick="toggleContent('tips')">Consejos</button>
+            <div id="tips" class="content">
+                <p>Consejos útiles para mejorar la calidad de tus videos y aumentar tu audiencia.</p>
+            </div>
+            <button class="main-btn" onclick="toggleContent('herramientas')">Herramientas</button>
+            <div id="herramientas" class="content">
+                <p>Las mejores herramientas para la edición de videos y gestión de contenido en tu canal de YouTube.</p>
+            </div>
+            <button class="main-btn" onclick="toggleContent('estrategias')">Estrategias</button>
+            <div id="estrategias" class="content">
+                <p>Estrategias efectivas para crecer tu canal y aumentar tus suscriptores.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/yt.js"></script>
+</body>
+</html>

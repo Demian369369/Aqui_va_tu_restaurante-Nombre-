@@ -17,6 +17,8 @@ body{
     position: relative;
     height: 100vh;
     display: flex;
+    background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg'); /* Reemplaza con tu imagen de fondo */
+    background-size: cover;
     justify-content: center;
     align-items: center;
 }

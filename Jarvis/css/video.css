@@ -1,6 +1,8 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
+    background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg'); /* Reemplaza con tu imagen de fondo */
+    background-size: cover;
     padding: 0;
     background-color: #f9f9f9;
 }

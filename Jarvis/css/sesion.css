@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-*{
+
+* {
     padding: 0;
     margin: 0;
     text-decoration: none;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-.Home{
+
+.Home {
     position: relative;
     min-height: 100vh;
     background: linear-gradient(to bottom, #030043, #00166b);
@@ -15,7 +17,8 @@
     align-items: center;
     overflow: hidden;
 }
-header{
+
+header {
     position: absolute;
     top: 0;
     left: 0;
@@ -28,41 +31,50 @@ header{
     width: 100%;
     padding: 35px 80px;
 }
-header nav a{
+
+header nav a {
     margin-left: 80px;
     color: white;
     font-size: 26px;
     transition: .3s;
 }
+
 header nav .active,
-header nav a:hover{
+header nav a:hover {
     color: #43e0f7;
 }
-.Home h1{
+
+.Home h1 {
     position: absolute;
     color: white;
     font-size: 100px;
     z-index: 99;
 }
-.Home img{
+
+.Home img {
     position: absolute;
     width: 100%;
     pointer-events: none;
 }
-.layer{
+
+.layer {
     height: 100%;
     bottom: 0;
 }
-.light{
+
+.light {
     opacity: 0;
 }
-.mountains{
+
+.mountains {
     bottom: 0;
 }
-.stars{
+
+.stars {
     top: 0;
 }
-.About{
+
+.About {
     min-height: 100vh;
     background-color: #06001b;
     color: white;
@@ -72,9 +84,43 @@ header nav a:hover{
     justify-content: center;
     gap: 80px;
 }
-.About h1{
+
+.About h1 {
     font-size: 50px;
 }
-.About p{
+
+.About p {
     font-size: 17px;
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 20px 40px;
+    }
+
+    header nav a {
+        margin-left: 20px;
+        font-size: 18px;
+    }
+
+    .Home h1 {
+        font-size: 60px;
+        text-align: center;
+        width: 90%;
+    }
+
+    .About {
+        padding: 0 20px;
+        gap: 40px;
+    }
+
+    .About h1 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .About p {
+        font-size: 15px;
+        text-align: center;
+    }
 }

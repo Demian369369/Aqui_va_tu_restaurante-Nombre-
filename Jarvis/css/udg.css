@@ -1,5 +1,4 @@
 body {
-    font-family: Arial, sans-serif;
     font-family: 'Montserrat', sans-serif; 
     background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg'); /* Reemplaza con tu imagen de fondo */
     background-size: cover;
@@ -20,12 +19,14 @@ body {
     width: 80%;
     max-width: 1200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
 }
 
 .menu {
     padding: 20px;
     background: #333;
     color: white;
+    flex-shrink: 0; /* Prevents the menu from shrinking */
 }
 
 .menu button {
@@ -49,6 +50,31 @@ body {
 .submenu {
     display: none;
     margin-left: 20px;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submenu .sub-btn,
+.submenu .task-btn,
+.submenu .resource-btn,
+.submenu .work-btn {
+    display: block;
+    margin-bottom: 5px;
+    background: #383737;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.submenu .sub-btn:hover,
+.submenu .task-btn:hover,
+.submenu .resource-btn:hover,
+.submenu .work-btn:hover {
+    background: #ccc;
 }
 
 .details {
@@ -73,7 +99,6 @@ body {
     gap: 10px; 
 }
 
-
 .external-link-btn {
     padding: 10px 20px;
     background-color: #008CBA; 
@@ -90,11 +115,6 @@ body {
 .external-link-btn:hover {
     background-color: #005f6a; 
 }
-
-.container {
-    margin-top: 60px; 
-}
-
 
 h1 {
     font-family: 'Pacifico', cursive; 
@@ -122,29 +142,28 @@ h2 {
     font-family: 'Montserrat', sans-serif; 
     font-size: 1.1em; 
     color: #ffffff; 
-  
 }
 
-.submenu {
-    display: none;
-    margin-left: 20px;
-    padding: 10px;
-    background: #f9f9f9;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        max-width: none;
+        margin-top: 0;
+    }
 
-.submenu .sub-btn, .submenu .task-btn, .submenu .resource-btn, .submenu .work-btn {
-    display: block;
-    margin-bottom: 5px;
-    background: #383737;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-}
+    .menu {
+        width: 100%;
+        padding: 10px;
+    }
 
-.submenu .sub-btn:hover, .submenu .task-btn:hover, .submenu .resource-btn:hover, .submenu .work-btn:hover {
-    background: #ccc;
+    .details {
+        padding: 10px;
+    }
+
+    .top-buttons {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

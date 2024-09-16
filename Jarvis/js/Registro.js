@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.setItem(username, password);
         alert("Usuario registrado exitosamente. Ahora puedes iniciar sesión.");
         registerForm.reset();
-        window.location.href = "IniciarSesion.html";
+        window.location.href = "index.html";
       }
     });
   });

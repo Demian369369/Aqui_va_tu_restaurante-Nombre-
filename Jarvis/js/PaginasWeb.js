@@ -6,7 +6,7 @@ function toggleMenu(menuId) {
         menu.style.display = "block";
     }
 }
-
+//Paginas
 function showTask(taskId) {
     var taskDescriptions = {
         taskPro0: 'Pagina Web de $200 para menu de restaurante, incluye fondo, producto, precio etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo0/" target="_blank">Ver más detalles</a>',

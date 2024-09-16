@@ -9,7 +9,7 @@ function toggleMenu(menuId) {
 
 function showTask(taskId) {
     var taskDescriptions = {
-        taskPro0: 'Pagina Web de $200 para menu de restaurante, incluye fondo, producto, precio etc. <a href="/PaginasWeb/Prototipo0/index.html" target="_blank">Ver más detalles</a>',
+        taskPro0: 'Pagina Web de $200 para menu de restaurante, incluye fondo, producto, precio etc. <a href="/JarvisFrontendProject/PaginasWeb/Prototipo0/" target="_blank">Ver más detalles</a>',
         taskPro1: 'Pagina Web de $300 Recomendada para menu de restaurante, incluye fondo, producto, precio, botones, idiomas etc. <a href="/PaginasWeb/Prototipo1/index.html" target="_blank">Ver más detalles</a>',
         taskPro2: 'Pagina Web de $400 para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, mas informacion etc. <a href="/PaginasWeb/Prototipo2/index.html" target="_blank">Ver más detalles</a>',
         taskPro3: 'Pagina Web de $700 Recomendada para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion etc. <a href="/PaginasWeb/Prototipo3/index.html" target="_blank">Ver más detalles</a>',

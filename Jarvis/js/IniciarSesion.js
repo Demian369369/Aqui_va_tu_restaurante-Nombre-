@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   
       if (localStorage.getItem(username) === password) {
         alert("Inicio de sesión exitoso.");
-        window.location.href = "sesion.html"; 
+        window.location.href = "Inicio.html"; 
       } else {
         alert("Nombre de usuario o contraseña incorrectos.");
       }

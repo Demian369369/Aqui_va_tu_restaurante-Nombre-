@@ -8,9 +8,23 @@ body {
 }
 
 .container {
+    display: flex;
     width: 80%;
-    margin: auto;
-    overflow: hidden;
+    justify-content: space-between;
+    min-height: 20vh;
+    background: rgb(164, 230, 170);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: absolute; 
+    top: 100px; 
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - 100px); 
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 h1 {

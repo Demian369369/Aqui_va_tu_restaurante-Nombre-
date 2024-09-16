@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Paginas Web</title>
+    <link rel="icon" type="image/svg+xml" href="images/Agujero.jpeg">
+    <link rel="stylesheet" href="css/PaginasWeb.css">
+</head>
+<body>
+    <div class="top-buttons">
+        <button class="external-link-btn" onclick="window.location.href='Inicio.html'">Inicio</button>
+        <button class="external-link-btn" onclick="window.location.href='CosasImportantes.html'">Cosas Importantes</button>
+        <button class="external-link-btn" onclick="window.location.href='Agenda.html'">Agenda</button>
+        <button class="external-link-btn" onclick="window.location.href='IdeasVideos.html'">Videos</button>
+        <button class="external-link-btn" onclick="window.location.href='GymRutinas.html'">Rutinas GYM</button>
+    </div>    
+    <div class="container">
+        <div class="menu">
+            <button class="main-btn" onclick="toggleMenu('subjectsMenu')">Para Restaurantes</button>
+            <div id="subjectsMenu" class="submenu">
+                <button class="sub-btn" onclick="toggleMenu('subject1Tasks')">Prototipo0</button>
+                <div id="subject1Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro0')">Cafeteria</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject2Tasks')">Prototipo1</button>
+                <div id="subject2Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro1')">Mariscos</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject3Tasks')">Prototipo2</button>
+                <div id="subject3Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro2')">Snacks</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject4Tasks')">Prototipo3</button>
+                <div id="subject4Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro3')">Joyeria Moderna</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject5Tasks')">Prototipo4</button>
+                <div id="subject5Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro4')">Hamburguesas multiples sucursales</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject6Tasks')">Prototipo5</button>
+                <div id="subject6Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro5')">Cafeteria Tienda en Linea</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject7Tasks')">Prototipo6</button>
+                <div id="subject7Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro6')">E commerce de ropa</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject8Tasks')">Prototipo7</button>
+                <div id="subject8Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro7')">Restaurante Famoso</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject9Tasks')">Prototipo8</button>
+                <div id="subject9Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro8')">Pagina de empresa</button>
+                </div>
+                <button class="sub-btn" onclick="toggleMenu('subject10Tasks')">Prototipo9</button>
+                <div id="subject10Tasks" class="submenu">
+                    <button class="task-btn" onclick="showTask('taskPro9')">Curriculums</button>
+                </div>  
+            </div>
+            <button class="main-btn" onclick="toggleMenu('resourcesMenu')">Uso Personal</button>
+            <div id="resourcesMenu" class="submenu">
+                <button class="sub-btn" onclick="toggleMenu('subject1Resources')">CV</button>
+                <div id="subject1Resources" class="submenu">
+                    <button class="resource-btn" onclick="showResource('resourceMa1')">Jarvis</button>
+                </div>
+            </div>
+            
+        </div>
+        <div id="details" class="details">
+            <h2>Detalles</h2>
+            <p id="description"></p>
+        </div>
+    </div>
+    <script src="js/PaginasWeb.js"></script>
+</body>
+</html>
+
+

@@ -1,7 +1,6 @@
 body {
     font-family: 'Montserrat', sans-serif; 
-    background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg'); /* Reemplaza con tu imagen de fondo */
-    background-size: cover;
+    background-image: url('Espacio.jpg');    background-size: cover;
     margin: 0;
     padding: 0;
     display: flex;
@@ -20,6 +19,15 @@ body {
     max-width: 1200px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 60px;
+
+        justify-content: space-between;
+        min-height: 20vh;
+        margin-top: 20px;
+        position: absolute; 
+        top: 100px; 
+        left: 0;
+        right: 0;
+        padding: 20px;
 }
 
 .menu {

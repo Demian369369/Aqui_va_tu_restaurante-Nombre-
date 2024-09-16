@@ -417,3 +417,18 @@ footer hr {
 }
 
 /* end of social-icons */
+
+.profile-container {
+    position: absolute;
+    top: 10px;
+    left: 10px; 
+}
+
+.profile-image {
+    width: 250px; 
+    height: 250px; 
+    border-radius: 50%; 
+    border: 5px solid rgb(255, 0, 0); 
+    box-shadow: 0 0 10px rgba(255, 0, 10, 0.8); 
+    object-fit: cover; 
+}

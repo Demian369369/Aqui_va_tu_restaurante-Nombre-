@@ -1,0 +1,7 @@
+.task {
+    font-size: 0.7rem;
+    line-height: 1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

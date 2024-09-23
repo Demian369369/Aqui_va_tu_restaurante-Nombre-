@@ -152,18 +152,18 @@ const DefinedTasks = {
     "domingo": [
         { id: 300, text: "Levantarse", time: "10:00", completed: false, isPredefined: true },
         { id: 301, text: "Meditar", time: "11:00", completed: false, isPredefined: true },  
-        { id: 257,text: "Desayunar", time: "11:30", completed: false, isPredefined: true },
-        { id: 258,text: "Dientes y trastes", time: "11:40", completed: false, isPredefined: true },
-        { id: 259,text: "Instrumento Semanal", time: "12:00", completed: false, isPredefined: true },
-        { id: 260,text: "Produccion Musical o Edicion De Videos", time: "13:00", completed: false, isPredefined: true },
-        { id: 261,text: "Perros(limpiar y comida)", time: "13:30", completed: false, isPredefined: true },
-        { id: 262,text: "Comer, Dientes y pasear perros", time: "14:00", completed: false, isPredefined: true },
-        { id: 263,text: "Tareas", time: "16:00", completed: false, isPredefined: true },
-        { id: 264,text: "Precalculo(Estudiar)", time: "19:00", completed: false, isPredefined: true },
-        { id: 265,text: "Platzi", time: "21:00", completed: false, isPredefined: true },
-        { id: 266,text: "Cenar y Dientes", time: "22:00", completed: false, isPredefined: true },
-        { id: 267,text: "Rachas", time: "22:30", completed: false, isPredefined: true },
-        { id: 268,text: "Dormir", time: "23:30", completed: false, isPredefined: true },   ]
+        { id: 302,text: "Desayunar", time: "11:30", completed: false, isPredefined: true },
+        { id: 303,text: "Dientes y trastes", time: "11:40", completed: false, isPredefined: true },
+        { id: 304,text: "Instrumento Semanal", time: "12:00", completed: false, isPredefined: true },
+        { id: 305,text: "Produccion Musical o Edicion De Videos", time: "13:00", completed: false, isPredefined: true },
+        { id: 306,text: "Perros(limpiar y comida)", time: "13:30", completed: false, isPredefined: true },
+        { id: 307,text: "Comer, Dientes y pasear perros", time: "14:00", completed: false, isPredefined: true },
+        { id: 308,text: "Tareas", time: "16:00", completed: false, isPredefined: true },
+        { id: 309,text: "Precalculo(Estudiar)", time: "19:00", completed: false, isPredefined: true },
+        { id: 310,text: "Platzi", time: "21:00", completed: false, isPredefined: true },
+        { id: 311,text: "Cenar y Dientes", time: "22:00", completed: false, isPredefined: true },
+        { id: 312,text: "Rachas", time: "22:30", completed: false, isPredefined: true },
+        { id: 313,text: "Dormir", time: "23:30", completed: false, isPredefined: true },   ]
 };
 
 function renderTasksForSelectedDate() {

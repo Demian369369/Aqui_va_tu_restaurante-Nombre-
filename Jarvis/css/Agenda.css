@@ -4,7 +4,9 @@
     margin: 0;
     padding: 0;
 }
-
+#taskTime {
+    margin-top: 0px;
+}
 @media (max-width: 768px) {
     .container {
         width: 90%;
@@ -61,11 +63,11 @@
 }
 
 .calendar-container {
-    width: 30%;
+    width: 35%;
 }
 
 .tasks-container {
-    width: 65%;
+    width: 60%;
 }
 
 #calendar {
@@ -91,12 +93,12 @@
 }
 
 .task-input {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #taskList {
     list-style-type: none;
-    padding: 0;
+    padding: 10;
 }
 
 #taskList li {
@@ -144,6 +146,7 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg');
+    background-attachment: fixed; 
     background-size: cover;
     justify-content: center;
     align-items: center;
@@ -219,4 +222,16 @@ h2 {
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+}
+
+.footer {
+    background-color: rgba(128, 128, 128, 0.9); 
+    color: #00f7ff; 
+    text-align: center; 
+    padding: 10px 0;
+    position: fixed; 
+    left: 0;
+    bottom: 0;
+    width: 100%; 
+    font-size: 14px; 
 }

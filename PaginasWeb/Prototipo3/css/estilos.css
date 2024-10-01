@@ -21,9 +21,6 @@ p {
 	font-size: 22px;
 }
 
-/* ------------------------- */
-/* Header */
-/* ------------------------- */
 .contenido-header {
 	width: 100%;
 	height: 100vh;
@@ -54,9 +51,6 @@ p {
 	mix-blend-mode: multiply;
 }
 
-/* ------------------------- */
-/* NAVBAR */
-/* ------------------------- */
 .menu {
 	background-color: var(--purple-medium);
 	width: 100%;
@@ -88,9 +82,7 @@ p {
 	background-color: var(--purple-light);
 }
 
-/* ------------------------- */
-/* Nosotros */
-/* ------------------------- */
+
 .nosotros {
 	margin-bottom: 60px;
 }
@@ -146,9 +138,7 @@ p {
 	border-bottom: 1px solid var(--purple-light);
 }
 
-/* ------------------------- */
-/* Productos */
-/* ------------------------- */
+
 .productos {
 	background: var(--gray-light);
 	padding: 20px;
@@ -214,9 +204,6 @@ p {
 	color: var(--purple-light);
 }
 
-/* ------------------------- */
-/* Separador */
-/* ------------------------- */
 .separador {
 	width: 100%;
 	height: 250px;
@@ -238,16 +225,12 @@ p {
 	padding: 10px;
 }
 
-/* ------------------------- */
-/* Acerca de */
-/* ------------------------- */
+
 .acerca-de {
 	margin-bottom: 60px;
 }
 
-/* ------------------------- */
-/* Galeria */
-/* ------------------------- */
+
 .galeria {
 	margin-bottom: 60px;
 }
@@ -278,9 +261,6 @@ p {
 	transform: scale(1.2);
 }
 
-/* ------------------------- */
-/* Mediaqueries */
-/* ------------------------- */
 @media screen and (max-width: 992px) {
 	p {
 		font-size: 18px;

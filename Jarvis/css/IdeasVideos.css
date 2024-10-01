@@ -34,7 +34,7 @@ body {
     padding: 20px;
     background: #333;
     color: white;
-    flex-shrink: 0; /* Prevents the menu from shrinking */
+    flex-shrink: 0; 
 }
 
 .menu button {

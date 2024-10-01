@@ -42,7 +42,6 @@ nav a {
 }
 
 
-/* Estilos del pie de página */
 footer {
   text-align: center;
   background-color: #21b137;
@@ -71,7 +70,6 @@ footer {
 }
 
 
-/* Sección de productos */
 .products-section {
   margin-top: 30px;
   background-color: #a99d1a;
@@ -95,7 +93,6 @@ footer {
 }
 
 
-/* Lista de precios */
 .price-list {
   list-style-type: none;
   padding: 0;
@@ -110,7 +107,6 @@ footer {
   border-bottom: none;
 }
 
-/* Botones */
 button {
   background-color: #bbb31a;
   color: white;
@@ -121,7 +117,6 @@ button {
   margin-top: 20px;
 }
 
-/* Clases oculto y mostrado */
 div.oculto {
   display: none;
 }
@@ -135,7 +130,6 @@ div.mostrado {
   margin-top: 20px;
 }
 
-/* Títulos */
 h2 {
   color: #3498db; 
   transition: color 0.3s ease; 
@@ -155,7 +149,6 @@ h2:hover {
   100% { color: #e74c3c; } 
 }
 
-/* Párrafos */
 p {
   color: #ffffff; 
   background-color: #f4590c; 
@@ -165,7 +158,6 @@ p {
   margin: 10px 0; 
 }
 
-/* Sección de productos y precios */
 #products-prices {
   text-align: left;
 }
@@ -197,7 +189,7 @@ p {
 .product-info {
   display: none;
   position: absolute;
-  top: 100%; /* Posicionado debajo del .snack-item */
+  top: 100%; 
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
@@ -205,7 +197,6 @@ p {
   padding: 10px;
 }
 
-/* Sección de productos */
 .products-section {
   margin-top: 30px;
   background-color: #a99d1a;
@@ -228,7 +219,6 @@ p {
   margin-bottom: 10px;
 }
 
-/* Lista de precios */
 .snack-menu {
   list-style-type: none;
   padding: 0;
@@ -250,7 +240,7 @@ p {
 .product-info {
   display: none;
   position: absolute;
-  top: 100%; /* Posicionado debajo del .snack-item */
+  top: 100%; 
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
@@ -259,7 +249,7 @@ p {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   max-width: 90vw;
   z-index: 1;
-  text-align: left; /* Centrar el contenido */
+  text-align: left; 
 }
 
 .snack-item:hover .product-info {
@@ -267,9 +257,9 @@ p {
 }
 
 .product-info img {
-  max-width: 80%; /* Reducir el tamaño de la imagen */
+  max-width: 80%; 
   height: auto;
-  margin-top: 10px; /* Espacio entre la imagen y el texto */
+  margin-top: 10px; 
 }
 
 .add-to-cart {
@@ -285,7 +275,6 @@ p {
   margin-right: 5px;
 }
 
-/* Imágenes en productos */
 .products-section img {
   max-width: 100%;
   height: auto;
@@ -293,7 +282,6 @@ p {
   margin: 0 auto;
 }
 
-/* Estilos del pie de página */
 footer {
   text-align: center;
   background-color: #21b137;
@@ -301,7 +289,6 @@ footer {
   padding: 10px;
 }
 
-/* Estilos de navegación en dispositivos móviles */
 @media (max-width: 768px) {
   nav {
     flex-direction: column;

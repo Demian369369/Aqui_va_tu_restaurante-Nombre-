@@ -39,7 +39,6 @@ function selectDate(year, month, day) {
     event.target.classList.add('selected');
     renderTasksForSelectedDate();
 }
-// Tareas predefinidas por día de la semana
 const DefinedTasks = {
     "lunes": [
         { id: 1, text: "Levantarse", time: "05:30", completed: false, isPredefined: true },
@@ -174,14 +173,9 @@ function renderTasksForSelectedDate() {
     displayDate.innerText = `${weekday}, ${formattedDate}`;
 
     taskList.innerHTML = "";
-
-    // Obtener las tareas del localStorage o iniciar un array vacío si no existen
     let dailyTasks = tasks[dateKey] || [];
-
-    // Agregar tareas predefinidas solo si no están ya en la lista
     if (DefinedTasks[weekday]) {
         DefinedTasks[weekday].forEach(preTask => {
-            // Verificar si la tarea predefinida ya está en la lista de tareas
             const taskExists = dailyTasks.some(task => task.text === preTask.text && task.time === preTask.time);
             if (!taskExists) {
                 dailyTasks.push(preTask);
@@ -189,7 +183,6 @@ function renderTasksForSelectedDate() {
         });
     }
 
-    // Renderizar las tareas
     dailyTasks.forEach((task, index) => {
         const taskItem = document.createElement('li');
         taskItem.innerHTML = `
@@ -200,10 +193,8 @@ function renderTasksForSelectedDate() {
         taskList.appendChild(taskItem);
     });
 
-    // Calcular el rendimiento
     calculateTaskCompletion(dailyTasks);
 
-    // Guardar las tareas actualizadas en el localStorage
     tasks[dateKey] = dailyTasks;
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
@@ -228,14 +219,11 @@ function deleteTask(index) {
     const dateKey = selectedDate.toDateString();
     let dailyTasks = tasks[dateKey] || [];
 
-    // Eliminar la tarea en la posición indicada
     dailyTasks.splice(index, 1);
 
-    // Guardar las tareas actualizadas en el localStorage
     tasks[dateKey] = dailyTasks;
     localStorage.setItem('tasks', JSON.stringify(tasks));
 
-    // Volver a renderizar las tareas del día
     renderTasksForSelectedDate();
 }
 
@@ -254,7 +242,6 @@ function calculateTaskCompletion(dailyTasks) {
     taskPercentage.innerText = `${percentage}%`;
 }
 
-// Initialize calendar to current month
 const now = new Date();
 renderCalendar(now.getFullYear(), now.getMonth() + 1);
 
@@ -267,7 +254,7 @@ function updateClock() {
 }
 
 setInterval(updateClock, 1000);
-updateClock(); // Inicializar el reloj de inmediato
+updateClock(); 
 
 const gymvideoRoutinesButton = document.getElementById('gymvideo-routines-button');
 gymvideoRoutinesButton.addEventListener('click', function() {

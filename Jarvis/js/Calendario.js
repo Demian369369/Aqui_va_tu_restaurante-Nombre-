@@ -1,137 +1,138 @@
 const taskColors = {
     'Nada': 'bg-white',
     'Cosas importantes': 'bg-pink-200',
-    'Obligatorias': 'bg-red-200',
+    'Obligatorias': 'bg-red-400',
     'Opcionales': 'bg-lime-200',
     'Extras': 'bg-yellow-200',
     'Trabajo': 'bg-blue-200',
-    'Libres': 'bg-purple-200'
+    'Escuela': 'bg-purple-200',
+    'Tareas': 'bg-cyan-200' 
 };
 
 const DefinedTasks = {
-"lunes": [
-{ id: 1, text: "Levantarse", time: "05:30 AM", isPredefined: true, type: "Nada" },
-{ id: 2,text: "Pasear Perros", time: "5:45 AM",  isPredefined: true, type: "Obligatorias" },
-{ id: 3,text: "Prepararme para el gym", time: "5:50 AM", isPredefined: true, type: "Obligatorias" },
-{ id: 4,text: "Gym", time: "7:00 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 5,text: "Desayunar", time: "7:40 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 6,text: "Dientes y Trastes", time: "7:50 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 7,text: "Bathroom", time: "8:05 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 8,text: "Meditar", time: "8:30 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 9,text: "Perros(limpiar y comida)", time: "8:55 AM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 10,text: "Derevo/Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true, type: "Obligatorias" },
-{ id: 11,text: "Derevo", time: "4:00 PM", completed: false, isPredefined: true, type: "Nada" },
-{ id: 12,text: "UDG/Logica Matematica", time: "7:00 PM", completed: false, isPredefined: true, type: "Nada" },
-{ id: 13,text: "UDG/FundamentosProgramacion", time: "9:00 PM", completed: false, isPredefined: true, type: "Nada" },
-{ id: 14,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true, type: "Nada" },
-{ id: 15,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true, type: "Nada" },
-{ id: 16,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true, type: "Nada" },
+    "lunes": [
+    { id: 1, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Extras" },
+    { id: 2, text: "Pasear Perros", startTime: "5:35 AM", endTime: "5:45 AM", isPredefined: true, type: "Opcionales" },
+    { id: 3, text: "Prepararme para el gym", startTime: "5:45 AM", endTime: "5:50 AM", isPredefined: true, type: "Opcionales" },
+    { id: 4, text: "Gym", startTime: "6:00 AM", endTime: "7:00 AM", isPredefined: true, type: "Extras" },
+    { id: 5, text: "Desayunar", startTime: "7:10 AM", endTime: "7:30 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 6, text: "Dientes y Trastes", startTime: "7:30 AM", endTime: "7:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 7, text: "Bathroom", startTime: "7:50 AM", endTime: "8:00 AM", isPredefined: true, type: "Opcionales" },
+    { id: 8, text: "Meditar", startTime: "8:00 AM", endTime: "8:30 AM", isPredefined: true, type: "Extras" },
+    { id: 9, text: "Perros(limpiar y comida)", startTime: "8:35 AM", endTime: "8:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 10, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 17, text: "Ir a Cucei", startTime: "15:40 PM", endTime: "15:40 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 11, text: "Derevo", startTime: "9:00 AM", endTime: "18:00 PM", isPredefined: true, type: "Trabajo" },
+    { id: 12, text: "UDG/Logica Matematica", startTime: "17:00 PM", endTime: "19:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 13, text: "UDG/FundamentosProgramacion", startTime: "19:00 PM", endTime: "21:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
 ],
 "martes": [
-{ id: 51,text: "Levantarse", time: "05:30 AM", completed: false, isPredefined: true },
-{ id: 52,text: "Pasear Perros", time: "5:45 AM", completed: false, isPredefined: true },
-{ id: 53,text: "Prepararme para el gym", time: "5:50 AM", completed: false, isPredefined: true },
-{ id: 54,text: "Gym", time: "7:00 AM", completed: false, isPredefined: true },
-{ id: 55,text: "Desayunar", time: "7:40 AM", completed: false, isPredefined: true },
-{ id: 56,text: "Dientes y Trastes", time: "7:50 AM", completed: false, isPredefined: true },
-{ id: 57,text: "Bathroom", time: "8:05 AM", completed: false, isPredefined: true },
-{ id: 58,text: "Meditar", time: "8:30 AM", completed: false, isPredefined: true },
-{ id: 59,text: "Perros(limpiar y comida)", time: "8:55 AM", completed: false, isPredefined: true },
-{ id: 60,text: "Derevo/Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 61,text: "Derevo", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 62,text: "UDG/IntroduccionIngenieria", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 63,text: "UDG/EticaYLegislacion", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 64,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 65,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 66,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true },
+    { id: 1, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Extras" },
+    { id: 2, text: "Pasear Perros", startTime: "5:35 AM", endTime: "5:45 AM", isPredefined: true, type: "Opcionales" },
+    { id: 3, text: "Prepararme para el gym", startTime: "5:45 AM", endTime: "5:50 AM", isPredefined: true, type: "Opcionales" },
+    { id: 4, text: "Gym", startTime: "6:00 AM", endTime: "7:00 AM", isPredefined: true, type: "Extras" },
+    { id: 5, text: "Desayunar", startTime: "7:10 AM", endTime: "7:30 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 6, text: "Dientes y Trastes", startTime: "7:30 AM", endTime: "7:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 7, text: "Bathroom", startTime: "7:50 AM", endTime: "8:00 AM", isPredefined: true, type: "Opcionales" },
+    { id: 8, text: "Meditar", startTime: "8:00 AM", endTime: "8:30 AM", isPredefined: true, type: "Extras" },
+    { id: 9, text: "Perros(limpiar y comida)", startTime: "8:35 AM", endTime: "8:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 10, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 17, text: "Ir a Cucei", startTime: "15:40 PM", endTime: "15:40 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 11, text: "Derevo", startTime: "9:00 AM", endTime: "18:00 PM", isPredefined: true, type: "Trabajo" },
+    { id: 62, text: "UDG/IntroduccionIngenieria", startTime: "17:00 PM", endTime: "19:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 63, text: "UDG/EticaYLegislacion", startTime: "19:00 PM", endTime: "21:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
 ],
 "miércoles": [
-{ id: 101, text: "Levantarse", time: "05:30 AM", completed: false, isPredefined: true },
-{ id: 102,text: "Pasear Perros", time: "5:45 AM", completed: false, isPredefined: true },
-{ id: 103,text: "Prepararme para el gym", time: "5:50 AM", completed: false, isPredefined: true },
-{ id: 104,text: "Gym", time: "7:00 AM", completed: false, isPredefined: true },
-{ id: 105,text: "Desayunar", time: "7:40 AM", completed: false, isPredefined: true },
-{ id: 106,text: "Dientes y Trastes", time: "7:50 AM", completed: false, isPredefined: true },
-{ id: 107,text: "Bathroom", time: "8:05 AM", completed: false, isPredefined: true },
-{ id: 108,text: "Meditar", time: "8:30 AM", completed: false, isPredefined: true },
-{ id: 109,text: "Perros(limpiar y comida)", time: "8:55 AM", completed: false, isPredefined: true },
-{ id: 110,text: "Derevo/Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 111,text: "Derevo", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 112,text: "ProblemasGlobalesXXI", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 113,text: "FundamentosProgramacion", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 114,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 115,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 116,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true },
+    { id: 1, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Extras" },
+    { id: 2, text: "Pasear Perros", startTime: "5:35 AM", endTime: "5:45 AM", isPredefined: true, type: "Opcionales" },
+    { id: 3, text: "Prepararme para el gym", startTime: "5:45 AM", endTime: "5:50 AM", isPredefined: true, type: "Opcionales" },
+    { id: 4, text: "Gym", startTime: "6:00 AM", endTime: "7:00 AM", isPredefined: true, type: "Extras" },
+    { id: 5, text: "Desayunar", startTime: "7:10 AM", endTime: "7:30 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 6, text: "Dientes y Trastes", startTime: "7:30 AM", endTime: "7:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 7, text: "Bathroom", startTime: "7:50 AM", endTime: "8:00 AM", isPredefined: true, type: "Opcionales" },
+    { id: 8, text: "Meditar", startTime: "8:00 AM", endTime: "8:30 AM", isPredefined: true, type: "Extras" },
+    { id: 9, text: "Perros(limpiar y comida)", startTime: "8:35 AM", endTime: "8:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 10, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 11, text: "Derevo", startTime: "9:00 AM", endTime: "18:00 PM", isPredefined: true, type: "Trabajo" },
+    { id: 112, text: "UDG/ProblemasGlobalesXXI", startTime: "17:00 PM", endTime: "19:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 113, text: "Estudio/Tareas", startTime: "19:00 PM", endTime: "21:00 PM", isPredefined: true, type: "Tareas" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
 ],
 "jueves": [
-{ id: 150, text: "Levantarse", time: "05:30 AM", completed: false, isPredefined: true },
-{ id: 151,text: "Pasear Perros", time: "5:45 AM", completed: false, isPredefined: true },
-{ id: 152,text: "Prepararme para el gym", time: "5:50 AM", completed: false, isPredefined: true },
-{ id: 153,text: "Gym", time: "7:00 AM", completed: false, isPredefined: true },
-{ id: 154,text: "Desayunar", time: "7:40 AM", completed: false, isPredefined: true },
-{ id: 155,text: "Dientes y Trastes", time: "7:50 AM", completed: false, isPredefined: true },
-{ id: 156,text: "Bathroom", time: "8:05 AM", completed: false, isPredefined: true },
-{ id: 157,text: "Meditar", time: "8:30 AM", completed: false, isPredefined: true },
-{ id: 158,text: "Perros(limpiar y comida)", time: "8:55 AM", completed: false, isPredefined: true },
-{ id: 159,text: "Derevo/Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 160,text: "Derevo", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 161,text: "Precalculo(Estudiar)", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 162,text: "EticaYLegislacion", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 163,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 164,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 165,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true },
+    { id: 1, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Extras" },
+    { id: 2, text: "Pasear Perros", startTime: "5:35 AM", endTime: "5:45 AM", isPredefined: true, type: "Opcionales" },
+    { id: 3, text: "Prepararme para el gym", startTime: "5:45 AM", endTime: "5:50 AM", isPredefined: true, type: "Opcionales" },
+    { id: 4, text: "Gym", startTime: "6:00 AM", endTime: "7:00 AM", isPredefined: true, type: "Extras" },
+    { id: 5, text: "Desayunar", startTime: "7:10 AM", endTime: "7:30 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 6, text: "Dientes y Trastes", startTime: "7:30 AM", endTime: "7:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 7, text: "Bathroom", startTime: "7:50 AM", endTime: "8:00 AM", isPredefined: true, type: "Opcionales" },
+    { id: 8, text: "Meditar", startTime: "8:00 AM", endTime: "8:30 AM", isPredefined: true, type: "Extras" },
+    { id: 9, text: "Perros(limpiar y comida)", startTime: "8:35 AM", endTime: "8:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 10, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 11, text: "Derevo", startTime: "9:00 AM", endTime: "18:00 PM", isPredefined: true, type: "Trabajo" },
+    { id: 113, text: "Estudio/Tareas", startTime: "18:00 PM", endTime: "19:00 PM", isPredefined: true, type: "Tareas" },
+    { id: 162, text: "UDG/EticaYLegislacion", startTime: "19:00 PM", endTime: "21:00 PM", isPredefined: true, type: "Escuela" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
 ],
 "viernes": [
-{ id: 200, text: "Levantarse", time: "05:30 AM", completed: false, isPredefined: true },
-{ id: 201,text: "Pasear Perros", time: "5:45 AM", completed: false, isPredefined: true },
-{ id: 202,text: "Prepararme para el gym", time: "5:50 AM", completed: false, isPredefined: true },
-{ id: 203,text: "Gym", time: "7:00 AM", completed: false, isPredefined: true },
-{ id: 204,text: "Desayunar", time: "7:40 AM", completed: false, isPredefined: true },
-{ id: 205,text: "Dientes y Trastes", time: "7:50 AM", completed: false, isPredefined: true },
-{ id: 206,text: "Bathroom", time: "8:05 AM", completed: false, isPredefined: true },
-{ id: 207,text: "Meditar", time: "8:30 AM", completed: false, isPredefined: true },
-{ id: 208,text: "Perros(limpiar y comida)", time: "8:55 AM", completed: false, isPredefined: true },
-{ id: 209,text: "Derevo/Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 210,text: "Derevo", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 211,text: "Precalculo(Estudiar)", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 212,text: "Tareas", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 213,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 214,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 215,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true },
+    { id: 1, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Extras" },
+    { id: 2, text: "Pasear Perros", startTime: "5:35 AM", endTime: "5:45 AM", isPredefined: true, type: "Opcionales" },
+    { id: 3, text: "Prepararme para el gym", startTime: "5:45 AM", endTime: "5:50 AM", isPredefined: true, type: "Opcionales" },
+    { id: 4, text: "Gym", startTime: "6:00 AM", endTime: "7:00 AM", isPredefined: true, type: "Extras" },
+    { id: 5, text: "Desayunar", startTime: "7:10 AM", endTime: "7:30 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 6, text: "Dientes y Trastes", startTime: "7:30 AM", endTime: "7:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 7, text: "Bathroom", startTime: "7:50 AM", endTime: "8:00 AM", isPredefined: true, type: "Opcionales" },
+    { id: 8, text: "Meditar", startTime: "8:00 AM", endTime: "8:30 AM", isPredefined: true, type: "Extras" },
+    { id: 9, text: "Perros(limpiar y comida)", startTime: "8:35 AM", endTime: "8:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 10, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 11, text: "Derevo", startTime: "9:00 AM", endTime: "18:00 PM", isPredefined: true, type: "Trabajo" },
+    { id: 113, text: "Estudio/Tareas", startTime: "18:00 PM", endTime: "21:00 PM", isPredefined: true, type: "Tareas" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
 ],
 "sábado": [
-{ id: 250, text: "Levantarse", time: "05:30 AM", completed: false, isPredefined: true },
-{ id: 251,text: "Hacer Desayuno", time: "5:45 AM", completed: false, isPredefined: true },
-{ id: 252,text: "Dientes", time: "5:50 AM", completed: false, isPredefined: true },
-{ id: 253,text: "Precalculo", time: "11:00 AM", completed: false, isPredefined: true },
-{ id: 254,text: "Desayunar", time: "?", completed: false, isPredefined: true },
-{ id: 256,text: "Bathroom", time: "?", completed: false, isPredefined: true },
-{ id: 257,text: "Dientes", time: "12:00 PM", completed: false, isPredefined: true },
-{ id: 258,text: "Meditar", time: "1:00 PM", completed: false, isPredefined: true },
-{ id: 259,text: "Perros(limpiar y comida)", time: "1:30 PM", completed: false, isPredefined: true },
-{ id: 260,text: "Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 261,text: "Tareas Precalculo", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 262,text: "Precalculo(Estudiar)", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 263,text: "Tareas", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 264,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 265,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 266,text: "Editar Videos", time: "11:30 PM", completed: false, isPredefined: true },
+    { id: 250, text: "Levantarse", startTime: "05:30 AM", endTime: "05:35 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 251, text: "Hacer Desayuno", startTime: "5:35 AM", endTime: "5:40 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 252, text: "Dientes", startTime: "5:40 AM", endTime: "5:50 AM", isPredefined: true, type: "Cosas importantes" },
+    { id: 17, text: "Ir a Cucei", startTime: "5:55 AM", endTime: "6:50 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 253, text: "UDG/Precalculo", startTime: "7:00 AM", endTime: "11:00 AM", isPredefined: true, type: "Escuela" },
+    { id: 254, text: "Desayunar", startTime: "7:45 AM", endTime: "8:00 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 256, text: "Bathroom", startTime: "9:00 AM", endTime: "9:15 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 257, text: "Dientes", startTime: "12:00 PM", endTime: "12:15 PM", isPredefined: true, type: "Cosas importantes" },
+    { id: 258, text: "Meditar", startTime: "1:00 PM", endTime: "1:30 PM", isPredefined: true, type: "Extras" },
+    { id: 259, text: "Perros(limpiar y comida)", startTime: "1:30 PM", endTime: "1:45 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 260, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 266, text: "Editar Videos", startTime: "23:30 PM", endTime: "00:30 AM", isPredefined: true, type: "Extras" }
 ],
 "domingo": [
-{ id: 300, text: "Levantarse", time: "10:00 AM", completed: false, isPredefined: true },
-{ id: 301, text: "Meditar", time: "11:00 AM", completed: false, isPredefined: true },  
-{ id: 302,text: "Desayunar", time: "11:30 AM", completed: false, isPredefined: true },
-{ id: 303,text: "Dientes y trastes", time: "11:40 AM", completed: false, isPredefined: true },
-{ id: 304,text: "Instrumento Semanal", time: "12:00 PM", completed: false, isPredefined: true },
-{ id: 305,text: "Produccion Musical o Edicion De Videos", time: "1:00 PM", completed: false, isPredefined: true },
-{ id: 306,text: "Perros(limpiar y comida)", time: "1:30 PM", completed: false, isPredefined: true },
-{ id: 307,text: "Comer, Dientes y pasear perros", time: "2:00 PM", completed: false, isPredefined: true },
-{ id: 308,text: "Tareas", time: "4:00 PM", completed: false, isPredefined: true },
-{ id: 309,text: "Precalculo(Estudiar)", time: "7:00 PM", completed: false, isPredefined: true },
-{ id: 310,text: "Platzi", time: "9:00 PM", completed: false, isPredefined: true },
-{ id: 311,text: "Cenar y Dientes", time: "10:00 PM", completed: false, isPredefined: true },
-{ id: 312,text: "Rachas", time: "10:30 PM", completed: false, isPredefined: true },
-{ id: 313,text: "Dormir", time: "11:30 PM", completed: false, isPredefined: true },   ]
+    { id: 300, text: "Levantarse", startTime: "10:00 AM", endTime: "10:05 AM", isPredefined: true, type: "Obligatorias" },
+    { id: 301, text: "Meditar", startTime: "11:00 AM", endTime: "11:30 AM", isPredefined: true, type: "Extras" },
+    { id: 302, text: "Desayunar", startTime: "11:30 AM", endTime: "12:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 303, text: "Dientes y trastes", startTime: "11:40 AM", endTime: "12:00 PM", isPredefined: true, type: "Nada" },
+    { id: 304, text: "Instrumento Semanal", startTime: "12:00 PM", endTime: "13:00 PM", isPredefined: true, type: "Extras" },
+    { id: 305, text: "Produccion Musical o Edicion De Videos", startTime: "13:00 PM", endTime: "14:00 PM", isPredefined: true, type: "Extras" },
+    { id: 306, text: "Perros(limpiar y comida)", startTime: "13:30 PM", endTime: "14:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 307, text: "Comer, Dientes y pasear perros", startTime: "14:00 PM", endTime: "15:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 14, text: "Cenar y Dientes", startTime: "21:00 PM", endTime: "22:00 PM", isPredefined: true, type: "Obligatorias" },
+    { id: 15, text: "Rachas", startTime: "22:00 PM", endTime: "22:30 PM", isPredefined: true, type: "Extras" },
+    { id: 16, text: "Dormir", startTime: "22:30 PM", endTime: "23:30 AM", isPredefined: true, type: "Extras" }
+]
+
+
+
 };
 
 const hours = Array.from({ length: 24 }, (_, i) => {
@@ -140,14 +141,13 @@ const hours = Array.from({ length: 24 }, (_, i) => {
     return `${hour}:00 ${ampm}`;
 });
 
-const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+const daysOfWeek = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
 let currentDate = new Date();
 
 function updateCalendar() {
     const calendar = document.getElementById('calendar');
     calendar.innerHTML = '';
 
-    // Añadir encabezados de días
     calendar.appendChild(createEmptyCell());
     daysOfWeek.forEach(day => {
         const dayHeader = document.createElement('div');
@@ -156,7 +156,6 @@ function updateCalendar() {
         calendar.appendChild(dayHeader);
     });
 
-    // Añadir filas de horas y celdas de tareas
     hours.forEach(hour => {
         const hourCell = createHourCell(hour);
         calendar.appendChild(hourCell);
@@ -182,61 +181,47 @@ function createHourCell(hour) {
     cell.textContent = hour;
     return cell;
 }
+
 function createTaskCell(day, hour) {
     const cell = document.createElement('div');
     cell.className = 'border border-gray-200 p-1 h-16 overflow-y-auto';
 
     const tasks = getTasksForDayAndHour(day, hour);
-    
-    // Ordenar las tareas por hora antes de añadirlas al DOM
-    tasks.sort((a, b) => {
-        const [aHour, aMinute] = a.time.split(' ')[0].split(':').map(Number);
-        const [bHour, bMinute] = b.time.split(' ')[0].split(':').map(Number);
-        const aPeriod = a.time.split(' ')[1];
-        const bPeriod = b.time.split(' ')[1];
-
-        const aTotalMinutes = (aPeriod === 'PM' ? aHour + 12 : aHour) * 60 + aMinute;
-        const bTotalMinutes = (bPeriod === 'PM' ? bHour + 12 : bHour) * 60 + bMinute;
-
-        return aTotalMinutes - bTotalMinutes;
-    });
 
     tasks.forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.className = `${taskColors[task.type] || 'bg-gray-100'} p-1 mb-1 rounded task`;
         taskElement.textContent = task.text;
-        taskElement.title = `${task.text} - ${task.time}`;
+        taskElement.title = `${task.text} - ${task.startTime} a ${task.endTime}`;
         cell.appendChild(taskElement);
     });
 
     return cell;
 }
 
-
 function getTasksForDayAndHour(day, hour) {
     const dayTasks = DefinedTasks[day.toLowerCase()] || [];
+    const currentHourInMinutes = convertTimeToMinutes(hour);
+
     return dayTasks.filter(task => {
-        const taskHourMinute = task.time.split(' '); // Dividir en hora y AM/PM
-        const [taskTime, period] = taskHourMinute; // Separar tiempo y periodo (AM/PM)
-        let [taskHour, taskMinute] = taskTime.split(':').map(Number); // Obtener hora y minutos
-
-        // Convertir a 24 horas
-        if (period === 'PM' && taskHour < 12) {
-            taskHour += 12; // Convertir PM a formato de 24 horas
-        }
-        if (period === 'AM' && taskHour === 12) {
-            taskHour = 0; // Convertir 12 AM a 0 horas
-        }
-
-        const taskTimeInMinutes = taskHour * 60 + taskMinute;
-        const [cellHour] = hour.split(':').map(Number);
-        const cellStartTime = cellHour * 60;
-        const cellEndTime = cellStartTime + 60;
-
-        return taskTimeInMinutes >= cellStartTime && taskTimeInMinutes < cellEndTime;
+        const taskStart = convertTimeToMinutes(task.startTime);
+        const taskEnd = convertTimeToMinutes(task.endTime);
+        
+        return taskStart >= currentHourInMinutes && taskStart < currentHourInMinutes + 60 ||
+               taskStart < currentHourInMinutes && taskEnd > currentHourInMinutes;
     });
 }
 
+
+function convertTimeToMinutes(time) {
+    const [hourMinute, period] = time.split(' '); // Separar hora de periodo AM/PM
+    let [hour, minute] = hourMinute.split(':').map(Number);
+    
+    if (period === 'PM' && hour < 12) hour += 12;
+    if (period === 'AM' && hour === 12) hour = 0; 
+
+    return hour * 60 + minute; 
+}
 
 function updateWeekDisplay() {
     const weekStart = new Date(currentDate);
@@ -257,5 +242,14 @@ document.getElementById('nextWeek').addEventListener('click', () => {
     currentDate.setDate(currentDate.getDate() + 7);
     updateCalendar();
 });
+function updateDateTime() {
+    const now = new Date();
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Mexico_City' };
+    const formattedDate = now.toLocaleString('es-MX', options);
+    document.getElementById('currentDateTime').textContent = formattedDate;
+}
+
+setInterval(updateDateTime, 1000);
+updateDateTime(); 
 
 updateCalendar();

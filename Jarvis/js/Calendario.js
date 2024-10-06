@@ -141,7 +141,7 @@ const hours = Array.from({ length: 24 }, (_, i) => {
     return `${hour}:00 ${ampm}`;
 });
 
-const daysOfWeek = ['lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado', 'domingo'];
+const daysOfWeek = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 let currentDate = new Date();
 
 function updateCalendar() {
@@ -214,7 +214,7 @@ function getTasksForDayAndHour(day, hour) {
 
 
 function convertTimeToMinutes(time) {
-    const [hourMinute, period] = time.split(' '); // Separar hora de periodo AM/PM
+    const [hourMinute, period] = time.split(' '); 
     let [hour, minute] = hourMinute.split(':').map(Number);
     
     if (period === 'PM' && hour < 12) hour += 12;
@@ -246,8 +246,31 @@ function updateDateTime() {
     const now = new Date();
     const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false, timeZone: 'America/Mexico_City' };
     const formattedDate = now.toLocaleString('es-MX', options);
-    document.getElementById('currentDateTime').textContent = formattedDate;
 }
+function actualizarReloj() {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    
+    const ahora = new Date();
+    const diaSemana = diasSemana[ahora.getDay()];
+    const dia = ahora.getDate();
+    const mes = meses[ahora.getMonth()];
+    const año = ahora.getFullYear();
+    
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    horas = horas % 12;
+    horas = horas ? horas : 12; // El '0' se convierte en '12'
+    
+    const horaActual = `${horas}:${minutos} ${ampm}`;
+    const fechaActual = `${diaSemana}, ${dia} de ${mes} del ${año}`;
+    
+    document.getElementById('reloj').innerHTML = `${fechaActual} - ${horaActual}`;
+    }
+
+    setInterval(actualizarReloj, 1000); 
+    actualizarReloj();
 
 setInterval(updateDateTime, 1000);
 updateDateTime(); 

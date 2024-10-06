@@ -136,3 +136,16 @@ header nav a:hover {
     width: 100%; 
     font-size: 14px; 
 }
+
+#reloj {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    color: aqua;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    background-color: rgba(136, 0, 255, 0.5);
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+}

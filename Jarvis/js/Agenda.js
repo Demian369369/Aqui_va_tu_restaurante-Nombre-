@@ -245,20 +245,28 @@ function calculateTaskCompletion(dailyTasks) {
 const now = new Date();
 renderCalendar(now.getFullYear(), now.getMonth() + 1);
 
-function updateClock() {
-    const clockElement = document.getElementById('clock');
-    const now = new Date();
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    clockElement.innerText = `${hours}:${minutes}`;
-}
+function actualizarReloj() {
+    const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+    
+    const ahora = new Date();
+    const diaSemana = diasSemana[ahora.getDay()];
+    const dia = ahora.getDate();
+    const mes = meses[ahora.getMonth()];
+    const año = ahora.getFullYear();
+    
+    let horas = ahora.getHours();
+    const minutos = ahora.getMinutes().toString().padStart(2, '0');
+    const ampm = horas >= 12 ? 'PM' : 'AM';
+    horas = horas % 12;
+    horas = horas ? horas : 12; // El '0' se convierte en '12'
+    
+    const horaActual = `${horas}:${minutos} ${ampm}`;
+    const fechaActual = `${diaSemana}, ${dia} de ${mes} del ${año}`;
+    
+    document.getElementById('reloj').innerHTML = `${fechaActual} - ${horaActual}`;
+    }
 
-setInterval(updateClock, 1000);
-updateClock(); 
-
-const gymvideoRoutinesButton = document.getElementById('gymvideo-routines-button');
-gymvideoRoutinesButton.addEventListener('click', function() {
-  window.location.href = 'video.html'; 
-});
-
+    setInterval(actualizarReloj, 1000); 
+    actualizarReloj();
 //localStorage.clear();

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Bullet Journal Web</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0e6ff;
+            margin: 0;
+            padding: 20px;
+            color: #5a5a5a;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #8a6bbd;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+            border-bottom: 2px solid #d4c4ff;
+            padding-bottom: 10px;
+        }
+        .habit-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .habit-item {
+            background-color: #faf0ff;
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .habit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .habit-text {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+            color: #6a4c93;
+        }
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-bar {
+            flex-grow: 1;
+            height: 25px;
+            background-color: #e0d0ff;
+            border-radius: 12.5px;
+            overflow: hidden;
+            margin-right: 10px;
+        }
+        .progress {
+            height: 100%;
+            background-color: #9f86c0;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .day-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .day-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: none;
+            background-color: #d4c4ff;
+            color: #5a5a5a;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .day-button.active {
+            background-color: #9f86c0;
+            color: white;
+        }
+        .day-button:hover {
+            transform: scale(1.1);
+        }
+        .add-habit {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .add-habit input, .add-habit select {
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #d4c4ff;
+            border-radius: 5px;
+        }
+        .add-habit button {
+            background-color: #9f86c0;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .add-habit button:hover {
+            background-color: #8a6bbd;
+        }
+        #important-habits-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #9f86c0;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        #important-habits-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        #important-habits-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        .important-habits-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            width: 80%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #8a6bbd;
+        }
+        .monsters-container {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .monster {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.8em;
+        }
+        .monster-daily { background-color: #eee703; }
+        .monster-weekly { background-color: #2196F3; }
+        .monster-important { background-color: #F44336; }
+        .monster-health-bar {
+            width: 100px;
+            height: 10px;
+            background-color: #ddd;
+            margin-top: 5px;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .monster-health {
+            height: 100%;
+            width: 100%;
+            background-color: #4CAF50;
+            transition: width 0.3s ease;
+        }
+        #reset-all-progress-btn {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 30px;
+            font-size: 18px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        #reset-all-progress-btn:hover {
+            background-color: #ff4757;
+            transform: scale(1.05);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        .footer {
+        background-color: rgba(96, 0, 251, 0.2);
+        color: #00f7ff;
+        display: flex; 
+        justify-content: center; 
+        padding: 10px 0;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        font-size: 14px;
+        }
+        .footer button {
+        margin: 0 10px; 
+        background-color: transparent; 
+        color: #ffffff; 
+        border: none; 
+        cursor: pointer; 
+        }
+        #reloj {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        color: aqua;
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        background-color: rgba(136, 0, 255, 0.5);
+        padding: 10px;
+        border-radius: 8px;
+        color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="reloj"></div>
+    <div class="container">
+        <h1>✨ Mi Bullet Journal Web ✨</h1>
+        
+        <h2>🌞 Hábitos Diarios 🌞</h2>
+        <ul id="daily-habits" class="habit-list"></ul>
+        
+        <h2>🗓️ Hábitos Semanales 🗓️</h2> 
+        <ul id="weekly-habits" class="habit-list"></ul>
+        
+        <div class="add-habit">
+            <input type="text" id="new-habit" placeholder="Nuevo hábito">
+            <select id="habit-type">
+                <option value="daily">Diario</option>
+                <option value="weekly">Semanal</option>
+            </select>
+            <button onclick="addHabit()">Agregar Hábito</button>
+        </div>
+    </div>
+    <button id="reset-all-progress-btn" onclick="resetAllProgress()">🗑️</button>
+    <button id="important-habits-btn" onclick="toggleImportantHabits()">⭐</button>
+
+    <div id="important-habits-container">
+        <div class="important-habits-content">
+            <span class="close-btn" onclick="toggleImportantHabits()">&times;</span>
+            <h2>⭐ Hábitos Importantes ⭐</h2>
+            <ul id="important-habits" class="habit-list"></ul>
+            <div class="add-habit">
+                <input type="text" id="new-important-habit" placeholder="Nuevo hábito importante">
+                <button onclick="addImportantHabit()">Agregar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="monsters-container">
+        <div class="monster monster-daily">
+            <span>Monstruo Procrastinador Diario</span>
+            <div class="monster-health-bar">
+                <div id="daily-monster-health" class="monster-health"></div>
+            </div>
+        </div>
+        <div class="monster monster-weekly">
+            <span>Monstruo Procrastinador Semanal</span>
+            <div class="monster-health-bar">
+                <div id="weekly-monster-health" class="monster-health"></div>
+            </div>
+        </div>
+        <div class="monster monster-important">
+            <span>Monstruo Procrastinador Tareas Importantes</span>
+            <div class="monster-health-bar">
+                <div id="important-monster-health" class="monster-health"></div>
+            </div>
+        </div>
+    </div>
+
+    <!DOCTYPE html>
+<html lang="es">
+<head>
+</head>
+<body>
+
+    <script>
+        let habits = {
+            daily: [
+                { text: "Diario Nocturno", days: [false, false, false, false, false, false, false] },
+            ],
+            weekly: [
+                { text: "Limpiar Mi Cuarto", progress: 0 },
+            ],
+            important: [
+                { text: "Mejorar Mi Fisico", progress: 0 },
+                { text: "Generar Ingresos Pasivos", progress: 0 },
+                { text: "Financiamiento Personal", progress: 0 },
+                { text: "Marie", progress: 0 }
+            ]
+        };
+
+        let monsters = {
+            daily: 100,
+            weekly: 100,
+            important: 100
+        };
+
+        function saveData() {
+            localStorage.setItem('bulletJournalData', JSON.stringify({ habits, monsters }));
+        }
+
+        function loadData() {
+            const savedData = localStorage.getItem('bulletJournalData');
+            if (savedData) {
+                const parsedData = JSON.parse(savedData);
+                habits = parsedData.habits;
+                monsters = parsedData.monsters;
+            }
+        }
+
+        function renderHabits() {
+            renderHabitList('daily-habits', habits.daily, createDailyHabitElement);
+            renderHabitList('weekly-habits', habits.weekly, createWeeklyHabitElement);
+            renderHabitList('important-habits', habits.important, createWeeklyHabitElement);
+            updateMonsterHealth();
+        }
+
+        function renderHabitList(elementId, habitList, createElementFunction) {
+            const list = document.getElementById(elementId);
+            list.innerHTML = '';
+            habitList.forEach((habit, index) => {
+                list.appendChild(createElementFunction(habit, index, elementId));
+            });
+        }
+
+        function createDailyHabitElement(habit, index, listId) {
+            const li = document.createElement('li');
+            li.className = 'habit-item';
+            li.innerHTML = `
+                <span class="habit-text">${habit.text}</span>
+                <div class="day-buttons">
+                    ${['Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa', 'Do'].map((day, i) => `
+                        <button class="day-button ${habit.days[i] ? 'active' : ''}" onclick="updateDailyHabit('${listId}', ${index}, ${i})">${day}</button>
+                    `).join('')}
+                </div>
+            `;
+            return li;
+        }
+
+        function createWeeklyHabitElement(habit, index, listId) {
+            const li = document.createElement('li');
+            li.className = 'habit-item';
+            li.innerHTML = `
+                <span class="habit-text">${habit.text}</span>
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${habit.progress}%"></div>
+                    </div>
+                    <button onclick="updateWeeklyProgress('${listId}', ${index})">Actualizar</button>
+                </div>
+            `;
+            return li;
+        }
+
+        function updateDailyHabit(listId, habitIndex, dayIndex) {
+            const habitList = habits.daily;
+            const prevState = habitList[habitIndex].days[dayIndex];
+            habitList[habitIndex].days[dayIndex] = !prevState;
+            
+            const today = new Date().getDay();
+            const totalDailyHabits = habitList.length;
+            const completedToday = habitList.filter(habit => habit.days[today]).length;
+            
+            monsters.daily = 100 - (completedToday / totalDailyHabits * 100);
+            
+            saveData();
+            renderHabits();
+        }
+
+        function resetDailyMonster() {
+            const now = new Date();
+            const lastReset = new Date(localStorage.getItem('lastDailyReset') || 0);
+            
+            if (now.getDate() !== lastReset.getDate() || now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
+                monsters.daily = 100;
+                const today = now.getDay();
+                habits.daily.forEach(habit => habit.days[today] = false);
+                localStorage.setItem('lastDailyReset', now.toISOString());
+                saveData();
+                renderHabits();
+            }
+        }
+
+        function updateWeeklyProgress(listId, index) {
+            const habitList = listId === 'weekly-habits' ? habits.weekly : habits.important;
+            const monsterType = listId === 'weekly-habits' ? 'weekly' : 'important';
+            const prevProgress = habitList[index].progress;
+            
+            habitList[index].progress += 15;
+            if (habitList[index].progress > 105) {
+                habitList[index].progress = 0;
+            }
+            
+            const progressDiff = habitList[index].progress - prevProgress;
+            monsters[monsterType] -= progressDiff / habitList.length;
+            monsters[monsterType] = Math.max(0, Math.min(100, monsters[monsterType]));
+            
+            saveData();
+            renderHabits();
+        }
+
+        function addHabit() {
+            const newHabitText = document.getElementById('new-habit').value;
+            const habitType = document.getElementById('habit-type').value;
+            
+            if (newHabitText) {
+                if (habitType === 'daily') {
+                    habits.daily.push({ text: newHabitText, days: [false, false, false, false, false, false, false] });
+                } else {
+                    habits.weekly.push({ text: newHabitText, progress: 0 });
+                }
+                document.getElementById('new-habit').value = '';
+                saveData();
+                renderHabits();
+            }
+        }
+
+        function addImportantHabit() {
+            const newHabitText = document.getElementById('new-important-habit').value;
+            if (newHabitText) {
+                habits.important.push({ text: newHabitText, progress: 0 });
+                document.getElementById('new-important-habit').value = '';
+                saveData();
+                renderHabits();
+            }
+        }
+
+        function toggleImportantHabits() {
+            const container = document.getElementById('important-habits-container');
+            container.style.display = container.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function updateMonsterHealth() {
+            document.getElementById('daily-monster-health').style.width = `${monsters.daily}%`;
+            document.getElementById('weekly-monster-health').style.width = `${monsters.weekly}%`;
+            document.getElementById('important-monster-health').style.width = `${monsters.important}%`;
+        }
+
+        function resetDailyMonster() {
+            const now = new Date();
+            const lastReset = new Date(localStorage.getItem('lastDailyReset') || 0);
+            
+            if (now.getDate() !== lastReset.getDate() || now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
+                monsters.daily = 100;
+                habits.daily.forEach(habit => habit.days = [false, false, false, false, false, false, false]);
+                localStorage.setItem('lastDailyReset', now.toISOString());
+                saveData();
+                renderHabits();
+            }
+        }
+
+        function resetWeeklyMonster() {
+            const now = new Date();
+            const lastReset = new Date(localStorage.getItem('lastWeeklyReset') || 0);
+            
+            if (now.getDay() === 0 && (now - lastReset) >= 7 * 24 * 60 * 60 * 1000) {
+                monsters.weekly = 100;
+                habits.weekly.forEach(habit => habit.progress = 0);
+                localStorage.setItem('lastWeeklyReset', now.toISOString());
+                saveData();
+                renderHabits();
+            }
+        }
+
+        function resetImportantMonster() {
+            const now = new Date();
+            const lastReset = new Date(localStorage.getItem('lastImportantReset') || 0);
+            
+            if (now.getDay() === 0 && (now - lastReset) >= 7 * 24 * 60 * 60 * 1000) {
+                monsters.important = 100;
+                habits.important.forEach(habit => habit.progress = 0);
+                localStorage.setItem('lastImportantReset', now.toISOString());
+                saveData();
+                renderHabits();
+            }
+        }
+
+        loadData();
+        renderHabits();
+        setInterval(resetDailyMonster, 60000); 
+        setInterval(resetWeeklyMonster, 60000); 
+        setInterval(resetImportantMonster, 60000); 
+        function resetAllProgress() {
+            if (confirm("¿Estás seguro de que quieres borrar todo tu progreso? Esta acción no se puede deshacer.")) {
+                habits.daily.forEach(habit => habit.days = [false, false, false, false, false, false, false]);
+                habits.weekly.forEach(habit => habit.progress = 0);
+                habits.important.forEach(habit => habit.progress = 0);
+                monsters.daily = 100;
+                monsters.weekly = 100;
+                monsters.important = 100;
+                saveData();
+                renderHabits();
+                alert("Todo el progreso ha sido borrado. ¡Es hora de un nuevo comienzo!");
+            }
+        }
+        function actualizarReloj() {
+        const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+        const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+        
+        const ahora = new Date();
+        const diaSemana = diasSemana[ahora.getDay()];
+        const dia = ahora.getDate();
+        const mes = meses[ahora.getMonth()];
+        const año = ahora.getFullYear();
+        
+        let horas = ahora.getHours();
+        const minutos = ahora.getMinutes().toString().padStart(2, '0');
+        const ampm = horas >= 12 ? 'PM' : 'AM';
+        horas = horas % 12;
+        horas = horas ? horas : 12; // El '0' se convierte en '12'
+        
+        const horaActual = `${horas}:${minutos} ${ampm}`;
+        const fechaActual = `${diaSemana}, ${dia} de ${mes} del ${año}`;
+        
+        document.getElementById('reloj').innerHTML = `${fechaActual} - ${horaActual}`;
+        }
+
+        setInterval(actualizarReloj, 1000); 
+        actualizarReloj();
+    </script>
+</body>
+<footer class="footer">
+    <button id="excel-button"onclick="window.location.href='Inicio.html';">Inicio</button>
+    <button class="btn btn-secondary add-task-button" type="text"onclick="window.location.href='Agenda.html';">Agenda</button>
+    <button id="excel-button"onclick="window.location.href='CosasImportantes.html';">Cosas Importantes</button>
+    <button id="excel-button"onclick="window.location.href='GymRutinas.html';">Gimnasio</button>
+    <button id="excel-button">Acciones</button>
+    <button id="excel-button"onclick="window.location.href='PaginasWeb.html';">PaginasWeb</button>
+    <button id="excel-button"onclick="window.location.href='IdeasVideos.html';">Youtube</button>
+    <button id="excel-button"onclick="window.location.href='UDGMaterias.html';">UDG Materias</button>
+    <button class="external-link-btn" onclick="window.location.href='MapaUDG.html'">Mapa Escuela</button>
+    <button id="excel-button"onclick="window.location.href='Calendario.html';">Calendario</button>
+</footer>
+</html>

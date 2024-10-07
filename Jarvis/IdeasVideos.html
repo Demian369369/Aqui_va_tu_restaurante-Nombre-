@@ -3,93 +3,379 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Paginas Web</title>
-    <link rel="icon" type="image/svg+xml" href="images/Agujero.jpeg">
-    <link rel="stylesheet" href="css/IdeasVideos.css">
+    <title>🎥 Content Creator Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap');
+        
+        :root {
+            --primary-neon: #ff003c;
+            --secondary-neon: #00fff2;
+            --accent-neon: #a200ff;
+            --bg-dark: #0a0a0a;
+            --bg-darker: #050505;
+            --text-color: #ffffff;
+            --menu-bg: rgba(10, 10, 10, 0.95);
+            --card-bg: rgba(20, 20, 20, 0.9);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--bg-darker);
+            min-height: 100vh;
+            color: var(--text-color);
+            background-image: 
+                linear-gradient(45deg, rgba(255, 0, 60, 0.1) 0%, rgba(0, 255, 242, 0.1) 100%),
+                repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0px, rgba(255, 255, 255, 0.05) 1px, transparent 1px, transparent 10px);
+        }
+
+        .container {
+            display: flex;
+            margin-top: 80px;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu {
+            background: var(--menu-bg);
+            border-radius: 15px;
+            padding: 20px;
+            width: 350px;
+            box-shadow: 0 0 20px rgba(255, 0, 60, 0.2);
+            border: 1px solid rgba(255, 0, 60, 0.1);
+            backdrop-filter: blur(10px);
+            flex-shrink: 0;
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 15px 20px;
+            background: linear-gradient(45deg, var(--primary-neon), var(--accent-neon));
+            border: none;
+            border-radius: 12px;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .submenu {
+            display: none;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+
+        .sub-btn {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border: 1px solid var(--secondary-neon);
+            border-radius: 8px;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            position: relative;
+            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        .sub-btn:hover {
+            background: rgba(0, 255, 242, 0.1);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(0, 255, 242, 0.3);
+        }
+
+        .task-btn {
+            width: 100%;
+            padding: 10px 15px;
+            background: rgba(162, 0, 255, 0.1);
+            border: 1px solid var(--accent-neon);
+            border-radius: 8px;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .task-btn:hover {
+            background: rgba(162, 0, 255, 0.2);
+            transform: translateX(5px);
+            box-shadow: 0 0 15px rgba(162, 0, 255, 0.3);
+        }
+
+        .details {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            flex-grow: 1;
+            box-shadow: 0 0 30px rgba(255, 0, 60, 0.2);
+            border: 1px solid rgba(255, 0, 60, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border: 1px solid var(--primary-neon);
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary-neon);
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, var(--primary-neon), var(--secondary-neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        #description {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid var(--secondary-neon);
+            margin-top: 20px;
+        }
+
+        .idea-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .tag {
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(0, 255, 242, 0.1);
+            border: 1px solid var(--secondary-neon);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .tag:hover {
+            background: rgba(0, 255, 242, 0.2);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .menu {
+                width: 100%;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="reloj"></div>
-    <div class="top-buttons">
-        <button class="external-link-btn" onclick="window.location.href='Inicio.html'">Inicio</button>
-        <button class="external-link-btn" onclick="window.location.href='CosasImportantes.html'">Cosas Importantes</button>
-        <button class="external-link-btn" onclick="window.location.href='Agenda.html'">Agenda</button>
-        <button class="external-link-btn" onclick="window.location.href='IdeasVideos.html'">Videos</button>
-        <button class="external-link-btn" onclick="window.location.href='GymRutinas.html'">Rutinas GYM</button>
-    </div>    
     <div class="container">
         <div class="menu">
-            <button class="main-btn" onclick="toggleMenu('subjectsMenu')">Ideas Videos</button>
-            <div id="subjectsMenu" class="submenu">
-                <button class="sub-btn" onclick="toggleMenu('subject1Tasks')">Cursos</button>
-                <div id="subject1Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro0')">Programacion</button>
-                    <button class="task-btn" onclick="showTask('taskPro1')">Habitos y Rutina</button>
-                    <button class="task-btn" onclick="showTask('taskPro2')">Ciencias</button>
-                    <button class="task-btn" onclick="showTask('taskPro3')">Otros</button>
+            <button class="main-btn" onclick="toggleMenu('ideasMenu')">
+                <i class="fas fa-lightbulb"></i> Ideas Videos
+            </button>
+            <div id="ideasMenu" class="submenu">
+                <button class="sub-btn" onclick="toggleMenu('coursesMenu')">
+                    <i class="fas fa-graduation-cap"></i> Cursos
+                </button>
+                <div id="coursesMenu" class="submenu">
+                    <button class="task-btn" onclick="showContent('programming')">
+                        <i class="fas fa-code"></i> Programación
+                    </button>
+                    <button class="task-btn" onclick="showContent('habits')">
+                        <i class="fas fa-calendar-check"></i> Hábitos y Rutina
+                    </button>
+                    <button class="task-btn" onclick="showContent('science')">
+                        <i class="fas fa-flask"></i> Ciencias
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject2Tasks')">Historias de financiamiento personal</button>
-                <div id="subject2Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro4')">Empresas</button>
-                    <button class="task-btn" onclick="showTask('taskPro5')">Personas</button>
+                
+                <button class="sub-btn" onclick="toggleMenu('storiesMenu')">
+                    <i class="fas fa-money-bill-wave"></i> Historias Financieras
+                </button>
+                <div id="storiesMenu" class="submenu">
+                    <button class="task-btn" onclick="showContent('business')">
+                        <i class="fas fa-building"></i> Empresas
+                    </button>
+                    <button class="task-btn" onclick="showContent('personal')">
+                        <i class="fas fa-user"></i> Personas
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject3Tasks')">Logica de programador</button>
-                <div id="subject3Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro6')">Video para desarrollar logica de programador</button>
-                    <button class="task-btn" onclick="showTask('taskPro7')">Tutoriales con programacion</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject4Tasks')">Financiamiento Personal metodos ganar dinero</button>
-                <div id="subject4Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro8')">Ingresos pasivos con IA(paginas web)</button>
-                    <button class="task-btn" onclick="showTask('taskPro9')">Ingresos pasivos (E-comerce)</button>
-                    <button class="task-btn" onclick="showTask('taskPro10')">Ingresos pasivos con videojuegos</button>
 
-
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject5Tasks')">Podcast</button>
-                <div id="subject5Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro11')">Filosofia</button>
-                    <button class="task-btn" onclick="showTask('taskPro12')">Historias</button>
-                    <button class="task-btn" onclick="showTask('taskPro13')">Psicologia</button>
-                    <button class="task-btn" onclick="showTask('taskPro14')">Emprendimiento</button>
-                    <button class="task-btn" onclick="showTask('taskPro15')">Espiritualidad</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject6Tasks')">Shorts</button>
-                <div id="subject6Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro16')">Cosas llamativas</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject7Tasks')">Prototipo6</button>
-                <div id="subject7Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro6')">E commerce de ropa</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject8Tasks')">Prototipo7</button>
-                <div id="subject8Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro7')">Restaurante Famoso</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject9Tasks')">Prototipo8</button>
-                <div id="subject9Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro8')">Pagina de empresa</button>
-                </div>
-                <button class="sub-btn" onclick="toggleMenu('subject10Tasks')">Prototipo9</button>
-                <div id="subject10Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro9')">Curriculums</button>
-                </div>  
-            </div>
-            <button class="main-btn" onclick="toggleMenu('resourcesMenu')">Uso Personal</button>
-            <div id="resourcesMenu" class="submenu">
-                <button class="sub-btn" onclick="toggleMenu('subject1Resources')">CV</button>
-                <div id="subject1Resources" class="submenu">
-                    <button class="resource-btn" onclick="showResource('resourceMa1')">Jarvis</button>
+                <button class="sub-btn" onclick="toggleMenu('podcastMenu')">
+                    <i class="fas fa-microphone"></i> Podcast
+                </button>
+                <div id="podcastMenu" class="submenu">
+                    <button class="task-btn" onclick="showContent('philosophy')">
+                        <i class="fas fa-brain"></i> Filosofía
+                    </button>
+                    <button class="task-btn" onclick="showContent('psychology')">
+                        <i class="fas fa-heart"></i> Psicología
+                    </button>
+                    <button class="task-btn" onclick="showContent('spirituality')">
+                        <i class="fas fa-infinity"></i> Espiritualidad
+                    </button>
                 </div>
             </div>
-            
         </div>
-        <div id="details" class="details">
-            <h2>Detalles</h2>
-            <p id="description"></p>
+
+        <div class="details">
+            <h2>📊 Dashboard de Contenido</h2>
+            
+            <div class="stats-container">
+                <div class="stat-card">
+                    <i class="fas fa-video fa-2x" style="color: var(--primary-neon)"></i>
+                    <div class="stat-value">42</div>
+                    <div>Ideas Pendientes</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock fa-2x" style="color: var(--secondary-neon)"></i>
+                    <div class="stat-value">12:30</div>
+                    <div>Tiempo Promedio</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-star fa-2x" style="color: var(--accent-neon)"></i>
+                    <div class="stat-value">4.8</div>
+                    <div>Rating Promedio</div>
+                </div>
+            </div>
+
+            <div id="description">
+                Selecciona una categoría para ver detalles y ideas específicas...
+            </div>
+
+            <div class="idea-tags">
+                <span class="tag">#Programación</span>
+                <span class="tag">#DesarrolloPersonal</span>
+                <span class="tag">#Tecnología</span>
+                <span class="tag">#Finanzas</span>
+                <span class="tag">#Educación</span>
+            </div>
         </div>
     </div>
-    <script src="js/IdeasVideos.js"></script>
-</body>
 
+    <script>
+        function toggleMenu(menuId) {
+            const menu = document.getElementById(menuId);
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        const contentDatabase = {
+            programming: {
+                title: "Ideas para Videos de Programación",
+                content: `
+                    <h3>🎯 Objetivos del Contenido</h3>
+                    <ul>
+                        <li>Explicar conceptos complejos de manera simple</li>
+                        <li>Crear series de tutoriales progresivos</li>
+                        <li>Compartir proyectos prácticos y útiles</li>
+                    </ul>
+
+                    <h3>📝 Ideas Específicas</h3>
+                    <ul>
+                        <li>"Crea tu primer API en 30 minutos"</li>
+                        <li>"5 proyectos para tu portafolio de desarrollador"</li>
+                        <li>"Conceptos de programación explicados con analogías"</li>
+                    </ul>
+
+                    <h3>🎬 Formato Sugerido</h3>
+                    <ul>
+                        <li>Duración: 15-20 minutos</li>
+                        <li>Incluir código en pantalla</li>
+                        <li>Añadir ejercicios prácticos</li>
+                    </ul>
+                `
+            },
+            // Add more content objects for other categories
+        };
+
+        function showContent(contentId) {
+            const description = document.getElementById('description');
+            const content = contentDatabase[contentId];
+            
+            if (content) {
+                description.innerHTML = content.content;
+            } else {
+                description.innerHTML = "Contenido en desarrollo...";
+            }
+
+            // Add animation
+            description.style.opacity = "0";
+            setTimeout(() => {
+                description.style.transition = "opacity 0.5s ease";
+                description.style.opacity = "1";
+            }, 100);
+        }
+    </script>
+</body>
 </html>
 

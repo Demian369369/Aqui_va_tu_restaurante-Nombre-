@@ -3,80 +3,432 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis Paginas Web</title>
+    <title>✨ Showcase de Páginas Web ✨</title>
     <link rel="icon" type="image/svg+xml" href="images/Agujero.jpeg">
-    <link rel="stylesheet" href="css/PaginasWeb.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+        
+        :root {
+            --primary-color: #a6c1ee;
+            --secondary-color: #fbc2eb;
+            --accent-color: #84fab0;
+            --text-color: #2c3e50;
+            --menu-bg: rgba(255, 255, 255, 0.95);
+            --card-bg: rgba(255, 255, 255, 0.85);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .container {
+            display: flex;
+            margin-top: 80px;
+            padding: 20px;
+            gap: 20px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .menu {
+            background: var(--menu-bg);
+            border-radius: 20px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+            flex-shrink: 0;
+        }
+
+        .main-btn {
+            width: 100%;
+            padding: 12px 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 12px;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 10px;
+            transition: transform 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .submenu {
+            display: none;
+            margin-left: 15px;
+            margin-top: 10px;
+        }
+
+        .sub-btn, .task-btn {
+            width: 100%;
+            padding: 10px 15px;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 8px;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .sub-btn:hover, .task-btn:hover {
+            background: var(--accent-color);
+            transform: translateX(5px);
+        }
+
+        .details {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 30px;
+            flex-grow: 1;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            backdrop-filter: blur(4px);
+        }
+
+        .top-buttons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px 30px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .external-link-btn {
+            padding: 10px 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 10px;
+            color: var(--text-color);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .external-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #reloj {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        #description {
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        #description a {
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        #description a:hover {
+            color: #2c3e50;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                padding: 10px;
+            }
+
+            .menu {
+                width: 100%;
+            }
+
+            .top-buttons {
+                flex-wrap: wrap;
+            }
+
+            #reloj {
+                position: static;
+                margin: 10px auto;
+                text-align: center;
+            }
+        }
+        .sub-btn i, .task-btn i, .resource-btn i {
+        margin-right: 8px;
+        font-size: 0.9em;
+    }
+
+    .task-btn, .resource-btn {
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+        padding: 8px 15px;
+        background: var(--card-bg);
+        border: none;
+        border-radius: 8px;
+        color: var(--text-color);
+        margin-bottom: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .task-btn:hover, .resource-btn:hover {
+        background: var(--accent-color);
+        transform: translateX(5px);
+    }
+
+    .sub-btn {
+        display: flex;
+        align-items: center;
+        font-weight: 500;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        opacity: 0.9;
+    }
+
+    .sub-btn:hover {
+        opacity: 1;
+        transform: translateX(5px);
+    }
+    </style>
 </head>
 <body>
     <div id="reloj"></div>
     <div class="top-buttons">
-        <button class="external-link-btn" onclick="window.location.href='Inicio.html'">Inicio</button>
-        <button class="external-link-btn" onclick="window.location.href='CosasImportantes.html'">Cosas Importantes</button>
-        <button class="external-link-btn" onclick="window.location.href='Agenda.html'">Agenda</button>
-        <button class="external-link-btn" onclick="window.location.href='IdeasVideos.html'">Videos</button>
-        <button class="external-link-btn" onclick="window.location.href='GymRutinas.html'">Rutinas GYM</button>
+        <button class="external-link-btn" onclick="window.location.href='Inicio.html'">
+            <i class="fas fa-home"></i> Inicio
+        </button>
+        <button class="external-link-btn" onclick="window.location.href='CosasImportantes.html'">
+            <i class="fas fa-star"></i> Cosas Importantes
+        </button>
+        <button class="external-link-btn" onclick="window.location.href='Agenda.html'">
+            <i class="fas fa-calendar"></i> Agenda
+        </button>
+        <button class="external-link-btn" onclick="window.location.href='IdeasVideos.html'">
+            <i class="fas fa-video"></i> Videos
+        </button>
+        <button class="external-link-btn" onclick="window.location.href='GymRutinas.html'">
+            <i class="fas fa-dumbbell"></i> Rutinas GYM
+        </button>
     </div>    
     <div class="container">
         <div class="menu">
-            <button class="main-btn" onclick="toggleMenu('subjectsMenu')">Para Restaurantes</button>
+            <button class="main-btn" onclick="toggleMenu('subjectsMenu')">
+                <i class="fas fa-utensils"></i> Para Restaurantes
+            </button>
             <div id="subjectsMenu" class="submenu">
-                <button class="sub-btn" onclick="toggleMenu('subject1Tasks')">Prototipo0</button>
+                <button class="sub-btn" onclick="toggleMenu('subject1Tasks')">
+                    <i class="fas fa-palette"></i> Prototipo0
+                </button>
                 <div id="subject1Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro0')">Cafeteria</button>
+                    <button class="task-btn" onclick="showTask('taskPro0')">
+                        <i class="fas fa-coffee"></i> Cafetería
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject2Tasks')">Prototipo1</button>
+                <button class="sub-btn" onclick="toggleMenu('subject2Tasks')">
+                    <i class="fas fa-code"></i> Prototipo1
+                </button>
                 <div id="subject2Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro1')">Mariscos</button>
+                    <button class="task-btn" onclick="showTask('taskPro1')">
+                        <i class="fas fa-fish"></i> Mariscos
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject3Tasks')">Prototipo2</button>
+                <button class="sub-btn" onclick="toggleMenu('subject3Tasks')">
+                    <i class="fas fa-laptop-code"></i> Prototipo2
+                </button>
                 <div id="subject3Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro2')">Snacks</button>
+                    <button class="task-btn" onclick="showTask('taskPro2')">
+                        <i class="fas fa-cookie-bite"></i> Snacks
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject4Tasks')">Prototipo3</button>
+                <button class="sub-btn" onclick="toggleMenu('subject4Tasks')">
+                    <i class="fas fa-gem"></i> Prototipo3
+                </button>
                 <div id="subject4Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro3')">Joyeria Moderna</button>
+                    <button class="task-btn" onclick="showTask('taskPro3')">
+                        <i class="fas fa-ring"></i> Joyería Moderna
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject5Tasks')">Prototipo4</button>
+                <button class="sub-btn" onclick="toggleMenu('subject5Tasks')">
+                    <i class="fas fa-store"></i> Prototipo4
+                </button>
                 <div id="subject5Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro4')">Hamburguesas multiples sucursales</button>
+                    <button class="task-btn" onclick="showTask('taskPro4')">
+                        <i class="fas fa-hamburger"></i> Hamburguesas
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject6Tasks')">Prototipo5</button>
+                <button class="sub-btn" onclick="toggleMenu('subject6Tasks')">
+                    <i class="fas fa-shopping-cart"></i> Prototipo5
+                </button>
                 <div id="subject6Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro5')">Cafeteria Tienda en Linea</button>
+                    <button class="task-btn" onclick="showTask('taskPro5')">
+                        <i class="fas fa-store-alt"></i> Cafetería Online
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject7Tasks')">Prototipo6</button>
+                <button class="sub-btn" onclick="toggleMenu('subject7Tasks')">
+                    <i class="fas fa-tshirt"></i> Prototipo6
+                </button>
                 <div id="subject7Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro6')">E commerce de ropa</button>
+                    <button class="task-btn" onclick="showTask('taskPro6')">
+                        <i class="fas fa-shopping-bag"></i> E-commerce Ropa
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject8Tasks')">Prototipo7</button>
+                <button class="sub-btn" onclick="toggleMenu('subject8Tasks')">
+                    <i class="fas fa-star"></i> Prototipo7
+                </button>
                 <div id="subject8Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro7')">Restaurante Famoso</button>
+                    <button class="task-btn" onclick="showTask('taskPro7')">
+                        <i class="fas fa-utensils"></i> Restaurante Famoso
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject9Tasks')">Prototipo8</button>
+                <button class="sub-btn" onclick="toggleMenu('subject9Tasks')">
+                    <i class="fas fa-building"></i> Prototipo8
+                </button>
                 <div id="subject9Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro8')">Pagina de empresa</button>
+                    <button class="task-btn" onclick="showTask('taskPro8')">
+                        <i class="fas fa-briefcase"></i> Página de Empresa
+                    </button>
                 </div>
-                <button class="sub-btn" onclick="toggleMenu('subject10Tasks')">Prototipo9</button>
+                <button class="sub-btn" onclick="toggleMenu('subject10Tasks')">
+                    <i class="fas fa-file-alt"></i> Prototipo9
+                </button>
                 <div id="subject10Tasks" class="submenu">
-                    <button class="task-btn" onclick="showTask('taskPro9')">Curriculums</button>
-                </div>  
-            </div>
-            <button class="main-btn" onclick="toggleMenu('resourcesMenu')">Uso Personal</button>
-            <div id="resourcesMenu" class="submenu">
-                <button class="sub-btn" onclick="toggleMenu('subject1Resources')">CV</button>
-                <div id="subject1Resources" class="submenu">
-                    <button class="resource-btn" onclick="showResource('resourceMa1')">Jarvis</button>
+                    <button class="task-btn" onclick="showTask('taskPro9')">
+                        <i class="fas fa-id-card"></i> Currículums
+                    </button>
                 </div>
             </div>
-            
+            <button class="main-btn" onclick="toggleMenu('resourcesMenu')">
+                <i class="fas fa-user-circle"></i> Uso Personal
+            </button>
+            <div id="resourcesMenu" class="submenu">
+                <button class="sub-btn" onclick="toggleMenu('subject1Resources')">
+                    <i class="fas fa-file-alt"></i> CV
+                </button>
+                <div id="subject1Resources" class="submenu">
+                    <button class="resource-btn" onclick="showResource('resourceMa1')">
+                        <i class="fas fa-robot"></i> Jarvis
+                    </button>
+                </div>
+            </div>
         </div>
         <div id="details" class="details">
-            <h2>Detalles</h2>
+            <h2>✨ Detalles del Proyecto</h2>
             <p id="description"></p>
         </div>
     </div>
-    <script src="js/PaginasWeb.js"></script>
+    <script>
+        // Your existing JavaScript code here
+        function toggleMenu(menuId) {
+            var menu = document.getElementById(menuId);
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        function showTask(taskId) {
+            var taskDescriptions = {
+                taskPro0: 'Pagina Web de $200 para menu de restaurante, incluye fondo, producto, precio etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo0/" target="_blank">Ver más detalles</a>',
+                taskPro1: 'Pagina Web de $300 Recomendada para menu de restaurante, incluye fondo, producto, precio, botones, idiomas etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo1/" target="_blank">Ver más detalles</a>',
+                taskPro2: 'Pagina Web de $400 para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, mas informacion etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo2/" target="_blank">Ver más detalles</a>',
+                taskPro3: 'Pagina Web de $700 Recomendada para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo3/" target="_blank">Ver más detalles</a>',
+                taskPro4: 'Pagina Web de $800 Recomendada para promociones y varias sucursales, incluye fondo, producto, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones,mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real etc.  <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo4/" target="_blank">Ver más detalles</a>',
+                taskPro5: 'Pagina Web de $900 Recomendada para tiendas en linea, promociones y varias sucursales, incluye fondo, productos, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real, filtro de busqueda para usuarios, sistema logico de compras etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo5/" target="_blank">Ver más detalles</a>',
+                taskPro6: 'Pagina Web de $1000 E commerce, Recomendada para tiendas en linea, promociones y varias sucursales, incluye fondo, productos, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real, filtro de busqueda para usuarios, sistema logico de compras etc.  <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo6/" target="_blank">Ver más detalles</a>',
+                taskPro7: 'Pagina Web de $2000 Ideal para menu de restaurante, promociones y varias sucursales, incluye fondo, productos, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real, filtro de busqueda para usuarios, sistema logico de compras, reserva de mesas, animaciones, React y personalizable etc.  <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo7/" target="_blank">Ver más detalles</a>',
+                taskPro8: 'Pagina Web de $1200 Empresas, Pagina personalizable a tus necesidades. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo8/" target="_blank">Ver más detalles</a>',
+                taskPro9: 'Pagina Web de $500 para Curriculum, incluye fondo, Informacion, Otras paginas etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo9/RESUME-Source_code/index.html" target="_blank">Ver más detalles</a>',
+            };
+            var description = taskDescriptions[taskId] || "No hay descripción para esta Pagina.";
+            document.getElementById("description").innerHTML = description;
+        }
+
+        function showResource(resourceId) {
+            var resourceDescriptions = {
+                resourceMa1: "Descripción del Recurso Math 1",
+                resourceMa2: "Descripción del Recurso Math 2",
+                resourcePro1: "Descripción del Recurso Pro 1",
+                resourcePro2: "Descripción del Recurso Pro 2",
+                resourceIng1: "Descripción del Recurso Ing 1",
+                resourceIng2: "Descripción del Recurso Ing 2",
+                resourceEL1: "Descripción del Recurso EL 1",
+                resourceEL2: "Descripción del Recurso EL 2",
+                resourcePre1: "Descripción del Recurso Pre 1",
+                resourcePre2: "Descripción del Recurso Pre 2",
+                resourceFi1: "Descripción del Recurso Fi 1",
+                resourceFi2: "Descripción del Recurso Fi 2",
+            };
+            var description = resourceDescriptions[resourceId] || "No hay descripción para esto.";
+            document.getElementById("description").innerHTML = description;
+        }
+
+        function actualizarReloj() {
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            const diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            
+            const ahora = new Date();
+            const diaSemana = diasSemana[ahora.getDay()];
+            const dia = ahora.getDate();
+            const mes = meses[ahora.getMonth()];
+            const año = ahora.getFullYear();
+            
+            let horas = ahora.getHours();
+            const minutos = ahora.getMinutes().toString().padStart(2, '0');
+            const ampm = horas >= 12 ? 'PM' : 'AM';
+            horas = horas % 12;
+            horas = horas ? horas : 12; // El '0' se convierte en '12'
+            
+            const horaActual = `${horas}:${minutos} ${ampm}`;
+            const fechaActual = `${diaSemana}, ${dia} de ${mes} del ${año}`;
+            
+            document.getElementById('reloj').innerHTML = `${fechaActual} - ${horaActual}`;
+        }
+
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj();
+    </script>
 </body>
 </html>
-
-

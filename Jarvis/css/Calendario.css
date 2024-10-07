@@ -161,3 +161,15 @@ h2 {
   border: none; 
   cursor: pointer; 
 }
+
+body {
+  background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg');
+  background-attachment: fixed; 
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: rgba(0, 255, 123, 0.18);
+  overflow-y: auto;
+}

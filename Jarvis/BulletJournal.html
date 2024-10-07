@@ -263,6 +263,18 @@
         border-radius: 8px;
         color: white;
         }
+        body {
+  
+        background-image: url('https://www.chromethemer.com/wallpapers/chromebook-wallpapers/images/960/iceland-chromebook-wallpaper.jpg');
+        background-attachment: fixed; 
+        background-size: cover;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: rgba(0, 255, 123, 0.18);
+        overflow-y: auto;
+        }
     </style>
 </head>
 <body>
@@ -433,8 +445,9 @@
             habitList[habitIndex].days[dayIndex] = !prevState;
             
             const today = new Date().getDay();
+            const adjustedToday = today === 0 ? 6 : today - 1; // Ajuste para que el domingo sea 6 y el lunes 0
             const totalDailyHabits = habitList.length;
-            const completedToday = habitList.filter(habit => habit.days[today]).length;
+            const completedToday = habitList.filter(habit => habit.days[adjustedToday]).length;
             
             monsters.daily = 100 - (completedToday / totalDailyHabits * 100);
             
@@ -449,13 +462,15 @@
             if (now.getDate() !== lastReset.getDate() || now.getMonth() !== lastReset.getMonth() || now.getFullYear() !== lastReset.getFullYear()) {
                 monsters.daily = 100;
                 const today = now.getDay();
-                habits.daily.forEach(habit => habit.days[today] = false);
+                const adjustedToday = today === 0 ? 6 : today - 1; // Ajuste para que el domingo sea 6 y el lunes 0
+                habits.daily.forEach(habit => {
+                    habit.days = habit.days.map((_, index) => index === adjustedToday ? false : habit.days[index]);
+                });
                 localStorage.setItem('lastDailyReset', now.toISOString());
                 saveData();
                 renderHabits();
             }
         }
-
         function updateWeeklyProgress(listId, index) {
             const habitList = listId === 'weekly-habits' ? habits.weekly : habits.important;
             const monsterType = listId === 'weekly-habits' ? 'weekly' : 'important';
@@ -563,6 +578,7 @@
                 monsters.daily = 100;
                 monsters.weekly = 100;
                 monsters.important = 100;
+                localStorage.clear();
                 saveData();
                 renderHabits();
                 alert("Todo el progreso ha sido borrado. ¡Es hora de un nuevo comienzo!");

@@ -224,3 +224,4 @@ function actualizarReloj() {
 
     setInterval(actualizarReloj, 1000); 
     actualizarReloj();
+

@@ -1,0 +1,1452 @@
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo UDG</title>
+    <link rel="stylesheet" href="css/MapaUDG.css">
+    <link rel="icon" type="image/jpeg" href="images/logoUDG.jpg">
+    
+</head>
+<body>
+    <div id="reloj"></div>
+    <div class="container">
+        <div class="phone-screen">
+            <div class="map-container" id="map-container">
+                <img src="images/mapa-udg.jpg" alt="Mapa de la UDG" id="main-map">
+                <iframe id="google-map" src="" style="display:none; width: 100%; height: 100%; border:none;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <button class="phone-home-button" onclick="showMainMap()"></button>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <h2>Filtro de Mapa UDG</h2>
+        <div class="buttons-container">
+            <button onclick="showParts()">Buscar Zona en Especifico</button>
+            <button onclick="showZonesOfInterest()">Zonas de Interés</button> 
+            <button  id="alert-button" onclick="showInteractiveMap()">Mapa Interactivo</button> 
+            <button onclick="showGoogleMaps()">Abrir en Google Maps</button>
+            <button onclick="window.location.href='https://1drv.ms/p/c/8daf5964e63d40e0/Ef14SDxuiHhMithnYRkfLqEBrDBcbGrKqtKSGPDPGVXlzQ?e=g2w96K';">Conociendo Mi UDG</button>
+            <button onclick="changeMap('images/ingesmap.jpg')">Mapa Ingenierias</button>
+
+
+        </div>
+        <div class="parts-buttons" id="parts-buttons" style="display: none;">
+            <button class="btn-brillante" onclick="changeMap('images/entradas.jpg')">Entradas</button>
+            <button class="btn-brillante" onclick="changeMap('images/cordinacion.jpg')">Cordinacion</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificio.jpg')">Edificio (E)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiox.jpg')">Edificio (X)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioy.jpg')">Edificio (Y)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioz.jpg')">Edificio (Z)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioalfabeta.jpg')">Edificios Alfa, Beta</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificion.jpg')">Edificio (N)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiout.jpg')">Edificios (U), (T)</button>
+            <button class="btn-brillante" onclick="changeMap('images/cafeteria.jpg')">Cafeterias</button>
+        </div>
+
+        <div class="zones-buttons" id="zones-buttons" style="display: none;">
+            <button class="btn-brillante" onclick="changeMap('images/sanitarios.jpg')">Sanitarios</button>
+            <button class="btn-brillante" onclick="changeMap('images/papelerias.jpg')">Papelerias</button>
+            <button class="btn-brillante" onclick="changeMap('images/lonaria.jpg')">Lonaria</button>
+            <button class="btn-brillante" onclick="changeMap('images/controlescolar.jpg')">Control Escolar</button>
+            <button class="btn-brillante" onclick="changeMap('images/jobsproulex.jpg')">Jobs & Proulex</button>
+            <button class="btn-brillante" onclick="changeMap('images/auditorios.jpg')">Auditorios</button>
+            <button class="btn-brillante" onclick="changeMap('images/medicos.jpg')">Servicios Medicos</button>
+            <button class="btn-brillante" onclick="changeMap('images/generales.jpg')">Servicios Generales</button>
+            <button class="btn-brillante" onclick="changeMap('images/cajero.jpg')">Cajero</button>
+
+        </div>
+
+        <div class="doors-buttons" id="interactive-map-buttons" style="display: none;">
+            <button id="boulevard-button" class="btn-brillante" onclick="changeMap('images/puerta1.jpg')">Boulevard</button>
+            <div id="control-container">
+                <button class="plus">+</button>
+                <div class="buttons-container">
+                    <button class="direction-button" id="up">↑</button>
+                    <button class="direction-button" id="left">←</button>
+                    <button class="direction-button" id="down">↓</button>
+                    <button class="direction-button" id="right">→</button>
+                </div>
+            </div>
+            <button class="btn-brillante" onclick="changeMap('images/puerta2.jpg')">Revolucion</button>
+            <button class="btn-brillante" onclick="changeMap('images/puerta2.jpg')">Olimpica</button>
+        </div>
+        
+    </div>
+   
+    </div>
+    <footer class="footer">
+        <button id="excel-button"onclick="window.location.href='Inicio.html';">Inicio</button>
+        <button class="btn btn-secondary add-task-button" type="text"onclick="window.location.href='Agenda.html';">Agenda</button>
+        <button id="excel-button"onclick="window.location.href='CosasImportantes.html';">Cosas Importantes</button>
+        <button id="excel-button"onclick="window.location.href='GymRutinas.html';">Gimnasio</button>
+        <button id="excel-button">Acciones</button>
+        <button id="excel-button"onclick="window.location.href='PaginasWeb.html';">PaginasWeb</button>
+        <button id="excel-button"onclick="window.location.href='IdeasVideos.html';">Youtube</button>
+        <button id="excel-button"onclick="window.location.href='UDGMaterias.html';">UDG Materias</button>
+        <button class="external-link-btn" onclick="window.location.href='BulletJournal.html'">BulletJournal</button>
+        <button id="excel-button"onclick="window.location.href='Calendario.html';">Calendario</button>
+    </footer>
+    <script src="js/MapaUDG.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+ <button onclick="window.location.href='Inicio.html';">Inicio</button>
+        <button onclick="window.location.href='Agenda.html';">Agenda</button>
+        <button onclick="window.location.href='CosasImportantes.html';">Cosas Importantes</button>
+        <button onclick="window.location.href='GymRutinas.html';">Gimnasio</button>
+        <button>Acciones</button>
+        <button onclick="window.location.href='PaginasWeb.html';">PaginasWeb</button>
+        <button onclick="window.location.href='IdeasVideos.html';">Youtube</button>
+        <button onclick="window.location.href='UDGMaterias.html';">UDG Materias</button>
+        <button onclick="window.location.href='BulletJournal.html';">BulletJournal</button>
+        <button onclick="window.location.href='Calendario.html';">Calendario</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>>>>>>>>..
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo UDG</title>
+    <link rel="icon" type="image/jpeg" href="images/logoUDG.jpg">
+    <style>
+        :root {
+            --udg-blue: #004682;
+            --udg-gold: #FFB800;
+            --control-btn-size: 50px;
+            --control-gap: 10px;
+            --control-border-color: #333;
+            --control-btn-text-color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a237e 0%, #0d47a1 100%);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            overflow-x: hidden;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 70, 130, 0.95);
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .search-box {
+            width: 80%;
+            max-width: 600px;
+            padding: 12px 20px;
+            border: 2px solid var(--udg-gold);
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255,255,255,0.9);
+            transition: all 0.3s ease;
+        }
+
+        .container {
+            position: relative;
+            width: 360px;
+            height: 640px;
+            background: #fff;
+            border: 16px solid #333;
+            border-radius: 36px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+        }
+
+        .phone-screen::before {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 6px;
+            background: #333;
+            border-radius: 10px;
+            position: absolute;
+            top: 10px;
+            left: calc(50% - 30px);
+        }
+
+        .map-container {
+            width: 100%;
+            height: calc(100% - 40px);
+            overflow: hidden;
+            position: absolute;
+            top: 20px;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .right-panel {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            padding: 20px;
+            margin: 80px 20px 20px 20px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+
+        .right-panel h2 {
+            color: var(--udg-blue);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--udg-gold);
+            padding-bottom: 10px;
+        }
+
+        .buttons-container button {
+            background: linear-gradient(145deg, var(--udg-blue), #005db1);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 0.5px;
+            margin: 5px 0;
+            width: 100%;
+        }
+
+        .buttons-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,70,130,0.3);
+        }
+
+        #control-container {
+    position: fixed; 
+    left: 470px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: var(--control-gap); 
+    z-index: 1000;
+    display: none; 
+}
+#control-container .plus {
+    background-color: rgb(145, 255, 0);
+    color: #ff4c4c;
+    position: absolute; 
+    top: -25px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+    width: var(--control-btn-size); 
+    height: var(--control-btn-size); 
+    border-radius: 100%; 
+    font-size: 10px; 
+    border: none; 
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#control-container .buttons-container {
+    display: flex;
+    flex-direction: row; 
+    justify-content: center; 
+    align-items: center; 
+    position: relative;
+}
+
+#control-container .direction-button {
+    width: var(--control-btn-size);
+    height: var(--control-btn-size);
+    border: 1px solid var(--control-border-color);
+    background-color: rgb(4, 255, 251);
+    color: var(--control-btn-text-color);
+    font-size: 10px;
+    border-radius: 6;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute; 
+}
+
+#up {
+    top: -60px; 
+}
+
+#down {
+    bottom: -60px; 
+}
+
+#left {
+    left: -50px; 
+}
+
+#right {
+    right: -50px;
+}
+
+        .footer {
+            background-color: rgba(0, 70, 130, 0.9);
+            padding: 15px 0;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .footer button {
+            background-color: transparent;
+            color: white;
+            border: 2px solid var(--udg-gold);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer button:hover {
+            background-color: var(--udg-gold);
+            color: var(--udg-blue);
+        }
+
+        #reloj {
+            position: fixed;
+            top: 80px;
+            right: 10px;
+            background: rgba(0, 70, 130, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 300px;
+                height: 530px;
+                margin-top: 60px;
+            }
+
+            .right-panel {
+                width: 90%;
+                margin: 20px auto;
+            }
+
+            #control-container {
+                bottom: 80px;
+                right: 20px;
+                top: auto;
+                transform: none;
+            }
+
+            .footer {
+                padding: 10px 0;
+            }
+
+            .footer button {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+        .btn-brillante {
+        background-color: #7ff70e; 
+        color: rgb(255, 255, 255); 
+        border: none; 
+        border-radius: 8px; 
+        padding: 15px 30px; 
+        font-size: 9px; 
+        cursor: pointer;
+        transition: all 0.3s ease; 
+        box-shadow: 0 4px 20px rgba(246, 244, 244, 0.9); 
+        }
+        .btn-brillante:hover {
+            background-color: #e63939; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(255, 76, 76, 0.7);
+        }
+        .btn-brillante:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 76, 76, 0.7); 
+        }
+
+        .btn-brillante:active {
+            transform: translateY(2px); 
+            box-shadow: 0 2px 10px rgba(255, 76, 76, 0.5); 
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Buscar edificio o área..." id="searchInput">
+    </div>
+
+    <div id="reloj"></div>
+
+    <div class="container">
+        <div class="phone-screen">
+            <div class="map-container" id="map-container">
+                <img src="images/mapa-udg.jpg" alt="Mapa de la UDG" id="main-map">
+                <iframe id="google-map" src="" style="display:none; width: 100%; height: 100%; border:none;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <button class="phone-home-button" onclick="showMainMap()"></button>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <h2>Filtro de Mapa UDG</h2>
+        <div class="buttons-container">
+            <button onclick="showParts()">Buscar Edificios</button>
+            <button onclick="showZonesOfInterest()">Zonas de Interés</button>
+            <button id="alert-button" onclick="showInteractiveMap()">Mapa Interactivo</button>
+            <button onclick="showGoogleMaps()">Abrir en Google Maps</button>
+            <button onclick="window.location.href='https://1drv.ms/p/c/8daf5964e63d40e0/Ef14SDxuiHhMithnYRkfLqEBrDBcbGrKqtKSGPDPGVXlzQ?e=g2w96K';">Conociendo Mi UDG</button>
+            <button onclick="changeMap('images/ingesmap.jpg')">Mapa Ingenierías</button>
+        </div>
+
+        <div class="parts-buttons" id="parts-buttons" style="display: none;">
+            <button class="btn-brillante" onclick="changeMap('images/cordinacion.jpg')">Coordinación</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioalfabeta.jpg')">Edificios Alfa, Beta</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioa.jpg')">Edificio (A)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiob.jpg')">Edificio (B)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioc.jpg')">Edificio (C)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiod.jpg')">Edificio (D)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioe.jpg')">Edificio (E)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiof.jpg')">Edificio (F)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiog.jpg')">Edificio (G)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioh.jpg')">Edificio (H)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioi.jpg')">Edificio (I)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioj.jpg')">Edificio (J)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiok.jpg')">Edificio (K)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiom.jpg')">Edificio (M)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificion.jpg')">Edificio (N)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioo.jpg')">Edificio (O)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiop.jpg')">Edificio (P)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioq.jpg')">Edificio (Q)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificior.jpg')">Edificio (R)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificios.jpg')">Edificio (S)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificios2.jpg')">Edificio (S2)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiout.jpg')">Edificio (T)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiout.jpg')">Edificio (U)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiov.jpg')">Edificio (V)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiow.jpg')">Edificio (W)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiox.jpg')">Edificio (X)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioy.jpg')">Edificio (Y)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioz.jpg')">Edificio (Z)</button>
+        </div>
+
+        <div class="zones-buttons" id="zones-buttons" style="display: none;">
+            <button class="btn-brillante" onclick="changeMap('images/entradas.jpg')">Entradas</button>
+            <button class="btn-brillante" onclick="changeMap('images/cafeteria.jpg')">Cafeterías</button>
+            <button class="btn-brillante" onclick="changeMap('images/sanitarios.jpg')">Sanitarios</button>
+            <button class="btn-brillante" onclick="changeMap('images/papelerias.jpg')">Papelerías</button>
+            <button class="btn-brillante" onclick="changeMap('images/lonaria.jpg')">Lonaria</button>
+            <button class="btn-brillante" onclick="changeMap('images/controlescolar.jpg')">Control Escolar</button>
+            <button class="btn-brillante" onclick="changeMap('images/jobsproulex.jpg')">Jobs & Proulex</button>
+            <button class="btn-brillante" onclick="changeMap('images/auditorios.jpg')">Auditorios</button>
+            <button class="btn-brillante" onclick="changeMap('images/medicos.jpg')">Servicios Médicos</button>
+            <button class="btn-brillante" onclick="changeMap('images/generales.jpg')">Servicios Generales</button>
+            <button class="btn-brillante" onclick="changeMap('images/cajero.jpg')">Cajero</button>
+        </div>
+        
+        <div id="control-container">
+            <button class="btn-brillante" onclick="changeMap('images/puerta2.jpg')">Boulevard</button>
+            <button class="btn-brillante" onclick="changeMap('images/puerta2.jpg')">Revolucion</button>
+            <button class="btn-brillante" onclick="changeMap('images/puerta2.jpg')">Olimpica</button>
+            <button class="plus">+</button>
+            <div class="buttons-container">
+                <button class="direction-button" id="up">↑</button>
+                <button class="direction-button" id="left">←</button>
+                <button class="direction-button" id="down">↓</button>
+                <button class="direction-button" id="right">→</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer class="footer">
+        <button id="nav-button" onclick="window.location.href='Inicio.html';">Inicio</button>
+        <button id="nav-button" onclick="window.location.href='CosasImportantes.html';">Cosas Importantes</button>
+        <button id="nav-button" onclick="window.location.href='UDGMaterias.html';">UDG Materias</button>
+        <button id="nav-button" onclick="window.location.href='Agenda.html';">Agenda</button>
+    </footer>
+
+    <script>
+        // Búsqueda mejorada
+        const searchInput = document.getElementById('searchInput');
+        const locationData = {
+            'entradas': 'images/entradas.jpg',
+            'edificio a': 'images/edificioa.jpg',
+            'edificio b': 'images/edificiob.jpg',
+            'edificio c': 'images/edificioc.jpg',
+            'edificio d': 'images/edificiod.jpg',
+            'biblioteca': 'images/biblioteca.jpg',
+            'cajero': 'images/cajero.jpg',
+            'edificio e': 'images/edificioe.jpg',
+            'edificio f': 'images/edificiof.jpg',
+            'edificio h': 'images/edificioh.jpg',
+            'edificio i': 'images/edificioi.jpg',
+            'edificio j': 'images/edificioj.jpg',
+            'edificio k': 'images/edificiok.jpg',
+            'edificio g': 'images/edificiog.jpg',
+            'alfa beta': 'images/edificioalfabeta.jpg',
+            'edificio s': 'images/edificios.jpg',
+            'edificio s2': 'images/edificios2.jpg',
+            'edificio m': 'images/edificiom.jpg',
+            'edificio n': 'images/edificion.jpg',
+            'edificio o': 'images/edificioo.jpg',
+            'coordinacion': 'images/cordinacion.jpg',
+            'edificio p': 'images/edificiop.jpg',
+            'edificio q': 'images/edificioq.jpg',
+            'edificio r': 'images/edificior.jpg',
+            'edificio u ': 'images/edificiout.jpg',
+            'edificio t': 'images/edificiout.jpg',
+
+            'edificio x': 'images/edificiox.jpg',
+            'edificio v': 'images/edificiov.jpg',
+            'edificio v2': 'images/edificiov2.jpg',
+            'edificio w': 'images/edificiow.jpg',
+            'edificio y': 'images/edificioy.jpg',
+            'lonaria': 'images/lonaria.jpg',
+            'jobs': 'images/jobs.jpg',
+            'auditorios': 'images/auditorios.jpg',
+            'medico': 'images/medicos.jpg',
+            'edificio z': 'images/edificioz.jpg',
+            'edificio z2': 'images/edificioz2.jpg',
+            'cafeteria': 'images/cafeteria.jpg',
+            'sanitarios': 'images/sanitarios.jpg',
+            'baños': 'images/sanitarios.jpg',
+
+            'papeleria': 'images/papelerias.jpg',
+            'control escolar': 'images/controlescolar.jpg',
+            'servicios medicos': 'images/medicos.jpg',
+            'servicios generales': 'images/generales.jpg',
+            'jardines explanadas': 'images/jardinesexplanadas.jpg',
+            'estacionamiento': 'images/estactionamiento.jpg',
+            'ingenierias': 'images/ingenierias.jpg',
+
+        };
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const matches = Object.entries(locationData)
+                .filter(([key]) => key.includes(searchTerm));
+            
+            if (matches.length > 0) {
+                changeMap(matches[0][1]);
+            }
+        });
+
+        // Sistema de navegación mejorado
+        const navigationState = {
+            currentPosition: { x: 0, y: 0, z: 0 },
+            imageHistory: [],
+            maxHistoryLength: 50
+        };
+
+        const images = {
+            right: [
+                'images/derecha1.jpg',
+                'images/derecha2.jpg',
+                'images/derecha3.jpg',
+                'images/derecha4.jpg',
+                'images/derecha5.jpg',
+                'images/derecha6.jpg',
+                'images/derecha7.jpg',
+                'images/derecha8.jpg',
+                'images/derecha9.jpg',
+                'images/derecha10.jpg',
+                'images/derecha11.jpg',
+                'images/derecha12.jpg',
+            ],
+            left: [
+                'images/izquierda1.jpg',
+                'images/izquierda2.jpg',
+            ],
+            up: [
+                'images/adelante1.jpg',
+                'images/adelante2.jpg',
+                'images/adelante3.jpg',
+            ],
+            down: [
+                'images/atras1.jpg',
+                'images/atras2.jpg',
+                'images/atras3.jpg',
+            ],
+        };
+
+        const currentIndices = {
+            right: 0,
+            left: 0,
+            up: 0,
+            down: 0,
+        };
+
+        let horizontalOffset = 0;
+        let verticalOffset = 0;
+
+        const changeImage = (direction) => {
+            const mainMap = document.getElementById('main-map');
+            
+            // Guardar estado actual
+            navigationState.imageHistory.push({
+                image: mainMap.src,
+                indices: {...currentIndices},
+                offsets: {horizontal: horizontalOffset, vertical: verticalOffset}
+            });
+
+            if (navigationState.imageHistory.length > navigationState.maxHistoryLength) {
+                navigationState.imageHistory.shift();
+            }
+
+            switch(direction) {
+                case 'right':
+                    if (currentIndices.left > 0) {
+                        currentIndices.left--;
+                        mainMap.src = images.left[currentIndices.left];
+                    } else {
+                        mainMap.src = images.right[horizontalOffset];
+                        horizontalOffset = (horizontalOffset + 1) % images.right.length;
+                    }
+                    break;
+
+                case 'left':
+                    if (horizontalOffset > 0) {
+                        horizontalOffset--;
+                        mainMap.src = images.right[horizontalOffset];
+                    } else {
+                        mainMap.src = images.left[currentIndices.left];
+                        currentIndices.left = (currentIndices.left + 1) % images.left.length;
+                    }
+                    break;
+
+                case 'up':
+                    if (currentIndices.down > 0) {
+                        currentIndices.down--;
+                        mainMap.src = images.down[currentIndices.down];
+                    } else {
+                        mainMap.src = images.up[verticalOffset];
+                        verticalOffset = (verticalOffset + 1) % images.up.length;
+                    }
+                    break;
+
+                case 'down':
+                    if (verticalOffset > 0) {
+                        verticalOffset--;
+                        mainMap.src = images.up[verticalOffset];
+                    } else {
+                        mainMap.src = images.down[currentIndices.down];
+                        currentIndices.down = (currentIndices.down + 1) % images.down.length;
+                    }
+                    break;
+            }
+
+            mainMap.style.transition = 'transform 0.3s ease';
+            mainMap.style.transform = 'scale(1.02)';
+            setTimeout(() => {
+                mainMap.style.transform = 'scale(1)';
+            }, 300);
+        };
+
+        document.getElementById('right').addEventListener('click', () => changeImage('right'));
+        document.getElementById('left').addEventListener('click', () => changeImage('left'));
+        document.getElementById('up').addEventListener('click', () => changeImage('up'));
+        document.getElementById('down').addEventListener('click', () => changeImage('down'));
+
+        const boulevardButton = document.getElementById('boulevard-button');
+        const controlContainer = document.getElementById('control-container');
+        const plusButton = controlContainer.querySelector('.plus');
+
+        const showControl = () => {
+            controlContainer.style.display = 'flex';
+        };
+
+        const toggleDirectionButtons = () => {
+            const directionButtons = document.querySelectorAll('.direction-button');
+            const buttonsVisible = Array.from(directionButtons).some(button => 
+                button.style.display === 'flex' || button.style.display === '');
+            
+            directionButtons.forEach(button => {
+                button.style.display = buttonsVisible ? 'none' : 'flex';
+            });
+        };
+
+        boulevardButton?.addEventListener('click', showControl);
+        plusButton?.addEventListener('click', toggleDirectionButtons);
+
+        let showingParts = false;
+        let showingInteractiveMap = false;
+        let showingZonesOfInterest = false;
+
+        function showParts() {
+            const partsButtons = document.getElementById('parts-buttons');
+            const otherButtons = document.querySelectorAll('.buttons-container button:not(:first-child)');
+            
+            if (showingParts) {
+                partsButtons.style.display = 'none';
+                otherButtons.forEach(button => button.style.display = 'block');
+            } else {
+                partsButtons.style.display = 'block';
+                otherButtons.forEach(button => button.style.display = 'none');
+            }
+            showingParts = !showingParts;
+        }
+
+        function showZonesOfInterest() {
+            const zonesButtons = document.getElementById('zones-buttons');
+            const otherButtons = document.querySelectorAll('.buttons-container button:not(:nth-child(2))');
+
+            if (showingZonesOfInterest) {
+                zonesButtons.style.display = 'none';
+                otherButtons.forEach(button => button.style.display = 'block');
+            } else {
+                zonesButtons.style.display = 'block';
+                otherButtons.forEach(button => button.style.display = 'none');
+            }
+            showingZonesOfInterest = !showingZonesOfInterest;
+        }
+
+        function showInteractiveMap() {
+            const interactiveMapButtons = document.getElementById('control-container');
+            const otherButtons = document.querySelectorAll('.buttons-container button:not(:nth-child(3))');
+            
+            if (showingInteractiveMap) {
+                interactiveMapButtons.style.display = 'none';
+                otherButtons.forEach(button => button.style.display = 'block');
+            } else {
+                interactiveMapButtons.style.display = 'block';
+                otherButtons.forEach(button => button.style.display = 'none');
+            }
+            showingInteractiveMap = !showingInteractiveMap;
+        }
+
+        function changeMap(image) {
+            document.getElementById('main-map').src = image;
+            document.getElementById('main-map').style.display = 'block';
+            document.getElementById('google-map').style.display = 'none';
+        }
+
+        function showGoogleMaps() {
+            var iframe = document.getElementById('google-map');
+            iframe.src = "https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1866.6716221012316!2d-103.32547288095878!3d20.65561000000002!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1723669773976!5m2!1ses-419!2smx";
+            iframe.style.display = 'block';
+            document.getElementById('main-map').style.display = 'none';
+            document.getElementById('parts-buttons').style.display = 'none';
+            document.getElementById('interactive-map-buttons').style.display = 'none';
+            document.getElementById('doors-buttons').style.display = 'none';
+        }
+
+        function showMainMap() {
+            document.getElementById('main-map').src = 'images/mapa-udg.jpg';
+            document.getElementById('main-map').style.display = 'block';
+            document.getElementById('google-map').style.display = 'none';
+            document.getElementById('parts-buttons').style.display = 'none';
+            document.getElementById('interactive-map-buttons').style.display = 'none';
+            document.getElementById('doors-buttons').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Interactivo UDG 🎓</title>
+    <link rel="icon" type="image/jpeg" href="images/logoUDG.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+        
+        :root {
+            --neon-blue: #00fff2;
+            --deep-blue: #001b3a;
+            --glow-blue: #4da8da;
+            --udg-blue: #004682;
+            --udg-gold: #FFB800;
+            --control-btn-size: 50px;
+            --control-gap: 10px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, #000B18 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .search-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 27, 58, 0.95);
+            padding: 15px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.2);
+        }
+
+        .search-wrapper {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 12px 20px 12px 50px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 25px;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+            animation: glow 2s infinite;
+        }
+
+        .search-box::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            content: "🔍";
+            font-size: 20px;
+            color: var(--neon-blue);
+        }
+
+        .container {
+            position: relative;
+            width: 360px;
+            height: 640px;
+            background: var(--deep-blue);
+            border: 16px solid #1a1a1a;
+            border-radius: 36px;
+            box-shadow: 0 0 30px rgba(0, 255, 242, 0.3);
+            overflow: hidden;
+            margin: 80px auto 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .phone-screen {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+
+        .map-container {
+            width: 100%;
+            height: calc(100% - 40px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .map-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .right-panel {
+            background: rgba(0, 27, 58, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(0, 255, 242, 0.3);
+            padding: 20px;
+            margin: 20px;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            animation: slideIn 0.5s ease;
+        }
+
+        .right-panel h2 {
+            color: var(--neon-blue);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0, 255, 242, 0.5);
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .sector-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .main-button {
+            background: linear-gradient(45deg, var(--deep-blue), var(--neon-blue));
+            border: none;
+            padding: 12px 25px;
+            border-radius: 15px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-brillante {
+            background: rgba(0, 255, 242, 0.1);
+            color: white;
+            border: 2px solid var(--neon-blue);
+            border-radius: 12px;
+            padding: 10px 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-brillante:hover {
+            background: var(--neon-blue);
+            color: var(--deep-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.5);
+        }
+
+        #control-container {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 27, 58, 0.9);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+
+        .door-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            justify-content: center;
+        }
+
+        .direction-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            position: relative;
+        }
+
+        .direction-button {
+            width: 60px;
+            height: 60px;
+            border: 2px solid var(--neon-blue);
+            background: rgba(0, 255, 242, 0.1);
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .direction-button:hover {
+            background: var(--neon-blue);
+            color: var(--deep-blue);
+            transform: scale(1.1);
+        }
+
+        .footer {
+            background: rgba(0, 27, 58, 0.95);
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer button {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            padding: 8px 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .footer button:hover {
+            background: var(--neon-blue);
+            color: var(--deep-blue);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(0, 255, 242, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(0, 255, 242, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(0, 255, 242, 0); }
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 5px rgba(0, 255, 242, 0.2); }
+            50% { box-shadow: 0 0 20px rgba(0, 255, 242, 0.4); }
+            100% { box-shadow: 0 0 5px rgba(0, 255, 242, 0.2); }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                height: 580px;
+                margin-top: 70px;
+            }
+
+            .right-panel {
+                width: 90%;
+                margin: 10px auto;
+            }
+
+            .sector-buttons {
+                flex-direction: column;
+            }
+
+            #control-container {
+                width: 80%;
+                padding: 15px;
+            }
+
+            .footer {
+                flex-wrap: wrap;
+                padding: 10px;
+            }
+
+            .footer button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="search-container">
+        <div class="search-wrapper">
+            <span class="search-icon">🔍</span>
+            <input type="text" class="search-box" placeholder="Buscar edificio o área..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="phone-screen">
+            <div class="map-container">
+                <img src="images/mapa-udg.jpg" alt="Mapa de la UDG" id="main-map">
+                <iframe id="google-map" style="display:none; width: 100%; height: 100%; border:none;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <h2>🗺️ Filtro de Mapa UDG</h2>
+        <div class="buttons-container">
+            <button class="main-button" onclick="toggleSectorButtons()">🏢 Buscar Edificios</button>
+            <button class="main-button" onclick="showZonesOfInterest()">🎯 Zonas de Interés</button>
+            <button class="main-button" onclick="showInteractiveMap()">🎮 Mapa Interactivo</button>
+            <button class="main-button" onclick="showGoogleMaps()">🗺️ Google Maps</button>
+            <button class="main-button" onclick="window.location.href='https://1drv.ms/p/c/8daf5964e63d40e0/Ef14SDxuiHhMithnYRkfLqEBrDBcbGrKqtKSGPDPGVXlzQ?e=g2w96K';">📚 Conociendo Mi UDG</button>
+            <button class="main-button" onclick="changeMap('images/ingesmap.jpg')">🎓 Mapa Ingenierías</button>
+        </div>
+
+        <div class="sector-buttons" id="sector-buttons" style="display: none;">
+            <button class="main-button" onclick="toggleSector('sector1')">🏛️ Sector 1 (A-M)</button>
+            <button class="main-button" onclick="toggleSector('sector2')">🏛️ Sector 2 (N-Z)</button>
+        </div>
+
+        <div id="sector1-buttons" style="display: none;">
+            <!-- Botones Sector 1 -->
+            <button class="btn-brillante" onclick="changeMap('images/edificioa.jpg')">🏢 Edificio (A)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiob.jpg')">🏢 Edificio (B)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioc.jpg')">🏢 Edificio (C)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiod.jpg')">🏢 Edificio (D)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioe.jpg')">🏢 Edificio (E)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiof.jpg')">🏢 Edificio (F)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiog.jpg')">🏢 Edificio (G)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioh.jpg')">🏢 Edificio (H)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioi.jpg')">🏢 Edificio (I)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioj.jpg')">🏢 Edificio (J)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiok.jpg')">🏢 Edificio (K)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiom.jpg')">🏢 Edificio (M)</button>
+            <!-- ... resto de edificios A-M ... -->
+        </div>
+
+        <div id="sector2-buttons" style="display: none;">
+            <!-- Botones Sector 2 -->
+            <button class="btn-brillante" onclick="changeMap('images/edificion.jpg')">🏢 Edificio (N)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioo.jpg')">🏢 Edificio (O)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiop.jpg')">🏢 Edificio (P)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioq.jpg')">🏢 Edificio (Q)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificior.jpg')">🏢 Edificio (R)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificios.jpg')">🏢 Edificio (S)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificios2.jpg')">🏢 Edificio (S2)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiout.jpg')">🏢 Edificio (T)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiout.jpg')">🏢 Edificio (U)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiov.jpg')">🏢 Edificio (V)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiow.jpg')">🏢 Edificio (W)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificiox.jpg')">🏢 Edificio (X)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioy.jpg')">🏢 Edificio (Y)</button>
+            <button class="btn-brillante" onclick="changeMap('images/edificioz.jpg')">🏢 Edificio (Z)</button>        </div>
+
+        <div id="zones-buttons" style="display: none;">
+            <button class="btn-brillante" onclick="changeMap('images/entradas.jpg')">🚪 Entradas</button>
+            <button class="btn-brillante" onclick="changeMap('images/cafeteria.jpg')">☕ Cafeterías</button>
+            <button class="btn-brillante" onclick="changeMap('images/sanitarios.jpg')">Sanitarios</button>
+            <button class="btn-brillante" onclick="changeMap('images/papelerias.jpg')">Papelerías</button>
+            <button class="btn-brillante" onclick="changeMap('images/lonaria.jpg')">Lonaria</button>
+            <button class="btn-brillante" onclick="changeMap('images/controlescolar.jpg')">Control Escolar</button>
+            <button class="btn-brillante" onclick="changeMap('images/jobsproulex.jpg')">Jobs & Proulex</button>
+            <button class="btn-brillante" onclick="changeMap('images/auditorios.jpg')">Auditorios</button>
+            <button class="btn-brillante" onclick="changeMap('images/medicos.jpg')">Servicios Médicos</button>
+            <button class="btn-brillante" onclick="changeMap('images/generales.jpg')">Servicios Generales</button>
+            <button class="btn-brillante" onclick="changeMap('images/cajero.jpg')">Cajero</button>
+        </div>
+
+        <div id="interactive-map" style="display: none;">
+            <div class="door-buttons">
+                <button class="btn-brillante" onclick="showDoorControl('boulevard')">🏛️ Boulevard</button>
+                <button class="btn-brillante" onclick="showDoorControl('revolucion')">🏛️ Revolución</button>
+                <button class="btn-brillante" onclick="showDoorControl('olimpica')">🏛️ Olímpica</button>
+            </div>
+        </div>
+
+        <div id="control-container">
+            <div class="direction-buttons">
+                <button class="direction-button" id="up">⬆️</button>
+                <button class="direction-button" id="left">⬅️</button>
+                <button class="direction-button" id="down">⬇️</button>
+                <button class="direction-button" id="right">➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <button onclick="window.location.href='Inicio.html';">🏠 Inicio</button>
+        <button onclick="window.location.href='CosasImportantes.html';">📌 Cosas Importantes</button>
+        <button onclick="window.location.href='UDGMaterias.html';">📚 UDG Materias</button>
+        <button onclick="window.location.href='Agenda.html';">📅 Agenda</button>
+    </footer>
+
+    <script>
+        // Sistema de búsqueda mejorado
+        const searchInput = document.getElementById('searchInput');
+        const locationData = {
+            'entradas': 'images/entradas.jpg',
+            'edificio a': 'images/edificioa.jpg',
+            'edificio b': 'images/edificiob.jpg',
+            'edificio c': 'images/edificioc.jpg',
+            'edificio d': 'images/edificiod.jpg',
+            'biblioteca': 'images/biblioteca.jpg',
+            'cajero': 'images/cajero.jpg',
+            'edificio e': 'images/edificioe.jpg',
+            'edificio f': 'images/edificiof.jpg',
+            'edificio h': 'images/edificioh.jpg',
+            'edificio i': 'images/edificioi.jpg',
+            'edificio j': 'images/edificioj.jpg',
+            'edificio k': 'images/edificiok.jpg',
+            'edificio g': 'images/edificiog.jpg',
+            'alfa beta': 'images/edificioalfabeta.jpg',
+            'edificio s': 'images/edificios.jpg',
+            'edificio s2': 'images/edificios2.jpg',
+            'edificio m': 'images/edificiom.jpg',
+            'edificio n': 'images/edificion.jpg',
+            'edificio o': 'images/edificioo.jpg',
+            'coordinacion': 'images/cordinacion.jpg',
+            'edificio p': 'images/edificiop.jpg',
+            'edificio q': 'images/edificioq.jpg',
+            'edificio r': 'images/edificior.jpg',
+            'edificio u ': 'images/edificiout.jpg',
+            'edificio t': 'images/edificiout.jpg',
+
+            'edificio x': 'images/edificiox.jpg',
+            'edificio v': 'images/edificiov.jpg',
+            'edificio v2': 'images/edificiov2.jpg',
+            'edificio w': 'images/edificiow.jpg',
+            'edificio y': 'images/edificioy.jpg',
+            'lonaria': 'images/lonaria.jpg',
+            'jobs': 'images/jobs.jpg',
+            'auditorios': 'images/auditorios.jpg',
+            'medico': 'images/medicos.jpg',
+            'edificio z': 'images/edificioz.jpg',
+            'edificio z2': 'images/edificioz2.jpg',
+            'cafeteria': 'images/cafeteria.jpg',
+            'sanitarios': 'images/sanitarios.jpg',
+            'baños': 'images/sanitarios.jpg',
+
+            'papeleria': 'images/papelerias.jpg',
+            'control escolar': 'images/controlescolar.jpg',
+            'servicios medicos': 'images/medicos.jpg',
+            'servicios generales': 'images/generales.jpg',
+            'jardines explanadas': 'images/jardinesexplanadas.jpg',
+            'estacionamiento': 'images/estactionamiento.jpg',
+            'ingenierias': 'images/ingenierias.jpg',
+        };
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            const matches = Object.entries(locationData)
+                .filter(([key]) => key.includes(searchTerm));
+            
+            if (matches.length > 0) {
+                changeMap(matches[0][1]);
+            }
+        });
+
+        // Funciones de control del mapa interactivo
+        let currentSector = null;
+        let showingInteractiveMap = false;
+
+        function toggleSectorButtons() {
+            const sectorButtons = document.getElementById('sector-buttons');
+            const mainButtons = document.querySelectorAll('.buttons-container .main-button');
+            
+            if (sectorButtons.style.display === 'none') {
+                sectorButtons.style.display = 'flex';
+                mainButtons.forEach(btn => {
+                    if (btn !== event.target) btn.style.display = 'none';
+                });
+            } else {
+                sectorButtons.style.display = 'none';
+                mainButtons.forEach(btn => btn.style.display = 'block');
+            }
+        }
+
+        function toggleSector(sector) {
+            const sector1Buttons = document.getElementById('sector1-buttons');
+            const sector2Buttons = document.getElementById('sector2-buttons');
+            
+            if (currentSector === sector) {
+                document.getElementById(`${sector}-buttons`).style.display = 'none';
+                currentSector = null;
+            } else {
+                sector1Buttons.style.display = sector === 'sector1' ? 'block' : 'none';
+                sector2Buttons.style.display = sector === 'sector2' ? 'block' : 'none';
+                currentSector = sector;
+            }
+        }
+
+        function showInteractiveMap() {
+            const interactiveMap = document.getElementById('interactive-map');
+            const mainButtons = document.querySelectorAll('.buttons-container .main-button');
+            
+            if (showingInteractiveMap) {
+                interactiveMap.style.display = 'none';
+                mainButtons.forEach(btn => btn.style.display = 'block');
+            } else {
+                interactiveMap.style.display = 'block';
+                mainButtons.forEach(btn => {
+                    if (btn !== event.target) btn.style.display = 'none';
+                });
+            }
+            showingInteractiveMap = !showingInteractiveMap;
+        }
+
+        function showDoorControl(door) {
+            const controlContainer = document.getElementById('control-container');
+            changeMap(`images/${door}.jpg`);
+            controlContainer.style.display = 'block';
+            
+            // Posicionar el control junto a la imagen
+            const mapContainer = document.querySelector('.map-container');
+            const mapRect = mapContainer.getBoundingClientRect();
+            
+            controlContainer.style.position = 'absolute';
+            controlContainer.style.left = `${mapRect.right + 10}px`;
+            controlContainer.style.top = `${mapRect.top}px`;
+        }
+
+        function changeMap(image) {
+            const mainMap = document.getElementById('main-map');
+            const googleMap = document.getElementById('google-map');
+            
+            mainMap.src = image;
+            mainMap.style.display = 'block';
+            googleMap.style.display = 'none';
+            
+            // Animación de transición
+            mainMap.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                mainMap.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        function showGoogleMaps() {
+            const mainMap = document.getElementById('main-map');
+            const googleMap = document.getElementById('google-map');
+            
+            googleMap.src = "https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d1866.6716221012316!2d-103.32547288095878!3d20.65561000000002!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses-419!2smx!4v1723669773976!5m2!1ses-419!2smx";
+            mainMap.style.display = 'none';
+            googleMap.style.display = 'block';
+        }
+
+        // Sistema de navegación mejorado
+        const directions = ['up', 'down', 'left', 'right'];
+        directions.forEach(direction => {
+            document.getElementById(direction).addEventListener('click', () => {
+                const mainMap = document.getElementById('main-map');
+                
+                // Efecto de movimiento
+                mainMap.style.transition = 'transform 0.3s ease';
+                switch(direction) {
+                    case 'up':
+                        mainMap.style.transform = 'translateY(-10px)';
+                        break;
+                    case 'down':
+                        mainMap.style.transform = 'translateY(10px)';
+                        break;
+                    case 'left':
+                        mainMap.style.transform = 'translateX(-10px)';
+                        break;
+                    case 'right':
+                        mainMap.style.transform = 'translateX(10px)';
+                        break;
+                }
+                
+                setTimeout(() => {
+                    mainMap.style.transform = 'none';
+                }, 300);
+            });
+        });
+
+        // Mostrar reloj
+        function actualizarReloj() {
+            const ahora = new Date();
+            const hora = ahora.getHours().toString().padStart(2, '0');
+            const minutos = ahora.getMinutes().toString().padStart(2, '0');
+            document.getElementById('reloj').textContent = `🕒 ${hora}:${minutos}`;
+        }
+
+        setInterval(actualizarReloj, 1000);
+        actualizarReloj();
+    </script>
+</body>
+</html>

@@ -94,7 +94,6 @@
             background: #f5f5f5;
             overflow: hidden;
         }
-        
 
         .map-container {
             width: 100%;
@@ -111,18 +110,32 @@
         }
 
         .right-panel {
-            position: fixed;
-            top: 60px;
-            right: 150px;
+            position: relative;
             background: rgba(0, 27, 58, 0.9);
             border-radius: 20px;
             box-shadow: 0 0 30px rgba(0, 255, 242, 0.3);
             padding: 20px;
-            max-width: 300px;
+            max-width: 360px;
             backdrop-filter: blur(10px);
             animation: slideIn 0.5s ease;
+            margin-top: -20px;
+            max-height: 400px;
+            overflow-y: auto;
         }
 
+        .right-panel::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .right-panel::-webkit-scrollbar-track {
+            background: rgba(0, 27, 58, 0.5);
+            border-radius: 10px;
+        }
+
+        .right-panel::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 10px;
+        }
 
         .right-panel h2 {
             color: var(--neon-blue);
@@ -180,12 +193,11 @@
             transform: translateY(-2px);
             box-shadow: 0 0 20px rgba(0, 255, 242, 0.5);
         }
-        
 
         #control-container {
-            position: absolute;
-            bottom: 0px;
-            left: -600px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
             transform: translateX(-50%);
             background: rgba(0, 27, 58, 0.9);
             padding: 20px;
@@ -193,6 +205,7 @@
             box-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
             backdrop-filter: blur(10px);
             display: none;
+            z-index: 1000;
         }
 
         .door-buttons {
@@ -298,10 +311,45 @@
                 flex-direction: column;
             }
 
-            #control-container {
-                width: 80%;
-                padding: 15px;
-            }
+           #control-container {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 27, 58, 0.9);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 242, 0.3);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+}
+
+.direction-buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.direction-button {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--neon-blue);
+    background: rgba(0, 255, 242, 0.1);
+    color: white;
+    font-size: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.direction-button:hover {
+    background: var(--neon-blue);
+    color: var(--deep-blue);
+    transform: scale(1.1);
+}
 
             .footer {
                 flex-wrap: wrap;
@@ -336,6 +384,8 @@
     </div>
 
     <div class="right-panel">
+        <button class="main-button" id="toggle-real-images">🏫 Ver desde Plantel</button>
+
         <h2>🗺️ Filtro de Mapa UDG</h2>
         <div class="buttons-container">
             <button class="main-button" onclick="showParts()">🏢 Buscar Edificios</button>
@@ -387,8 +437,8 @@
             <button class="btn-brillante" onclick="changeMap('images/jobsproulex.jpg')">💼Jobs & Proulex</button>
             <button class="btn-brillante" onclick="changeMap('images/auditorios.jpg')">🎤Auditorios</button>
             <button class="btn-brillante" onclick="changeMap('images/medicos.jpg')">🏥Servicios Médicos</button>
-            <button class="btn-brillante" onclick="changeMap('images/generales.jpg')">🛠️Servicios Generales</button>
             <button class="btn-brillante" onclick="changeMap('images/cajero.jpg')">🏦Cajero</button>
+            <button class="btn-brillante" onclick="changeMap('images/generales.jpg')">🛠️Servicios Generales</button>
         </div>
 
         <div id="interactive-map" style="display: none;">
@@ -399,7 +449,7 @@
             </div>
         </div>
 
-        <div id="control-container">
+        <div id="control-container" style="display: none;">
             <div class="direction-buttons">
                 <button class="direction-button" id="up">⬆️</button>
                 <button class="direction-button" id="left">⬅️</button>
@@ -418,57 +468,58 @@
         // Búsqueda mejorada
         const searchInput = document.getElementById('searchInput');
         const locationData = {
-            'entradas': 'images/entradas.jpg',
-            'edificio a': 'images/edificioa.jpg',
-            'edificio b': 'images/edificiob.jpg',
-            'edificio c': 'images/edificioc.jpg',
-            'edificio d': 'images/edificiod.jpg',
-            'biblioteca': 'images/biblioteca.jpg',
-            'cajero': 'images/cajero.jpg',
-            'edificio e': 'images/edificioe.jpg',
-            'edificio f': 'images/edificiof.jpg',
-            'edificio h': 'images/edificioh.jpg',
-            'edificio i': 'images/edificioi.jpg',
-            'edificio j': 'images/edificioj.jpg',
-            'edificio k': 'images/edificiok.jpg',
-            'edificio g': 'images/edificiog.jpg',
-            'alfa beta': 'images/edificioalfabeta.jpg',
-            'edificio s': 'images/edificios.jpg',
-            'edificio s2': 'images/edificios2.jpg',
-            'edificio m': 'images/edificiom.jpg',
-            'edificio n': 'images/edificion.jpg',
-            'edificio o': 'images/edificioo.jpg',
-            'coordinacion': 'images/cordinacion.jpg',
-            'edificio p': 'images/edificiop.jpg',
-            'edificio q': 'images/edificioq.jpg',
-            'edificio r': 'images/edificior.jpg',
-            'edificio u ': 'images/edificiout.jpg',
-            'edificio t': 'images/edificiout.jpg',
-
-            'edificio x': 'images/edificiox.jpg',
-            'edificio v': 'images/edificiov.jpg',
-            'edificio v2': 'images/edificiov2.jpg',
-            'edificio w': 'images/edificiow.jpg',
-            'edificio y': 'images/edificioy.jpg',
-            'lonaria': 'images/lonaria.jpg',
-            'jobs': 'images/jobs.jpg',
-            'auditorios': 'images/auditorios.jpg',
-            'medico': 'images/medicos.jpg',
-            'edificio z': 'images/edificioz.jpg',
-            'edificio z2': 'images/edificioz2.jpg',
-            'cafeteria': 'images/cafeteria.jpg',
-            'sanitarios': 'images/sanitarios.jpg',
-            'baños': 'images/sanitarios.jpg',
-
-            'papeleria': 'images/papelerias.jpg',
-            'control escolar': 'images/controlescolar.jpg',
-            'servicios medicos': 'images/medicos.jpg',
-            'servicios generales': 'images/generales.jpg',
-            'jardines explanadas': 'images/jardinesexplanadas.jpg',
-            'estacionamiento': 'images/estactionamiento.jpg',
-            'ingenierias': 'images/ingenierias.jpg',
-
+            'entradas': { map: 'images/entradas.jpg', real: 'images/Realentradas.jpg' },
+            'edificio a': { map: 'images/edificioa.jpg', real: 'images/Realedificioa.jpg' },
+            'edificio b': { map: 'images/edificiob.jpg', real: 'images/Realedificiob.jpg' },
+            'edificio c': { map: 'images/edificioc.jpg', real: 'images/Realedificioc.jpg' },
+            'edificio d': { map: 'images/edificiod.jpg', real: 'images/Realedificiod.jpg' },
+            'biblioteca': { map: 'images/biblioteca.jpg', real: 'images/Realbiblioteca.jpg' },
+            'cajero': { map: 'images/cajero.jpg', real: 'images/Realcajero.jpg' },
+            'edificio e': { map: 'images/edificioe.jpg', real: 'images/Realedificioe.jpg' },
+            'edificio f': { map: 'images/edificiof.jpg', real: 'images/Realedificiof.jpg' },
+            'edificio h': { map: 'images/edificioh.jpg', real: 'images/Realedificioh.jpg' },
+            'edificio i': { map: 'images/edificioi.jpg', real: 'images/Realedificioi.jpg' },
+            'edificio j': { map: 'images/edificioj.jpg', real: 'images/Realedificioj.jpg' },
+            'edificio k': { map: 'images/edificiok.jpg', real: 'images/Realedificiok.jpg' },
+            'edificio g': { map: 'images/edificiog.jpg', real: 'images/Realedificiog.jpg' },
+            'alfa beta': { map: 'images/edificioalfabeta.jpg', real: 'images/Realedificioalfabeta.jpg' },
+            'edificio s': { map: 'images/edificios.jpg', real: 'images/Realedificios.jpg' },
+            'edificio s2': { map: 'images/edificios2.jpg', real: 'images/Realedificios2.jpg' },
+            'edificio m': { map: 'images/edificiom.jpg', real: 'images/Realedificiom.jpg' },
+            'edificio n': { map: 'images/edificion.jpg', real: 'images/Realedificion.jpg' },
+            'edificio o': { map: 'images/edificioo.jpg', real: 'images/Realedificioo.jpg' },
+            'coordinacion': { map: 'images/cordinacion.jpg', real: 'images/Realcordinacion.jpg' },
+            'edificio p': { map: 'images/edificiop.jpg', real: 'images/Realedificiop.jpg' },
+            'edificio q': { map: 'images/edificioq.jpg', real: 'images/Realedificioq.jpg' },
+            'edificio r': { map: 'images/edificior.jpg', real: 'images/Realedificior.jpg' },
+            'edificio u': { map: 'images/edificiout.jpg', real: 'images/Realedificiout.jpg' },
+            'edificio t': { map: 'images/edificiout.jpg', real: 'images/Realedificiout.jpg' },
+            'edificio x': { map: 'images/edificiox.jpg', real: 'images/Realedificiox.jpg' },
+            'edificio v': { map: 'images/edificiov.jpg', real: 'images/Realedificiov.jpg' },
+            'edificio v2': { map: 'images/edificiov2.jpg', real: 'images/Realedificiov2.jpg' },
+            'edificio w': { map: 'images/edificiow.jpg', real: 'images/Realedificiow.jpg' },
+            'edificio y': { map: 'images/edificioy.jpg', real: 'images/Realedificioy.jpg' },
+            'lonaria': { map: 'images/lonaria.jpg', real: 'images/Reallonaria.jpg' },
+            'jobs': { map: 'images/jobs.jpg', real: 'images/Realjobs.jpg' },
+            'proulex': { map: 'images/proulex.jpg', real: 'images/Realproulex.jpg' },
+            'auditorios': { map: 'images/auditorios.jpg', real: 'images/Realauditorios.jpg' },
+            'medico': { map: 'images/medicos.jpg', real: 'images/Realmedicos.jpg' },
+            'edificio z': { map: 'images/edificioz.jpg', real: 'images/Realedificioz.jpg' },
+            'edificio z2': { map: 'images/edificioz2.jpg', real: 'images/Realedificioz2.jpg' },
+            'cafeteria': { map: 'images/cafeteria.jpg', real: 'images/Realcafeteria.jpg' },
+            'sanitarios': { map: 'images/sanitarios.jpg', real: 'images/Realsanitarios.jpg' },
+            'baños': { map: 'images/sanitarios.jpg', real: 'images/Realsanitarios.jpg' },
+            'papeleria': { map: 'images/papelerias.jpg', real: 'images/Realpapelerias.jpg' },
+            'control escolar': { map: 'images/controlescolar.jpg', real: 'images/Realcontrolescolar.jpg' },
+            'servicios medicos': { map: 'images/medicos.jpg', real: 'images/Realmedicos.jpg' },
+            'servicios generales': { map: 'images/generales.jpg', real: 'images/Realgenerales.jpg' },
+            'jardines explanadas': { map: 'images/jardinesexplanadas.jpg', real: 'images/Realjardinesexplanadas.jpg' },
+            'estacionamiento': { map: 'images/estactionamiento.jpg', real: 'images/Realestacionamiento.jpg' },
+            'ingenierias': { map: 'images/ingenierias.jpg', real: 'images/Realingenierias.jpg' }
         };
+
+
+        let showingRealImages = false;
 
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
@@ -480,7 +531,23 @@
             }
         });
         let currentSector = null;
-
+        document.getElementById('toggle-real-images').addEventListener('click', () => {
+            showingRealImages = !showingRealImages;
+            const button = document.getElementById('toggle-real-images');
+            button.textContent = showingRealImages ? '🗺️ Ver Mapa' : '🏫 Ver desde Plantel';
+            
+            // Actualiza la imagen actual si hay una visible
+            const mainMap = document.getElementById('main-map');
+            if (mainMap.style.display !== 'none') {
+                const currentImage = mainMap.src;
+                const key = Object.keys(locationData).find(k => 
+                    locationData[k].map === currentImage || locationData[k].real === currentImage
+                );
+                if (key) {
+                    changeMap(locationData[key]);
+                }
+            }
+        });
         function toggleSectorButtons() {
             const sectorButtons = document.getElementById('sector-buttons');
             const mainButtons = document.querySelectorAll('.buttons-container .main-button');
@@ -708,8 +775,13 @@
 
 
         function changeMap(image) {
-            document.getElementById('main-map').src = image;
-            document.getElementById('main-map').style.display = 'block';
+            const mainMap = document.getElementById('main-map');
+            if (typeof image === 'string') {
+                mainMap.src = image;
+            } else {
+                mainMap.src = showingRealImages ? image.real : image.map;
+            }
+            mainMap.style.display = 'block';
             document.getElementById('google-map').style.display = 'none';
         }
 
@@ -731,6 +803,17 @@
             document.getElementById('interactive-map-buttons').style.display = 'none';
             document.getElementById('doors-buttons').style.display = 'none';
         }
+        document.querySelectorAll('.btn-brillante').forEach(button => {
+            const originalOnclick = button.getAttribute('onclick');
+            const match = originalOnclick.match(/'([^']+)'/);
+            if (match) {
+                const imagePath = match[1];
+                const key = Object.keys(locationData).find(k => locationData[k].map === imagePath);
+                if (key) {
+                    button.onclick = () => changeMap(locationData[key]);
+                }
+            }
+        });
     </script>
 </body>
 </html>

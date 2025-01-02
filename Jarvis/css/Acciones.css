@@ -242,11 +242,11 @@ input:focus, select:focus {
 }
 
 .btn-danger {
-    background-color: #ff3366;
+    background-color: #36e10c;
 }
 
 .btn-danger:hover {
-    background-color: #ff0044;
+    background-color: #57da05;
 }
 
 .transaction-list {

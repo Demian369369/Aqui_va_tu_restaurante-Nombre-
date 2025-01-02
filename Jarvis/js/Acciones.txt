@@ -1,0 +1,1484 @@
+Eres un profesional en logica y desarrollo web con habilidades de JS. el dia de hoy te proporcionare un codigo y lo que quiero es que arregles ciertos errores y mejores toda la logica. la pagina web es para llevar un control de finanzas de mi dinero en la que quiero que cada 15 dias se agregue un ingreso de $3000 por un trabajo que tengo. tambien quiero que hagas un JSON en el que pueda poner si recibi ingresos, ahorre, gaste etc todo el sistema de JSON debe aparecer predefinido en el historial de la pagina. recuerda que todo el dinero que llegue de ingresos debe seguir la tecnica 50%ahorros 30%Invertir y 20%libres para hacer lo que quiera que podria ser gastar pero recuerda que para gastar se requiere especificar el motivo y la pagina debe tener el sistema de distribucion del dinero. un apartado que diga todo el total de mi dinero. otro que diga cuanto tengo ahorrado, otro que diga cuanto tengo invertido y otro que diga cuanto he gastado y eso debe aparecer en la grafica. recuerda el Json y tambien has un sistema que cada que sea quincena en la vida real aumente el valor y solo una vez para evitar bugs de duplicacion. tambien contempla errores como por ejemplo poner una inversion y luego eliminarla que podria hacer que duplique el dinero y eso no es logico. tambien que no pueda gastar dinero si ya no tengo dinero para gastar etc. quiero que profesionalmente arregles errores implementes codigo y perfecciones el sistema de finanzas. al final entregame el codigo completo de Javascript unicamente con las modificaciones e implementaciones solicitadas. te proporcionare todas las areas de codigo para que tengas un contexto pero solo quiero la parte de javascript completa y el JSON que si se puede lo quiero dentro del mismo JavaScript, todo debe tener logica porfavor implementa bien el filtro de 50, 30, 20 que aplique incluso para el salario inicial y todo(no quiero el filtro para algo en especifico) tambien recuerda mantener lo del dolar, bitcoin y cetes eso es importante que lo dejes en el codigo ya que da datos en tiempo real y si hay algo en el codigo de javascript que no sea necesario mostrar no lo quites, recuerda dejarme el JSON y especificarme como usarlo para poder estar agregando ingresos que aparezcan en la pagina siempre(pon un ejemplo con esta cantidad: gane $1200 pesos Encuesta Ari) Y mi saldo inicial es de $19589(recuerda que esto debe pasar tambien por el filtro 50,30,20) y que en dinero total debe de aparecer siempre todo el dinero que tengo(lo de patrimonio total)(evita bugs con el dinero total, debe ser exacto siempre recuerda que es una pagina de finanzas por lo tanto no puede haber errores con las cuentas) Tambien recuerda que ingresos totales, ahorro, gastos e inversiones se deben de reflejar en la pagina y en la grafica de hasta abajo en la que tambien los datos deben de ser exactos al igual que el historial de transacciones ingresos gastos etc. todo debe ser exacto de manera profesional.              PORFAVOR!!!!!!! QUE SE REFLEJE TODO EN LA PAGINA WEB se debe de ver bien el dinero y eres un puto profesional que debe de siempre ser perfecto por lo tanto la pagina se debe de ver bien. EL patrimonio total se debe de ver bien y coherente(es todo el dinero total) balance disponible es todo el dinero del 20% que se puede gastar. ahorros siempre debe ser 50% de todo el dinero total o que llega por obligacion y se debe de reflejar en total de ahorros. Lo mismo con Inversion con el 30% de Gastos solo se debe reflejar lo que se haya gastado por lo tanto de momento esta bien en 0 pero tambien debes de hacer un JSON para el apartado de gastos, inversiones etc. Recuerda que las Apis de dolar bitcoin y cetes se deben de ver porfavor manten esa parte del codigo. la grafica de hasta abajo en teoria ya funciona solo se deben de agregar los datos asi que haz que todo sea presiso y funcione correctamente a lo solicitado en este prompt. Los datos de JSON se deben reflejar en la pagina web en el apartado de transacciones recientes dentro del cuadro para tener informacion de eso recuerda que los usuarios deben de poder ver con presicion estos datos. te dare 2 Documentos de JavaScript el inicial y un ejemplo porfavor sigue mi prompt y haz todo lo que te solicite como el profesional que eres
+*SI ME ENTREGAS MENOS LINEAS DE CODIGO NO HCISTE UN BUEN trabajo
+*Haz caso a todo el prompt
+
+
+
+
+
+
+
+
+
+
+
+ESTE ES EL EJEMPLO:
+
+
+
+
+
+// Definición de constantes
+const INITIAL_BALANCE = 19589;
+const RECURRING_INCOME = 3000;
+const SAVINGS_PERCENTAGE = 0.50;
+const INVESTMENT_PERCENTAGE = 0.30;
+const SPENDING_PERCENTAGE = 0.20;
+
+// JSON de transacciones predefinidas
+const predefinedTransactions = [
+    {
+        type: 'income',
+        category: 'Encuesta',
+        description: 'Encuesta Ari',
+        amount: 1200,
+        date: '2024-10-15'
+    }
+];
+
+// Estado global de las finanzas
+let state = {
+    totalPatrimony: 0,
+    balance: 0,
+    totalIncome: 0,
+    totalExpenses: 0,
+    savings: 0,
+    investments: 0,
+    transactions: []
+};
+
+// Elementos del DOM
+const elements = {
+    totalPatrimony: document.getElementById('totalPatrimony'),
+    totalBalance: document.getElementById('totalBalance'),
+    totalIncome: document.getElementById('totalIncome'),
+    totalExpenses: document.getElementById('totalExpenses'),
+    totalSavings: document.getElementById('totalSavings'),
+    totalInvestments: document.getElementById('totalInvestments'),
+    transactionList: document.getElementById('transactionList'),
+    transactionForm: document.getElementById('transactionForm'),
+    categorySelect: document.getElementById('category'),
+    typeSelect: document.getElementById('type'),
+    clearAllBtn: document.getElementById('clearAllBtn'),
+    expenseChart: document.getElementById('expenseChart').getContext('2d')
+};
+
+// Categorías de transacciones
+const categories = {
+    income: ['Salario', 'Bonificación', 'Venta', 'Otros'],
+    expense: ['Gasto obligatorio', 'Gasto necesario', 'Gasto innecesario'],
+    saving: ['Cuenta de ahorros', 'Fondo de emergencia'],
+    investment: ['Acciones', 'Criptomonedas', 'Bienes raíces']
+};
+
+// Inicialización
+document.addEventListener('DOMContentLoaded', () => {
+    initializeState();
+    setupEventListeners();
+    updateUI();
+});
+
+// Funciones principales
+
+function initializeState() {
+    const storedState = localStorage.getItem('financeState');
+    if (storedState) {
+        state = JSON.parse(storedState);
+    } else {
+        distributeAmount(INITIAL_BALANCE, 'Saldo Inicial');
+        predefinedTransactions.forEach(transaction => addTransaction(transaction));
+    }
+}
+
+function setupEventListeners() {
+    elements.typeSelect.addEventListener('change', updateCategoryOptions);
+    elements.transactionForm.addEventListener('submit', handleNewTransaction);
+    elements.clearAllBtn.addEventListener('click', clearAllTransactions);
+}
+
+function updateUI() {
+    updateStatistics();
+    renderTransactions();
+    updateChart();
+}
+
+function updateStatistics() {
+    elements.totalPatrimony.textContent = formatCurrency(state.totalPatrimony);
+    elements.totalBalance.textContent = formatCurrency(state.balance);
+    elements.totalIncome.textContent = formatCurrency(state.totalIncome);
+    elements.totalExpenses.textContent = formatCurrency(state.totalExpenses);
+    elements.totalSavings.textContent = formatCurrency(state.savings);
+    elements.totalInvestments.textContent = formatCurrency(state.investments);
+}
+
+function renderTransactions() {
+    elements.transactionList.innerHTML = '';
+    state.transactions.forEach((transaction, index) => {
+        const transactionItem = createTransactionElement(transaction, index);
+        elements.transactionList.appendChild(transactionItem);
+    });
+}
+
+function updateChart() {
+    if (window.myChart) {
+        window.myChart.destroy();
+    }
+    window.myChart = new Chart(elements.expenseChart, {
+        type: 'doughnut',
+        data: {
+            labels: ['Ahorros', 'Inversiones', 'Gastos', 'Balance Disponible'],
+            datasets: [{
+                data: [state.savings, state.investments, state.totalExpenses, state.balance],
+                backgroundColor: [
+                    'rgba(0, 255, 0, 0.8)',
+                    'rgba(255, 165, 0, 0.8)',
+                    'rgba(255, 0, 0, 0.8)',
+                    'rgba(0, 0, 255, 0.8)'
+                ]
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+}
+
+function handleNewTransaction(e) {
+    e.preventDefault();
+    const type = elements.typeSelect.value;
+    const category = elements.categorySelect.value;
+    const description = document.getElementById('description').value;
+    const amount = parseFloat(document.getElementById('amount').value);
+
+    if (isNaN(amount) || amount <= 0) {
+        alert('Por favor, ingresa una cantidad válida.');
+        return;
+    }
+
+    if (type === 'expense' && amount > state.balance) {
+        alert('No tienes suficiente saldo para realizar este gasto.');
+        return;
+    }
+
+    addTransaction({ type, category, description, amount, date: new Date().toISOString().split('T')[0] });
+    e.target.reset();
+    updateCategoryOptions();
+}
+
+function addTransaction(transaction) {
+    state.transactions.push(transaction);
+
+    switch (transaction.type) {
+        case 'income':
+            distributeAmount(transaction.amount, transaction.description);
+            break;
+        case 'expense':
+            state.balance -= transaction.amount;
+            state.totalExpenses += transaction.amount;
+            break;
+        case 'saving':
+            state.savings += transaction.amount;
+            state.balance -= transaction.amount;
+            break;
+        case 'investment':
+            state.investments += transaction.amount;
+            state.balance -= transaction.amount;
+            break;
+    }
+
+    state.totalPatrimony = state.balance + state.savings + state.investments;
+    saveState();
+    updateUI();
+}
+
+function distributeAmount(amount, description) {
+    const savingsAmount = amount * SAVINGS_PERCENTAGE;
+    const investmentAmount = amount * INVESTMENT_PERCENTAGE;
+    const balanceAmount = amount * SPENDING_PERCENTAGE;
+
+    state.totalIncome += amount;
+    state.savings += savingsAmount;
+    state.investments += investmentAmount;
+    state.balance += balanceAmount;
+
+    // Agregar transacciones detalladas para la distribución
+    state.transactions.push(
+        { type: 'saving', category: 'Distribución Automática', description: `50% de ${description}`, amount: savingsAmount, date: new Date().toISOString().split('T')[0] },
+        { type: 'investment', category: 'Distribución Automática', description: `30% de ${description}`, amount: investmentAmount, date: new Date().toISOString().split('T')[0] },
+        { type: 'income', category: 'Balance', description: `20% de ${description}`, amount: balanceAmount, date: new Date().toISOString().split('T')[0] }
+    );
+}
+
+function deleteTransaction(index) {
+    const transaction = state.transactions[index];
+    state.transactions.splice(index, 1);
+
+    switch (transaction.type) {
+        case 'income':
+            state.totalIncome -= transaction.amount;
+            state.savings -= transaction.amount * SAVINGS_PERCENTAGE;
+            state.investments -= transaction.amount * INVESTMENT_PERCENTAGE;
+            state.balance -= transaction.amount * SPENDING_PERCENTAGE;
+            break;
+        case 'expense':
+            state.totalExpenses -= transaction.amount;
+            state.balance += transaction.amount;
+            break;
+        case 'saving':
+            state.savings -= transaction.amount;
+            state.balance += transaction.amount;
+            break;
+        case 'investment':
+            state.investments -= transaction.amount;
+            state.balance += transaction.amount;
+            break;
+    }
+
+    state.totalPatrimony = state.balance + state.savings + state.investments;
+    saveState();
+    updateUI();
+}
+
+function clearAllTransactions() {
+    if (confirm('¿Estás seguro de que deseas eliminar todo el historial?')) {
+        state = {
+            totalPatrimony: 0,
+            balance: 0,
+            totalIncome: 0,
+            totalExpenses: 0,
+            savings: 0,
+            investments: 0,
+            transactions: []
+        };
+        distributeAmount(INITIAL_BALANCE, 'Saldo Inicial');
+        saveState();
+        updateUI();
+    }
+}
+
+// Funciones auxiliares
+
+function updateCategoryOptions() {
+    const selectedType = elements.typeSelect.value;
+    elements.categorySelect.innerHTML = '';
+    categories[selectedType].forEach(category => {
+        const option = document.createElement('option');
+        option.value = category;
+        option.textContent = category;
+        elements.categorySelect.appendChild(option);
+    });
+}
+
+function createTransactionElement(transaction, index) {
+    const transactionItem = document.createElement('div');
+    transactionItem.classList.add('transaction-item');
+    transactionItem.innerHTML = `
+        <span>${getTransactionIcon(transaction.type)} ${transaction.category}</span>
+        <span>${transaction.description}</span>
+        <span>${formatCurrency(transaction.amount)}</span>
+        <button onclick="deleteTransaction(${index})" class="btn-neon">Eliminar</button>
+    `;
+    return transactionItem;
+}
+
+function getTransactionIcon(type) {
+    const icons = {
+        income: '💰',
+        expense: '💸',
+        saving: '🐷',
+        investment: '📈'
+    };
+    return icons[type] || '🔄';
+}
+
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(amount);
+}
+
+function saveState() {
+    localStorage.setItem('financeState', JSON.stringify(state));
+}
+
+// Funciones para datos en tiempo real
+
+function updateRates() {
+    fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,mxn')
+        .then(response => response.json())
+        .then(data => {
+            const usdToMxnRate = data.bitcoin.mxn / data.bitcoin.usd;
+            document.getElementById('usdmxn').textContent = usdToMxnRate.toFixed(2);
+            document.getElementById('btcusd').textContent = data.bitcoin.usd.toFixed(2);
+        })
+        .catch(error => {
+            console.error('Error al obtener las tasas de cambio:', error);
+            document.getElementById('usdmxn').textContent = 'Error';
+            document.getElementById('btcusd').textContent = 'Error';
+        });
+}
+
+// Función para agregar ingreso recurrente
+function checkForRecurringIncome() {
+    const today = new Date();
+    const day = today.getDate();
+    const lastIncomeDate = localStorage.getItem('lastIncomeDate');
+
+    if ((day === 15 || day === 30) && lastIncomeDate !== today.toISOString().split('T')[0]) {
+        addTransaction({
+            type: 'income',
+            category: 'Salario',
+            description: 'Ingreso Quincenal',
+            amount: RECURRING_INCOME,
+            date: today.toISOString().split('T')[0]
+        });
+        localStorage.setItem('lastIncomeDate', today.toISOString().split('T')[0]);
+    }
+}
+
+// Inicialización y ejecución periódica
+updateRates();
+setInterval(updateRates, 60000); // Actualizar cada minuto
+setInterval(checkForRecurringIncome, 86400000); // Verificar cada día
+
+
+
+
+
+
+
+
+
+
+//HTML 
+document.addEventListener('DOMContentLoaded', () => {
+    const totalPatrimony = document.getElementById('totalPatrimony');
+    const totalBalance = document.getElementById('totalBalance');
+    const totalIncome = document.getElementById('totalIncome');
+    const totalExpenses = document.getElementById('totalExpenses');
+    const totalSavings = document.getElementById('totalSavings');
+    const totalInvestments = document.getElementById('totalInvestments');
+    const transactionList = document.getElementById('transactionList');
+    const transactionForm = document.getElementById('transactionForm');
+    const categorySelect = document.getElementById('category');
+    const typeSelect = document.getElementById('type');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+
+    const initialBalance = 16589;  
+    let balance = initialBalance;  
+    let income = 0;   
+    let expenses = 0;
+    let savings = 0;
+    let investments = 0;
+    let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    const categories = {
+        income: ['Salario', 'Bonificación', 'Venta'],
+        expense: ['Gasto obligatorio', 'Gasto necesario', 'Gasto innecesario'],
+        saving: ['Cuenta de ahorros', 'Fondo de emergencia'],
+        investment: ['Acciones', 'Criptomonedas', 'Bienes raíces']
+    };
+
+    const updateCategoryOptions = () => {
+        const selectedType = typeSelect.value;
+        categorySelect.innerHTML = '';
+        categories[selectedType].forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categorySelect.appendChild(option);
+        });
+    };
+
+    typeSelect.addEventListener('change', updateCategoryOptions);
+    updateCategoryOptions();
+
+    const updateUI = () => {
+        totalPatrimony.textContent = `$${(savings + investments + balance).toFixed(2)}`;  
+        totalBalance.textContent = `$${balance.toFixed(2)}`; 
+        totalIncome.textContent = `$${income.toFixed(2)}`;
+        totalExpenses.textContent = `$${expenses.toFixed(2)}`;
+        totalSavings.textContent = `$${savings.toFixed(2)}`;
+        totalInvestments.textContent = `$${investments.toFixed(2)}`;
+        renderTransactions();
+        updateChart();
+    };
+
+    const renderTransactions = () => {
+        transactionList.innerHTML = '';
+        transactions.forEach((transaction, index) => {
+            const transactionItem = document.createElement('div');
+            transactionItem.classList.add('transaction-item');
+            transactionItem.innerHTML = `
+                <span>${transaction.type === 'income' ? '💰 Ingreso' : transaction.type === 'expense' ? '💸 Gasto' : transaction.type === 'saving' ? '🐷 Ahorro' : '📈 Inversión'} - ${transaction.category}</span>
+                <span>${transaction.description}</span>
+                <span>$${transaction.amount.toFixed(2)}</span>
+                <button onclick="deleteTransaction(${index})"  class="btn-neon">Eliminar</button>
+            `;
+            transactionList.appendChild(transactionItem);
+        });
+    };
+
+    const deleteTransaction = (index) => {
+        const removed = transactions.splice(index, 1)[0];
+        if (removed.type === 'income') {
+            income -= removed.amount;
+            savings -= removed.amount * 0.50;
+            investments -= removed.amount * 0.30;
+            balance -= removed.amount * 0.20;
+        } else if (removed.type === 'expense') {
+            expenses -= removed.amount;
+            balance += removed.amount;
+        } else if (removed.type === 'saving') {
+            savings -= removed.amount;
+            balance += removed.amount;
+        } else if (removed.type === 'investment') {
+            investments -= removed.amount;
+            balance += removed.amount;
+        }
+        updateUI();
+        saveTransactions();
+    };
+
+    window.deleteTransaction = deleteTransaction; 
+
+    const saveTransactions = () => {
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+    };
+
+    transactionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const type = typeSelect.value;
+        const category = categorySelect.value;
+        const description = document.getElementById('description').value;
+        const amount = parseFloat(document.getElementById('amount').value);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert('Por favor, ingresa una cantidad válida.');
+            return;
+        }
+
+        let transaction = { type, category, description, amount };
+
+        if (type === 'income') {
+            income += amount;
+            const savingAmount = amount * 0.50;
+            const investmentAmount = amount * 0.30;
+            const balanceAmount = amount * 0.20;
+
+            savings += savingAmount;
+            investments += investmentAmount;
+            balance += balanceAmount;
+
+            transactions.push({
+                type: 'income',
+                category,
+                description,
+                amount
+            });
+            transactions.push({
+                type: 'saving',
+                category: 'Distribución Automática',
+                description: `50% de ingreso ${description}`,
+                amount: savingAmount
+            });
+            transactions.push({
+                type: 'investment',
+                category: 'Distribución Automática',
+                description: `30% de ingreso ${description}`,
+                amount: investmentAmount
+            });
+            transactions.push({
+                type: 'income',
+                category: 'Balance',
+                description: `20% de ingreso ${description}`,
+                amount: balanceAmount
+            });
+        } else if (type === 'expense') {
+            expenses += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        } else if (type === 'saving') {
+            savings += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        } else if (type === 'investment') {
+            investments += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        }
+
+        updateUI();
+        saveTransactions();
+        transactionForm.reset();
+        updateCategoryOptions();
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+        if (!confirm('¿Estás seguro de que deseas eliminar todas las transacciones?')) return;
+        transactions = [];
+        income = 0;
+        expenses = 0;
+        savings = 0;
+        investments = 0;
+        balance = initialBalance;  
+        distributeInitialBalance();
+        updateUI();
+        saveTransactions();
+    });
+
+    let isInitialBalanceDistributed = localStorage.getItem('isInitialBalanceDistributed') === 'true';
+
+const distributeInitialBalance = () => {
+    if (isInitialBalanceDistributed) return; 
+
+    const savingAmount = initialBalance * 0.50;
+    const investmentAmount = initialBalance * 0.30;
+    const balanceAmount = initialBalance * 0.20;
+
+    savings += savingAmount;
+    investments += investmentAmount;
+    balance += balanceAmount;
+
+    transactions.push({
+        type: 'income',
+        category: 'Saldo Inicial',
+        description: 'Ingreso inicial distribuido automáticamente',
+        amount: initialBalance
+    });
+    transactions.push({
+        type: 'saving',
+        category: 'Distribución Inicial',
+        description: '50% del saldo inicial',
+        amount: savingAmount
+    });
+    transactions.push({
+        type: 'investment',
+        category: 'Distribución Inicial',
+        description: '30% del saldo inicial',
+        amount: investmentAmount
+    });
+    transactions.push({
+        type: 'income',
+        category: 'Balance Inicial',
+        description: '20% del saldo inicial',
+        amount: balanceAmount
+    });
+
+    isInitialBalanceDistributed = true;
+    localStorage.setItem('isInitialBalanceDistributed', 'true'); 
+    updateUI();
+    saveTransactions();
+};
+
+    const loadTransactions = () => {
+        if (transactions.length === 0) {
+            distributeInitialBalance();
+            saveTransactions();
+        } else {
+            transactions.forEach(transaction => {
+                if (transaction.type === 'income') {
+                    income += transaction.amount;
+                } else if (transaction.type === 'expense') {
+                    expenses += transaction.amount;
+                    balance -= transaction.amount;
+                } else if (transaction.type === 'saving') {
+                    savings += transaction.amount;
+                    balance -= transaction.amount;
+                } else if (transaction.type === 'investment') {
+                    investments += transaction.amount;
+                    balance -= transaction.amount;
+                }
+            });
+        }
+    };
+
+    let expenseChart;
+
+    const setupExpenseChart = () => {
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        expenseChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ahorros', 'Inversiones', 'Gastos', 'Balance Disponible'],
+                datasets: [{
+                    data: [savings, investments, expenses, balance],
+                    backgroundColor: [
+                        'rgba(0, 255, 0, 0.8)',    
+                        'rgba(255, 165, 0, 0.8)', 
+                        'rgba(255, 0, 0, 0.8)',    
+                        'rgba(0, 0, 255, 0.8)'    
+                    ],
+                    borderColor: [
+                        'rgba(0, 255, 0, 1)',
+                        'rgba(255, 165, 0, 1)',
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 0, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#ffffff'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    const updateChart = () => {
+        if (expenseChart) {
+            expenseChart.data.datasets[0].data = [savings, investments, expenses, balance];
+            expenseChart.update();
+        }
+    };
+
+    const coinGeckoAPI = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,mxn';
+
+    const updateRates = async () => {
+        try {
+            const response = await fetch(coinGeckoAPI);
+            const data = await response.json();
+            const usdToMxnRate = data.bitcoin.mxn / data.bitcoin.usd;
+            document.getElementById('usdmxn').textContent = usdToMxnRate.toFixed(2);
+            const btcToUsdRate = data.bitcoin.usd;
+            document.getElementById('btcusd').textContent = btcToUsdRate.toFixed(2);
+        } catch (error) {
+            console.error('Error al obtener las tasas de cambio:', error);
+            document.getElementById('usdmxn').textContent = 'Error';
+            document.getElementById('btcusd').textContent = 'Error';
+        }
+    };
+
+    updateRates();
+    setInterval(updateRates, 60000); 
+
+    const checkForIncome = () => {
+        const currentDate = new Date();
+        const day = currentDate.getDate();
+        const lastIncomeDate = localStorage.getItem('lastIncomeDate');
+    
+        if ((day === 15 || day === 30) && lastIncomeDate !== currentDate.toDateString()) {
+            const recurringIncome = 3000;
+            distributeIncome(recurringIncome, 'Ingreso Recurrente');
+            alert('Se ha añadido un ingreso recurrente de $3000');
+    
+            localStorage.setItem('lastIncomeDate', currentDate.toDateString());
+        }
+    };
+
+    const distributeIncome = (amount, description = 'Distribución Automática') => {
+        let transactionDescription = description;
+        if (description === 'Distribución Automática') {
+            transactionDescription = 'Distribución Automática';
+        }
+
+        income += amount;
+        const savingAmount = amount * 0.50;
+        const investmentAmount = amount * 0.30;
+        const balanceAmount = amount * 0.20;
+
+        savings += savingAmount;
+        investments += investmentAmount;
+        balance += balanceAmount;
+
+        transactions.push({
+            type: 'income',
+            category: 'Ingreso Recurrente',
+            description: transactionDescription,
+            amount: amount
+        });
+        transactions.push({
+            type: 'saving',
+            category: 'Distribución Automática',
+            description: `50% de ingreso recurrente (${transactionDescription})`,
+            amount: savingAmount
+        });
+        transactions.push({
+            type: 'investment',
+            category: 'Distribución Automática',
+            description: `30% de ingreso recurrente (${transactionDescription})`,
+            amount: investmentAmount
+        });
+        transactions.push({
+            type: 'income',
+            category: 'Balance Recurrente',
+            description: `20% de ingreso recurrente (${transactionDescription})`,
+            amount: balanceAmount
+        });
+
+        updateUI();
+        saveTransactions();
+    };
+
+    setInterval(checkForIncome, 86400000); 
+
+    const init = () => {
+        loadTransactions();
+        setupExpenseChart();
+        updateUI();
+        updateChart();
+    };
+
+    init();
+});
+
+
+/CSS
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #00ff00;
+    --secondary-color: #ff00ff;
+    --background-color: #111;
+    --card-bg-color: rgba(0, 255, 0, 0.05);
+    --text-color: #fff;
+    --neon-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color), 0 0 15px var(--primary-color);
+    --neon-text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 0, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(0, 255, 0, 0.05) 0%, transparent 20%);
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+h1, h2, h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--primary-color);
+    text-shadow: var(--neon-text-shadow);
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+.forex-widget {
+    display: flex;
+    gap: 20px;
+}
+
+.forex-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(0, 255, 0, 0.1);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.forex-value {
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(0, 255, 0, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.balance-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-shadow: var(--neon-shadow);
+    margin-bottom: 20px;
+}
+
+.distribution-info {
+    margin-bottom: 15px;
+}
+
+.distribution-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.distribution-bar {
+    display: flex;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.distribution-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--background-color);
+    font-size: 0.8rem;
+    font-weight: bold;
+    position: relative;
+}
+
+.distribution-segment::before {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: var(--primary-color);
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.distribution-segment:hover::before {
+    opacity: 1;
+}
+
+.segment-investment { background-color: #ff9900; width: 30%; }
+.segment-savings { background-color: #00cc66; width: 50%; }
+.segment-spending { background-color: #ff3366; width: 20%; }
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.stat-card {
+    background-color: rgba(0, 255, 0, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 255, 0, 0.3);
+}
+
+.stat-card i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--primary-color);
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary-color);
+}
+
+form {
+    display: grid;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+input, select {
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-color);
+    font-size: 1rem;
+}
+
+input:focus, select:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--primary-color);
+}
+
+.btn-neon {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-neon::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: rotate(45deg);
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.btn-neon:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color), 0 0 20px var(--secondary-color);
+}
+
+.btn-danger {
+    background-color: #ff3366;
+}
+
+.btn-danger:hover {
+    background-color: #ff0044;
+}
+
+.transaction-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.transaction-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+    transition: background-color 0.3s;
+}
+
+.transaction-item:hover {
+    background-color: rgba(0, 255, 0, 0.1);
+}
+
+.transaction-item:last-child {
+    border-bottom: none;
+}
+
+.chart-container {
+    height: 300px;
+    position: relative;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--card-bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary-color);
+}
+
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .forex-widget {
+        margin-top: 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+
+
+
+ESTE ES EL JavaScript ORIGINAL Y EL QUE DEBES DE MEJORAR(eso implica que debes de entregar mas codigo del que te proporcione ya que entregar menos de 400 lineas de este codigo implican que no hiciste un buen trabajo ya que implementar y arreglar deberia de darme mas lineas de codigo, probablemente el doble)
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const totalPatrimony = document.getElementById('totalPatrimony');
+    const totalBalance = document.getElementById('totalBalance');
+    const totalIncome = document.getElementById('totalIncome');
+    const totalExpenses = document.getElementById('totalExpenses');
+    const totalSavings = document.getElementById('totalSavings');
+    const totalInvestments = document.getElementById('totalInvestments');
+    const transactionList = document.getElementById('transactionList');
+    const transactionForm = document.getElementById('transactionForm');
+    const categorySelect = document.getElementById('category');
+    const typeSelect = document.getElementById('type');
+    const clearAllBtn = document.getElementById('clearAllBtn');
+
+    const initialBalance = 16589;  
+    let balance = initialBalance;  
+    let income = 0;   
+    let expenses = 0;
+    let savings = 0;
+    let investments = 0;
+    let transactions = JSON.parse(localStorage.getItem('transactions')) || [];
+
+    const categories = {
+        income: ['Salario', 'Bonificación', 'Venta'],
+        expense: ['Gasto obligatorio', 'Gasto necesario', 'Gasto innecesario'],
+        saving: ['Cuenta de ahorros', 'Fondo de emergencia'],
+        investment: ['Acciones', 'Criptomonedas', 'Bienes raíces']
+    };
+
+    const updateCategoryOptions = () => {
+        const selectedType = typeSelect.value;
+        categorySelect.innerHTML = '';
+        categories[selectedType].forEach(category => {
+            const option = document.createElement('option');
+            option.value = category;
+            option.textContent = category;
+            categorySelect.appendChild(option);
+        });
+    };
+
+    typeSelect.addEventListener('change', updateCategoryOptions);
+    updateCategoryOptions();
+
+    const updateUI = () => {
+        totalPatrimony.textContent = `$${(savings + investments + balance).toFixed(2)}`;  
+        totalBalance.textContent = `$${balance.toFixed(2)}`; 
+        totalIncome.textContent = `$${income.toFixed(2)}`;
+        totalExpenses.textContent = `$${expenses.toFixed(2)}`;
+        totalSavings.textContent = `$${savings.toFixed(2)}`;
+        totalInvestments.textContent = `$${investments.toFixed(2)}`;
+        renderTransactions();
+        updateChart();
+    };
+
+    const renderTransactions = () => {
+        transactionList.innerHTML = '';
+        transactions.forEach((transaction, index) => {
+            const transactionItem = document.createElement('div');
+            transactionItem.classList.add('transaction-item');
+            transactionItem.innerHTML = `
+                <span>${transaction.type === 'income' ? '💰 Ingreso' : transaction.type === 'expense' ? '💸 Gasto' : transaction.type === 'saving' ? '🐷 Ahorro' : '📈 Inversión'} - ${transaction.category}</span>
+                <span>${transaction.description}</span>
+                <span>$${transaction.amount.toFixed(2)}</span>
+                <button onclick="deleteTransaction(${index})"  class="btn-neon">Eliminar</button>
+            `;
+            transactionList.appendChild(transactionItem);
+        });
+    };
+
+    const deleteTransaction = (index) => {
+        const removed = transactions.splice(index, 1)[0];
+        if (removed.type === 'income') {
+            income -= removed.amount;
+            savings -= removed.amount * 0.50;
+            investments -= removed.amount * 0.30;
+            balance -= removed.amount * 0.20;
+        } else if (removed.type === 'expense') {
+            expenses -= removed.amount;
+            balance += removed.amount;
+        } else if (removed.type === 'saving') {
+            savings -= removed.amount;
+            balance += removed.amount;
+        } else if (removed.type === 'investment') {
+            investments -= removed.amount;
+            balance += removed.amount;
+        }
+        updateUI();
+        saveTransactions();
+    };
+
+    window.deleteTransaction = deleteTransaction; 
+
+    const saveTransactions = () => {
+        localStorage.setItem('transactions', JSON.stringify(transactions));
+    };
+
+    transactionForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const type = typeSelect.value;
+        const category = categorySelect.value;
+        const description = document.getElementById('description').value;
+        const amount = parseFloat(document.getElementById('amount').value);
+
+        if (isNaN(amount) || amount <= 0) {
+            alert('Por favor, ingresa una cantidad válida.');
+            return;
+        }
+
+        let transaction = { type, category, description, amount };
+
+        if (type === 'income') {
+            income += amount;
+            const savingAmount = amount * 0.50;
+            const investmentAmount = amount * 0.30;
+            const balanceAmount = amount * 0.20;
+
+            savings += savingAmount;
+            investments += investmentAmount;
+            balance += balanceAmount;
+
+            transactions.push({
+                type: 'income',
+                category,
+                description,
+                amount
+            });
+            transactions.push({
+                type: 'saving',
+                category: 'Distribución Automática',
+                description: `50% de ingreso ${description}`,
+                amount: savingAmount
+            });
+            transactions.push({
+                type: 'investment',
+                category: 'Distribución Automática',
+                description: `30% de ingreso ${description}`,
+                amount: investmentAmount
+            });
+            transactions.push({
+                type: 'income',
+                category: 'Balance',
+                description: `20% de ingreso ${description}`,
+                amount: balanceAmount
+            });
+        } else if (type === 'expense') {
+            expenses += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        } else if (type === 'saving') {
+            savings += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        } else if (type === 'investment') {
+            investments += amount;
+            balance -= amount;
+            transactions.push(transaction);
+        }
+
+        updateUI();
+        saveTransactions();
+        transactionForm.reset();
+        updateCategoryOptions();
+    });
+
+    clearAllBtn.addEventListener('click', () => {
+        if (!confirm('¿Estás seguro de que deseas eliminar todas las transacciones?')) return;
+        transactions = [];
+        income = 0;
+        expenses = 0;
+        savings = 0;
+        investments = 0;
+        balance = initialBalance;  
+        distributeInitialBalance();
+        updateUI();
+        saveTransactions();
+    });
+
+    let isInitialBalanceDistributed = localStorage.getItem('isInitialBalanceDistributed') === 'true';
+
+const distributeInitialBalance = () => {
+    if (isInitialBalanceDistributed) return; 
+
+    const savingAmount = initialBalance * 0.50;
+    const investmentAmount = initialBalance * 0.30;
+    const balanceAmount = initialBalance * 0.20;
+
+    savings += savingAmount;
+    investments += investmentAmount;
+    balance += balanceAmount;
+
+    transactions.push({
+        type: 'income',
+        category: 'Saldo Inicial',
+        description: 'Ingreso inicial distribuido automáticamente',
+        amount: initialBalance
+    });
+    transactions.push({
+        type: 'saving',
+        category: 'Distribución Inicial',
+        description: '50% del saldo inicial',
+        amount: savingAmount
+    });
+    transactions.push({
+        type: 'investment',
+        category: 'Distribución Inicial',
+        description: '30% del saldo inicial',
+        amount: investmentAmount
+    });
+    transactions.push({
+        type: 'income',
+        category: 'Balance Inicial',
+        description: '20% del saldo inicial',
+        amount: balanceAmount
+    });
+
+    isInitialBalanceDistributed = true;
+    localStorage.setItem('isInitialBalanceDistributed', 'true'); 
+    updateUI();
+    saveTransactions();
+};
+
+    const loadTransactions = () => {
+        if (transactions.length === 0) {
+            distributeInitialBalance();
+            saveTransactions();
+        } else {
+            transactions.forEach(transaction => {
+                if (transaction.type === 'income') {
+                    income += transaction.amount;
+                } else if (transaction.type === 'expense') {
+                    expenses += transaction.amount;
+                    balance -= transaction.amount;
+                } else if (transaction.type === 'saving') {
+                    savings += transaction.amount;
+                    balance -= transaction.amount;
+                } else if (transaction.type === 'investment') {
+                    investments += transaction.amount;
+                    balance -= transaction.amount;
+                }
+            });
+        }
+    };
+
+    let expenseChart;
+
+    const setupExpenseChart = () => {
+        const ctx = document.getElementById('expenseChart').getContext('2d');
+        expenseChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Ahorros', 'Inversiones', 'Gastos', 'Balance Disponible'],
+                datasets: [{
+                    data: [savings, investments, expenses, balance],
+                    backgroundColor: [
+                        'rgba(0, 255, 0, 0.8)',    
+                        'rgba(255, 165, 0, 0.8)', 
+                        'rgba(255, 0, 0, 0.8)',    
+                        'rgba(0, 0, 255, 0.8)'    
+                    ],
+                    borderColor: [
+                        'rgba(0, 255, 0, 1)',
+                        'rgba(255, 165, 0, 1)',
+                        'rgba(255, 0, 0, 1)',
+                        'rgba(0, 0, 255, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            color: '#ffffff'
+                        }
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                if (context.parsed !== null) {
+                                    label += new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(context.parsed);
+                                }
+                                return label;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    const updateChart = () => {
+        if (expenseChart) {
+            expenseChart.data.datasets[0].data = [savings, investments, expenses, balance];
+            expenseChart.update();
+        }
+    };
+
+    const coinGeckoAPI = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,mxn';
+
+    const updateRates = async () => {
+        try {
+            const response = await fetch(coinGeckoAPI);
+            const data = await response.json();
+            const usdToMxnRate = data.bitcoin.mxn / data.bitcoin.usd;
+            document.getElementById('usdmxn').textContent = usdToMxnRate.toFixed(2);
+            const btcToUsdRate = data.bitcoin.usd;
+            document.getElementById('btcusd').textContent = btcToUsdRate.toFixed(2);
+        } catch (error) {
+            console.error('Error al obtener las tasas de cambio:', error);
+            document.getElementById('usdmxn').textContent = 'Error';
+            document.getElementById('btcusd').textContent = 'Error';
+        }
+    };
+
+    updateRates();
+    setInterval(updateRates, 60000); 
+
+    const checkForIncome = () => {
+        const currentDate = new Date();
+        const day = currentDate.getDate();
+        const lastIncomeDate = localStorage.getItem('lastIncomeDate');
+    
+        if ((day === 15 || day === 30) && lastIncomeDate !== currentDate.toDateString()) {
+            const recurringIncome = 3000;
+            distributeIncome(recurringIncome, 'Ingreso Recurrente');
+            alert('Se ha añadido un ingreso recurrente de $3000');
+    
+            localStorage.setItem('lastIncomeDate', currentDate.toDateString());
+        }
+    };
+
+    const distributeIncome = (amount, description = 'Distribución Automática') => {
+        let transactionDescription = description;
+        if (description === 'Distribución Automática') {
+            transactionDescription = 'Distribución Automática';
+        }
+
+        income += amount;
+        const savingAmount = amount * 0.50;
+        const investmentAmount = amount * 0.30;
+        const balanceAmount = amount * 0.20;
+
+        savings += savingAmount;
+        investments += investmentAmount;
+        balance += balanceAmount;
+
+        transactions.push({
+            type: 'income',
+            category: 'Ingreso Recurrente',
+            description: transactionDescription,
+            amount: amount
+        });
+        transactions.push({
+            type: 'saving',
+            category: 'Distribución Automática',
+            description: `50% de ingreso recurrente (${transactionDescription})`,
+            amount: savingAmount
+        });
+        transactions.push({
+            type: 'investment',
+            category: 'Distribución Automática',
+            description: `30% de ingreso recurrente (${transactionDescription})`,
+            amount: investmentAmount
+        });
+        transactions.push({
+            type: 'income',
+            category: 'Balance Recurrente',
+            description: `20% de ingreso recurrente (${transactionDescription})`,
+            amount: balanceAmount
+        });
+
+        updateUI();
+        saveTransactions();
+    };
+
+    setInterval(checkForIncome, 86400000); 
+
+    const init = () => {
+        loadTransactions();
+        setupExpenseChart();
+        updateUI();
+        updateChart();
+    };
+
+    init();
+});
+
+
+
+
+DEBES DE SEGUIR TODAS LAS ORDENES DE MI PROMPT HASTA EL ULTIMO TEXTO. vuelve a hacer todo desde 0 y obedece mi prompt no quiero que hagas copypaste del codigo quiero que como profesional hagas todo lo que te pedi. no tiene sentido que si te doy 400 lineas de codigo me entregues 320 diciendo que hiciste todo lo que te pedi y no sirve de nada lo que implementaste si es menos a el codigo que te proporcione obedece el prompt y entregame todo lo que te pedi, todo, cada orden. no copies el ejemplo es solo un ejemplo y quiero que todo sirva porque eres un profesional
+

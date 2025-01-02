@@ -1,0 +1,12 @@
+{
+    "initialBalance": 24302,
+    "transactions": [
+      {
+        "type": "income",
+        "category": "Saldo Inicial",
+        "description": "Ingreso inicial distribuido automáticamente",
+        "amount": 24302
+      }
+    ]
+  }
+  

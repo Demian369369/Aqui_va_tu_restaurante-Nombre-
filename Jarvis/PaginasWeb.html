@@ -239,17 +239,12 @@
         <button class="external-link-btn" onclick="window.location.href='Inicio.html'">
             <i class="fas fa-home"></i> Inicio
         </button>
-        <button class="external-link-btn" onclick="window.location.href='CosasImportantes.html'">
-            <i class="fas fa-star"></i> Cosas Importantes
+        <button class="external-link-btn" onclick="window.location.href='Calendario.html'">
+            <i class="fas fa-calendar"></i> Calendario
         </button>
-        <button class="external-link-btn" onclick="window.location.href='Agenda.html'">
-            <i class="fas fa-calendar"></i> Agenda
-        </button>
-        <button class="external-link-btn" onclick="window.location.href='IdeasVideos.html'">
-            <i class="fas fa-video"></i> Videos
-        </button>
+        
         <button class="external-link-btn" onclick="window.location.href='GymRutinas.html'">
-            <i class="fas fa-dumbbell"></i> Rutinas GYM
+            <i class="fas fa-book"></i> UDG
         </button>
     </div>    
     <div class="container">
@@ -257,6 +252,7 @@
             <button class="main-btn" onclick="toggleMenu('subjectsMenu')">
                 <i class="fas fa-utensils"></i> Para Restaurantes
             </button>
+            
             <div id="subjectsMenu" class="submenu">
                 <button class="sub-btn" onclick="toggleMenu('subject1Tasks')">
                     <i class="fas fa-palette"></i> Prototipo0
@@ -339,6 +335,9 @@
                     </button>
                 </div>
             </div>
+            <button class="main-btn" onclick="toggleExtra('subjectsMenu')">
+                <i class="fas fa-camera"></i> Habitos
+            </button>
         </div>
         <div id="details" class="details">
             <h2>✨ Detalles del Proyecto</h2>
@@ -355,12 +354,13 @@
                 menu.style.display = "block";
             }
         }
+        
 
         function showTask(taskId) {
             var taskDescriptions = {
                 taskPro0: 'Pagina Web de $200 para menu de restaurante, incluye fondo, producto, precio etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo0/" target="_blank">Ver más detalles</a>',
                 taskPro1: 'Pagina Web de $300 Recomendada para menu de restaurante, incluye fondo, producto, precio, botones, idiomas etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo1/" target="_blank">Ver más detalles</a>',
-                taskPro2: 'Pagina Web de $400 para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, mas informacion etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo2/" target="_blank">Ver más detalles</a>',
+                taskPro2: 'Pagina Web de $400 para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, mas informacion etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo2/menu.html" target="_blank">Ver más detalles</a>',
                 taskPro3: 'Pagina Web de $700 Recomendada para tiendas en linea, incluye fondo, producto, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo3/" target="_blank">Ver más detalles</a>',
                 taskPro4: 'Pagina Web de $800 Recomendada para promociones y varias sucursales, incluye fondo, producto, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones,mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real etc.  <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo4/" target="_blank">Ver más detalles</a>',
                 taskPro5: 'Pagina Web de $900 Recomendada para tiendas en linea, promociones y varias sucursales, incluye fondo, productos, precio, botones, idiomas, otras paginas, moderna, catalogos, animaciones, mas informacion, base de datos, comentarios de usuarios e informacion para llenar, promociones en tiempo real, filtro de busqueda para usuarios, sistema logico de compras etc. <a href="https://demian369369.github.io/JarvisFrontendProject/PaginasWeb/Prototipo5/" target="_blank">Ver más detalles</a>',

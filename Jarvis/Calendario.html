@@ -19,19 +19,81 @@
             <button id="nextWeek" class="p-2 bg-blue-500 text-white rounded">&gt;</button>
         </div>
         <div id="calendar" class="grid grid-cols-8 gap-1 bg-white rounded shadow"></div>
+        
+    </div>
+     <div id="bullet-journal-container" style="display: none;" class="bullet-journal-modal">
+        <div class="bullet-journal-content">
+            <span class="bullet-journal-close" onclick="toggleBulletJournal()">&times;</span>
+            <div class="bullet-journal-inner">
+                <div id="reloj"></div>
+                <div class="container">
+                    <h1>✨ Mi Bullet Journal Web ✨</h1>
+                    
+                    <h2>🌞 Hábitos Diarios 🌞</h2>
+                    <ul id="daily-habits" class="habit-list"></ul>
+                    
+                    <h2>🗓️ Hábitos Semanales 🗓️</h2> 
+                    <ul id="weekly-habits" class="habit-list"></ul>
+                    
+                    <div class="add-habit">
+                        <input type="text" id="new-habit" placeholder="Nuevo hábito">
+                        <select id="habit-type">
+                            <option value="daily">Diario</option>
+                            <option value="weekly">Semanal</option>
+                        </select>
+                        <button onclick="addHabit()">Agregar Hábito</button>
+                    </div>
+                </div>
+                <button id="reset-all-progress-btn" onclick="resetAllProgress()">🗑️</button>
+                <button id="important-habits-btn" onclick="toggleImportantHabits()">⭐</button>
+    
+                <div id="important-habits-container">
+                    <div class="important-habits-content">
+                        <span class="close-btn" onclick="toggleImportantHabits()">&times;</span>
+                        <h2>⭐ Hábitos Importantes ⭐</h2>
+                        <ul id="important-habits" class="habit-list"></ul>
+                        <div class="add-habit">
+                            <input type="text" id="new-important-habit" placeholder="Nuevo hábito importante">
+                            <button onclick="addImportantHabit()">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="monsters-container">
+                    <div class="monster monster-daily">
+                        <span>Monstruo Procrastinador Diario</span>
+                        <div class="monster-health-bar">
+                            <div id="daily-monster-health" class="monster-health"></div>
+                        </div>
+                    </div>
+                    <div class="monster monster-weekly">
+                        <span>Monstruo Procrastinador Semanal</span>
+                        <div class="monster-health-bar">
+                            <div id="weekly-monster-health" class="monster-health"></div>
+                        </div>
+                    </div>
+                    <div class="monster monster-important">
+                        <span>Monstruo Procrastinador Tareas Importantes</span>
+                        <div class="monster-health-bar">
+                            <div id="important-monster-health" class="monster-health"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="js/Calendario.js"></script>
     <footer class="footer">
         <button id="excel-button"onclick="window.location.href='Inicio.html';">Inicio</button>
-        <button class="btn btn-secondary add-task-button" type="text"onclick="window.location.href='Agenda.html';">Agenda</button>
         <button id="excel-button"onclick="window.location.href='CosasImportantes.html';">Cosas Importantes</button>
         <button id="excel-button"onclick="window.location.href='GymRutinas.html';">Gimnasio</button>
         <button id="excel-button"onclick="window.location.href='Acciones.html';">Acciones</button>
         <button id="excel-button"onclick="window.location.href='PaginasWeb.html';">PaginasWeb</button>
         <button id="excel-button"onclick="window.location.href='IdeasVideos.html';">Youtube</button>
-        <button id="excel-button"onclick="window.location.href='UDGMaterias.html';">UDG Materias</button>
-        <button class="external-link-btn" onclick="window.location.href='MapaUDG.html'">Mapa Escuela</button>
-        <button id="excel-button"onclick="window.location.href='BulletJournal.html';">BulletJournal</button>
+        <button id="excel-button"onclick="window.location.href='UDGMaterias.html';">UDG</button>
+        <button class="open-bullet-journal" onclick="toggleBulletJournal()">
+            Bullet Journal
+        </button>
     </footer>
 </body>
 </html>

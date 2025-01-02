@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <header>
-            <h1>Acciones </h1>
+            <h1>Mercado</h1>
             <div class="forex-widget">
                 <div class="forex-item">
                     <i class="fas fa-dollar-sign"></i>
@@ -23,10 +23,15 @@
                     <span>BTC/USD:</span>
                     <span id="btcusd" class="forex-value">Cargando...</span>
                 </div>
-                <div>
+                <div class="forex-item">
                     <i class="fas fa-chart-line"></i>
-                    <span>CETES México:</span>
+                    <span>CETES:</span>
                     <span id="cetesRate"><a href="https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=18&accion=consultarCuadro&idCuadro=CF102&locale=es" target="_blank">Ver tasas actuales</a></span>
+                </div>
+                <div class="forex-item">
+                    <i class="fas fa-file-excel"></i>
+                    <span>Excel:</span>
+                    <span id="cetesRate"><a href="https://www.banxico.org.mx/SieInternet/consultarDirectorioInternetAction.do?sector=18&accion=consultarCuadro&idCuadro=CF102&locale=es" target="_blank">Hoja Cuentas</a></span>
                 </div>
                 
             </div>
@@ -60,32 +65,29 @@
                 </div>
 
                 <div class="stats-grid">
-                    <div class="stat-card">
-                        <i class="fas fa-wallet"></i>
-                        <div>Balance Disponible</div>
-                        <div class="stat-value" id="totalBalance">$0.00</div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <i class="fas fa-arrow-up"></i>
+                            <div>Ingresos Totales</div>
+                            <div class="stat-value" id="totalIncome">$0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-arrow-down"></i>
+                            <div>Gastos Totales</div>
+                            <div class="stat-value" id="totalExpenses">$0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-piggy-bank"></i>
+                            <div>Ahorros</div>
+                            <div class="stat-value" id="totalSavings">$0.00</div>
+                        </div>
+                        <div class="stat-card">
+                            <i class="fas fa-chart-line"></i>
+                            <div>Inversiones</div>
+                            <div class="stat-value" id="totalInvestments">$0.00</div>
+                        </div>
                     </div>
-                    <div class="stat-card">
-                        <i class="fas fa-arrow-up"></i>
-                        <div>Ingresos Totales</div>
-                        <div class="stat-value" id="totalPatrimony">$0.00</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-arrow-down"></i>
-                        <div>Gastos Totales</div>
-                        <div class="stat-value" id="totalExpenses">$0.00</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-piggy-bank"></i>
-                        <div>Ahorros</div>
-                        <div class="stat-value" id="totalSavings">$0.00</div>
-                    </div>
-                    <div class="stat-card">
-                        <i class="fas fa-chart-line"></i>
-                        <div>Inversiones</div>
-                        <div class="stat-value" id="totalInvestments">$0.00</div>
-                    </div>
-                </div>
+                    
             </section>
 
             <section class="transaction-section">
@@ -122,9 +124,9 @@
 
             <section class="history-section">
                 <div class="card">
-                    <h2><i class="fas fa-history"></i> Transacciones Recientes</h2>
+                    <h2><i class="fas fa-history"></i> Historial de acciones </h2>
                     <button class="btn-neon btn-danger" id="clearAllBtn">
-                        <i class="fas fa-trash-alt"></i> Eliminar Todo el Historial
+                        <i class="fas fa-trash-alt"></i> Mostrar el Historial
                     </button>
                     <div class="transaction-list" id="transactionList"></div>
                 </div>
@@ -132,7 +134,7 @@
 
             <section class="analysis-section">
                 <div class="card">
-                    <h2><i class="fas fa-chart-pie"></i> Análisis de Gastos</h2>
+                    <h2><i class="fas fa-chart-pie"></i> Análisis de Patrimonio</h2>
                     <div class="chart-container">
                         <canvas id="expenseChart"></canvas>
                     </div>
